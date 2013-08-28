@@ -1,4 +1,3 @@
-imkaywu.github.io
-=================
+# mojobojo dot com
 
-My Tech Blog
+Potential forkers:  Make sure you change the google analytics key :)
