@@ -1,7 +1,7 @@
 # Site Variables
-name:             "Alex Kalicki"
-description:      "The personal design portfolio and blog of Alex Kalicki, a Computer Science student at Columbia University."
-url:              "http://alexkalicki.com"
+name:             "Kay Wu"
+description:      "Tech blog of Kay Wu, a Electric Engineer student at BUPT."
+url:              "http://imkaywu.com"
 blog:             "/blog"
 blog_categories:  "/blog/categories"
 blog_tags:        "/blog/tags"
