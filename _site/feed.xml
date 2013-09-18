@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Template from here: https://github.com/diverso/jekyll-rss-feeds -->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+		<title>Kay Wu</title>
+		<description>Tech blog of Kay Wu</description>
+		<link>http://imkaywu.com</link>
+		<atom:link href="http://imkaywu.com/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>My first blog</title>
+				<description>&lt;p&gt;Hello, everyone! This is the first page of my blog and from today on, I&amp;#39;m gonna share my thoughts and coding experience in this blog, hopefully, these blogs will help the folks who neet it. The primary motivation for me to setup this blog is to record my journey as the learner of programming and help myself to be more professional in the coming days. Besides, I&amp;#39;m also gonna share things like my favorite musics and movies and talk about my feeling towards these stuffs cause that&amp;#39;s something I love. So this is a day to remember, and I hope I can have fun writing this blog.&lt;!-- truncate_here --&gt;&lt;/p&gt;
+</description>
+				<pubDate>Wed, 18 Sep 2013 00:00:00 +0800</pubDate>
+				<link>http://imkaywu.com/blog/2013/09/18/My-first-blog/</link>
+				<guid isPermaLink="true">http://imkaywu.com/blog/2013/09/18/My-first-blog/</guid>
+			</item>
+		
+			<item>
+				<title>Learning Jekyll</title>
+				<description>&lt;p&gt;This series is my learning notes of Jekyll which is the static web engine I use for my blog. And I&amp;#39;ll only record the important points to me. The original site is &lt;a href=&quot;http://www.andrewmunsell.com/tutorials/jekyll-by-example/index.html&quot;&gt;here&lt;/a&gt;.
+&lt;!-- truncate_here --&gt;
+###_config.yml&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;replace “[YOUR DOMAIN]” with your website’s domain name after &lt;em&gt;url&lt;/em&gt;, without a trailing slash&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;not need to surround a string with quotation marks unless it contains specific characters, like the colon (“:”) in the URL.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;includes&quot;&gt;_includes&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;files shared between posts and pages.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Files and folders with underscores prepending the name will not be copied to the final, generated website.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;layout&quot;&gt;_layout&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;posts&amp;#39; layout files.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;posts&quot;&gt;_posts&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;source Markdown files for your blog posts.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;site&quot;&gt;_site&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;in the root directory of your project, enter &lt;em&gt;jekyll&lt;/em&gt; in the Terminal, a &lt;em&gt;_site&lt;/em&gt; directory will be created.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;the above instruction has not been successfully tested in my machine. wait for further checking.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+				<pubDate>Wed, 18 Sep 2013 00:00:00 +0800</pubDate>
+				<link>http://imkaywu.com/blog/2013/09/18/Learning-Jekyll/</link>
+				<guid isPermaLink="true">http://imkaywu.com/blog/2013/09/18/Learning-Jekyll/</guid>
+			</item>
+		
+	</channel>
+</rss>
