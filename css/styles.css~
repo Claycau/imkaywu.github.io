@@ -222,6 +222,12 @@ p.feature-image img {
     width: 80%;
 }
 
+.content .discuss {
+    font-style: italic;
+    margin-top: 1.5em;
+    margin-bottom: 0;
+}
+
 .tags ul {
     list-style-type: none;
 }
