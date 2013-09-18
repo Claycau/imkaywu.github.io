@@ -4,7 +4,7 @@ url: "http://imkaywu.com"
 
 # Author info
 author_name: Kay Wu
-author_image_path: /images/image.jpeg
+author_image_path: /images/author-image.jpeg
 author_bio: |
     Electric Enginee student in BUPT.
     Keen programmer and music & movie lover
@@ -12,7 +12,7 @@ author_bio: |
 
 # External services
 github_url: "https://github.com/imkaywu"
-twitter_url: "https://twitter.com/emaadmanzoor"
+twitter_url: "http://weibo.com/imkaywu"
 linkedin_url: "https://linkedin.com/in/imkaywu"
 feed_url: "http://feeds.feedburner.com/eyeshalfclosed"
 email: "imkaywu@gmail.com"
@@ -27,3 +27,6 @@ kramdown:
 permalink: /blog/:year/:month/:day/:title/
 relative_permalinks: false
 pygments: true
+# keep 24 posts every page
+-paginate: 16
++paginate: 24
