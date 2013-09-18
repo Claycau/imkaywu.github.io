@@ -1,14 +1,19 @@
 ---
-title: Main
-layout: main
+layout: default
+title: Emaad Ahmed Manzoor's Blog
 ---
 
-{% include main/content/home.html %}
-
-{% include main/content/projects.html %}
-
-{% include main/content/blog.html %}
-
-{% include main/content/resume.html %}
-
-{% include main/content/contact.html %}
+{% for post in site.posts %}
+<div class=post>
+    {% if post.feature %}
+    <p class=feature-image>
+        <img src="{{ post.feature }}"/>
+    </p> 
+    {% endif %}
+    <h1 class=title><a href="{{ post.url }}">{{ post.title }}</a></h1>
+    <div class=content>
+        {{ post.excerpt | markdownify }}
+    </div>
+    {% include post-meta.html %}
+</div>
+{% endfor %}
