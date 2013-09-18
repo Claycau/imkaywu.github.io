@@ -1,23 +1,29 @@
-# Site Variables
-name:             "Kay Wu"
-description:      "Tech blog of Kay Wu, a Electric Engineer student at BUPT."
-url:              "http://imkaywu.com"
-blog:             "/blog"
-blog_categories:  "/blog/categories"
-blog_tags:        "/blog/tags"
-blog_rss:         "/blog/feed.xml"
+name: Kay Wu
+description: Tech blog of Kay Wu
+url: "http://imkaywu.com"
 
-# Dependencies
-markdown:         rdiscount
-pygments:         true
+# Author info
+author_name: Kay Wu
+author_image_path: /images/author-image.jpeg
+author_bio: |
+    Electric Enginee student in BUPT.
+    Keen programmer and music & movie lover
+    More <a href=/about/>about me</a>.
 
-# Blog Permalinks
-permalink:        "/blog/:categories/:year/:month/:day/:title/"
+# External services
+github_url: "https://github.com/emaadmanzoor"
+twitter_url: "https://twitter.com/emaadmanzoor"
+linkedin_url: "https://linkedin.com/in/emaadmanzoor"
+feed_url: "http://feeds.feedburner.com/eyeshalfclosed"
+email: "emaadmanzoor@gmail.com"
 
-# Blog Pagination
-paginate:         5
-paginate_path:    "/blog/page:num"
+# Markdown rendering
+markdown: kramdown
+kramdown:
+  smart_quotes: apos,apos,quot,quot
+  parse_block_html: true
 
-# Server Info
-exclude:          [".gitignore", "less", "CNAME", "LICENSE", "README.md"]
-port:             4001
+# Site settings
+permalink: /blog/:year/:month/:day/:title/
+relative_permalinks: false
+pygments: true

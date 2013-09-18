@@ -1,14 +1,13 @@
-name: eyeshalfclosed
-description: Blog of Emaad Ahmed Manzoor
-url: "http://eyeshalfclosed.com"
+name: Kay Wu
+description: Tech blog of Kay Wu
+url: "http://imkaywu.com"
 
 # Author info
-author_name: Emaad Ahmed Manzoor
+author_name: Kay Wu
 author_image_path: /images/author-image.jpeg
 author_bio: |
-    Engineer at Yahoo!.
-    Formerly, research intern at <a href=http://tachyon.in/>Tachyon Technologies</a>, 
-    undergrad at <a href=http://www.bits-pilani.ac.in/Goa/>BITS Pilani Goa</a>.
+    Electric Enginee student in BUPT.
+    Keen programmer and music & movie lover
     More <a href=/about/>about me</a>.
 
 # External services
