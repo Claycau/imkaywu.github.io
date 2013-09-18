@@ -4,16 +4,16 @@ url: "http://imkaywu.com"
 
 # Author info
 author_name: Kay Wu
-author_image_path: /images/author-image.jpeg
+author_image_path: /images/image.jpeg
 author_bio: |
     Electric Enginee student in BUPT.
     Keen programmer and music & movie lover
     More <a href=/about/>about me</a>.
 
 # External services
-github_url: "https://github.com/emaadmanzoor"
+github_url: "https://github.com/imkaywu"
 twitter_url: "https://twitter.com/emaadmanzoor"
-linkedin_url: "https://linkedin.com/in/emaadmanzoor"
+linkedin_url: "https://linkedin.com/in/imkaywu"
 feed_url: "http://feeds.feedburner.com/eyeshalfclosed"
 email: "imkaywu@gmail.com"
 
