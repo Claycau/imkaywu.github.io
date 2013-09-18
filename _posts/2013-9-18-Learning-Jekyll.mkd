@@ -5,3 +5,27 @@ tags: Jekyll
 ---
 
 This series is my learning notes of Jekyll which is the static web engine I use for my blog. And I'll only record the important points to me. The original site is [here](http://www.andrewmunsell.com/tutorials/jekyll-by-example/index.html).
+
+###_config.yml
+
+* replace “[YOUR DOMAIN]” with your website’s domain name after *url*, without a trailing slash
+
+* not need to surround a string with quotation marks unless it contains specific characters, like the colon (“:”) in the URL.
+
+###_includes
+
+* files shared between posts and pages.
+
+###_layout
+
+* posts' layout files.
+
+###_posts
+
+* source Markdown files for your blog posts.
+
+###_site
+
+* in the root directory of your project, enter *jekyll* in the Terminal, a *_site* directory will be created.
+
+* the above instruction has not been successfully tested in my machine. wait for further checking.
