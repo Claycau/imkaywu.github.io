@@ -16,6 +16,8 @@ This series is my learning notes of Jekyll which is the static web engine I use 
 
 * files shared between posts and pages.
 
+* Files and folders with underscores prepending the name will not be copied to the final, generated website.
+
 ###_layout
 
 * posts' layout files.
@@ -29,3 +31,4 @@ This series is my learning notes of Jekyll which is the static web engine I use 
 * in the root directory of your project, enter *jekyll* in the Terminal, a *_site* directory will be created.
 
 * the above instruction has not been successfully tested in my machine. wait for further checking.
+
