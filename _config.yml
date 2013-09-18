@@ -28,5 +28,5 @@ permalink: /blog/:year/:month/:day/:title/
 relative_permalinks: false
 pygments: true
 # keep 24 posts every page
--paginate: 16
-+paginate: 24
+#-paginate: 16
+#+paginate: 24
