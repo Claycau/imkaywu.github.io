@@ -250,3 +250,76 @@ p.feature-image img {
         padding: 0 2em;
     }
 }
+/*CSS for the header*/
+.pure-menu-heading {
+  font-weight: bold;
+}
+
+.header {
+  margin:0;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.header .pure-menu {
+  padding: 0.5em;
+}
+
+.header .pure-menu li a:hover,
+.header .pure-menu li a:focus {
+  background: none;
+  border: none;
+  color: #aaa;
+}
+
+.header .pure-menu ul {
+  float: right;
+  padding-right: 10px;
+}
+
+.pure-menu ul div {
+  position:fixed;
+  top:8px;
+  right:0;
+  float:right;
+}
+
+.expand-icon {
+  position:fixed;
+  top:8px;
+  right:0;
+  float:right;
+}
+
+.phone {
+  display:none;
+}
+
+.pure-menu .pure-menu-fixed .pure-menu-horizontal {
+  max-height:36px;
+}
+
+@media screen and (max-width: 400px) {
+  .phone {
+    display: inline-block;
+  }
+  .pure-menu ul {
+    display: none;
+  }
+
+  .pure-menu ul div {
+    background-color: white;
+    border: 1px solid #DDD;
+    position: fixed;
+    top:50px;
+    right:0;
+  }
+  .pure-menu ul .hidden-phone {
+    display: none;
+  }
+  .pure-menu ul .show-phone {
+    display: inline-block;
+  }
+}
