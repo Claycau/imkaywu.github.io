@@ -77,39 +77,52 @@ More <a href=/about/>about me</a>.
             </div>
             <div class=pure-u-3-4>
                 <div class=right-column>
-                    <div>
-
-<a href="#Jekyll" title="Jekyll" rel="1">Jekyll</a>
+                    <div id='tag_cloud'>
 
 <a href="#introduction" title="introduction" rel="1">introduction</a>
 
+<a href="#Jekyll" title="Jekyll" rel="1">Jekyll</a>
+
 </div>
  
-<ul>
-
-  <li class='tag_item' id='Jekyll'>
-    <span class='tag_name'>Jekyll</span>
-    <span>
-      <ul>
-      <!-- tag[1]包含tag是tag[0]的所有posts -->
-        <li class='tag_post'><a href="/blog/2013/09/18/Learning-Jekyll/" title="Learning Jekyll">Learning Jekyll</a></li>
-      
-      </ul>
-    </span>
-  </li>
+<ul id='tag_list'>
 
   <li class='tag_item' id='introduction'>
     <span class='tag_name'>introduction</span>
     <span>
       <ul>
-      <!-- tag[1]包含tag是tag[0]的所有posts -->
+      
         <li class='tag_post'><a href="/blog/2013/09/18/My-first-blog/" title="My first blog">My first blog</a></li>
       
       </ul>
     </span>
   </li>
 
+  <li class='tag_item' id='Jekyll'>
+    <span class='tag_name'>Jekyll</span>
+    <span>
+      <ul>
+      
+        <li class='tag_post'><a href="/blog/2013/09/18/Learning-Jekyll/" title="Learning Jekyll">Learning Jekyll</a></li>
+      
+      </ul>
+    </span>
+  </li>
+
 </ul>
+ 
+<script src="/assets/js/jquery-2.0.3.min.js" type="text/javascript" charset="utf-8"></script> 
+<script src="/assets/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script> 
+<script language="javascript">
+$.fn.tagcloud.defaults = {
+    size: {start: 0.9, end: 2, unit: 'em'},
+      color: {start: '#e77471', end: '#f62817'}
+};
+ 
+$(function () {
+    $('#tag_cloud a').tagcloud();
+});
+</script>
 
                 </div>
             </div>
