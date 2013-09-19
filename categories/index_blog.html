@@ -4,24 +4,23 @@ title: Blog
 categories: blog
 ---
 
-<div id="blog" style="padding-top:30px; margin-top:-23px;">
-{% assign blogposts = site.categories.blog %}
-{% for post in blogposts %}
-  <small style="float:right; margin-top:1px;">{{ post.date | date:'%a %d %b %Y' }}</small>
-  <a href="{{ post.url }}">
-    <h3>{{ post.title }}</h3>
-  </a>
-  {% assign truncated_post = post.content | split:"<!-- truncate_here -->" | first %}
-  {% if truncated_post != post.content %}
-  {{ truncated_post | append:".."}}
-  <a href="{{ post.url }}">
-    <p>Continue reading &rarr;</p>
-  </a>
-  {% else %}
-   {{ post.content }}
-  {% endif %}
-  {% if post != blogposts.last %}
-    <hr />
-  {% endif %}
+<div>
+{% for tag in site.tags %}
+<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
 {% endfor %}
 </div>
+ 
+<ul>
+{% for tag in site.tags %}
+  <li class='tag_item' id='{{ tag[0] }}'>
+    <span class='tag_name'>{{ tag[0] }}</span>
+    <span>
+      <ul>
+      {% for post in tag[1] %}<!-- tag[1]包含tag是tag[0]的所有posts -->
+        <li class='tag_post'><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+      {% endfor %}
+      </ul>
+    </span>
+  </li>
+{% endfor %}
+</ul>
