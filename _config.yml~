@@ -30,6 +30,6 @@ pygments: true
 
 assets:
   sources:
-    - _assets/css
+    - assets/css
     #- _assets/js
   debug: false

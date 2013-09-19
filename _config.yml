@@ -27,9 +27,3 @@ kramdown:
 permalink: /blog/:year/:month/:day/:title/
 relative_permalinks: false
 pygments: true
-
-assets:
-  sources:
-    - assets/css
-    #- _assets/js
-  debug: false
