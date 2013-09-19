@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Blog
-categories: blog
 ---
 
 <div id='tag_cloud'>
@@ -17,7 +16,7 @@ categories: blog
     <span>
       <ul>
       {% for post in tag[1] %}
-        <li class='tag_post'><a href="{{ post.url }}" title="{{ post.title }}">{{ post.date|date_to_long_string }}<p>      <p>{{ post.title }}</a></li>
+        <li class='tag_post'><a href="{{ post.url }}" title="{{ post.title }}">{{ post.date|date_to_long_string }}&nbsp;&nbsp;&nbsp;&nbsp;{{ post.title }}</a></li>
       {% endfor %}
       </ul>
     </span>
