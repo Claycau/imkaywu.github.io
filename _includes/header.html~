@@ -6,7 +6,7 @@
       <div id="links" class="hidden-phone">
         <li><a href="/projects">Projects</a></li>
         <br class="phone" />
-        <li><a href="/blog">Blog</a></li>
+        <li><a href="/blog/index.html">Blog</a></li>
         <br class="phone" />
         <li><a href="/resume">Resume</a></li>
       </div>
