@@ -16,7 +16,7 @@ categories: blog
     <span class='tag_name'>{{ tag[0] }}</span>
     <span>
       <ul>
-      {% for post in tag[1] %}
+      {% for post in tag[1] %}<!-- tag[1]包含tag是tag[0]的所有posts -->
         <li class='tag_post'><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
       {% endfor %}
       </ul>
