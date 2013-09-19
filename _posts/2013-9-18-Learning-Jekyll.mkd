@@ -7,6 +7,7 @@ categories: blog
 
 This series is my learning notes of Jekyll which is the static web engine I use for my blog. And I'll only record the important points to me. The original site is [here](http://www.andrewmunsell.com/tutorials/jekyll-by-example/index.html).
 <!-- truncate_here -->
+
 ###_config.yml
 
 * replace “[YOUR DOMAIN]” with your website’s domain name after *url*, without a trailing slash

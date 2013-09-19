@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<html>
+  <body style="width:820px; margin:auto;">
+    <?xml version="1.0" encoding="UTF-8"?>
 <!-- Template from here: https://github.com/diverso/jekyll-rss-feeds -->
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
@@ -19,8 +21,9 @@
 			<item>
 				<title>Learning Jekyll</title>
 				<description>&lt;p&gt;This series is my learning notes of Jekyll which is the static web engine I use for my blog. And I&amp;#39;ll only record the important points to me. The original site is &lt;a href=&quot;http://www.andrewmunsell.com/tutorials/jekyll-by-example/index.html&quot;&gt;here&lt;/a&gt;.
-&lt;!-- truncate_here --&gt;
-###_config.yml&lt;/p&gt;
+&lt;!-- truncate_here --&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;configyml&quot;&gt;_config.yml&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
@@ -73,3 +76,6 @@
 		
 	</channel>
 </rss>
+
+  </body>
+</html>

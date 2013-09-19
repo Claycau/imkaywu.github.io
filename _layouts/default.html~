@@ -32,13 +32,16 @@
             });
         </script>
                 
-        <link rel=stylesheet type=text/css href=/css/pure-min.css>
-        <link rel=stylesheet type=text/css href=/css/github.css>
-        <link rel=stylesheet type=text/css href=/css/styles.css>
-        <link rel=stylesheet type=text/css href=/css/font-awesome/css/font-awesome.min.css>
+        <link rel=stylesheet type=text/css href=/_asset/css/pure-min.css>
+        <link rel=stylesheet type=text/css href=/_asset/css/github.css>
+        <link rel=stylesheet type=text/css href=/_asset/css/styles.css>
+        <link rel=stylesheet type=text/css href=/_asset/css/font-awesome/css/font-awesome.min.css>
         <link rel=alternate type=application/rss+xml title="RSS feed for eyeshalfclosed.com" href="/feed.xml">
     </head>
     <body>
+		<header>
+			{% include header.html %}
+		</header>
         <div class="container pure-g-r">
             <div class=pure-u-1-4>
                 {% include introduction.html %}

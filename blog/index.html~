@@ -4,25 +4,39 @@ title: Blog
 categories: blog
 ---
 
-<div id="blog" style="padding-top:30px; margin-top:-23px;">
-{% assign blogposts = site.categories.blog %}
-{% for post in blogposts %}
-  {% capture time %}{{ post.content | reading_time }}{% endcapture %}
-  <small style="float:right; margin-top:1px;"><i>{{ time }} min read</i> &sdot; {{ post.date | date:'%a %d %b %Y' }}</small>
-  <a href="{{ post.url }}">
-    <h3>{{ post.title }}</h3>
-  </a>
-  {% assign truncated_post = post.content | split:"<!-- truncate_here -->" | first %}
-  {% if truncated_post != post.content %}
-  {{ truncated_post | append:".."}}
-  <a href="{{ post.url }}">
-    <p>Continue reading &rarr;</p>
-  </a>
-  {% else %}
-   {{ post.content }}
-  {% endif %}
-  {% if post != blogposts.last %}
-    <hr />
-  {% endif %}
+<div id='tag_cloud'>
+{% for tag in site.tags %}
+<a href="#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">{{ tag[0] }}</a>
 {% endfor %}
 </div>
+ 
+<ul id='tag_list'>
+{% for tag in site.tags %}
+  <li class='tag_item' id='{{ tag[0] }}'>
+    <span class='tag_name'>{{ tag[0] }}</span>
+    <span>
+      <ul>
+      {% for post in tag[1] %}
+        <li class='tag_post'><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
+      {% endfor %}
+      </ul>
+    </span>
+  </li>
+{% endfor %}
+</ul>
+ 
+<!--修改这里的地址--> 
+<script src="/js/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>  
+<script src="/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script> 
+<!--END-->
+ 
+<script language="javascript">
+$.fn.tagcloud.defaults = {
+    size: {start: 0.9, end: 2, unit: 'em'},
+      color: {start: '#e77471', end: '#f62817'}
+};
+ 
+$(function () {
+    $('#tag_cloud a').tagcloud();
+});
+</script>

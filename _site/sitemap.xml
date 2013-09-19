@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<html>
+  <body style="width:820px; margin:auto;">
+    <?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>http://imkaywu.com</loc>
-    <lastmod>2013-09-18</lastmod>
+    <lastmod>2013-09-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -35,9 +37,11 @@
     
   
     
+  
+    
       <url>
         <loc>http://imkaywu.com/about/</loc>
-        <lastmod>2013-09-18</lastmod>
+        <lastmod>2013-09-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
       </url>
@@ -45,6 +49,7 @@
   
     
   
-    
-  
 </urlset>
+
+  </body>
+</html>
