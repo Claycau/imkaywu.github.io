@@ -32,10 +32,10 @@
             });
         </script>
                 
-        <link rel=stylesheet type=text/css href=/_asset/css/pure-min.css>
-        <link rel=stylesheet type=text/css href=/_asset/css/github.css>
-        <link rel=stylesheet type=text/css href=/_asset/css/styles.css>
-        <link rel=stylesheet type=text/css href=/_asset/css/font-awesome/css/font-awesome.min.css>
+        <link rel=stylesheet type=text/css href=/_assets/css/pure-min.css>
+        <link rel=stylesheet type=text/css href=/_assets/css/github.css>
+        <link rel=stylesheet type=text/css href=/_assets/css/styles.css>
+        <link rel=stylesheet type=text/css href=/_assets/css/font-awesome/css/font-awesome.min.css>
         <link rel=alternate type=application/rss+xml title="RSS feed for eyeshalfclosed.com" href="/feed.xml">
     </head>
     <body>
