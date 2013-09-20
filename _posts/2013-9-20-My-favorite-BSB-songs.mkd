@@ -1,0 +1,17 @@
+---
+layout: post
+title: Songs of the Backstreet boy that I like most
+tags: music
+categories: blog
+---
+
+I began listen to the songs of BSB in June, and fell in love with their beautiful melodies. Even more, their harmony is perfect that it sounds like one voice. So with no more words, let me present my favorite BSB's songs
+
+###As long as you love###
+
+It's the second BSB song I listened, and I just love the solo part sang by Nick and B-rock.
+
+<audio controls>
+  <source src="/musics/as_long_as_you_love_me.mp3" type="audio/mpeg">
+  Your browser does not support this audio format.
+</audio>

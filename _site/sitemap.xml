@@ -11,6 +11,13 @@
 
   
   <url>
+    <loc>http://imkaywu.com/blog/2013/09/20/My-favorite-BSB-songs/</loc>
+    <lastmod>2013-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://imkaywu.com/blog/2013/09/19/Jekyll-creating-tags-page/</loc>
     <lastmod>2013-09-19</lastmod>
     <changefreq>weekly</changefreq>
