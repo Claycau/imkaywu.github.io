@@ -2,6 +2,7 @@
 layout: none
 title: Resume
 categories: resume
+permalink: /categories/resume/
 ---
 
 {% assign pages = site.tags.resume %}
