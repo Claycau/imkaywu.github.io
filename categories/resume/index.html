@@ -1,0 +1,11 @@
+---
+layout: none
+title: Resume
+categories: resume
+permalink: /categories/resume/
+---
+
+{% assign pages = site.tags.resume %}
+{% for page in pages %}
+    {{ page.content }}
+{% endfor %}
