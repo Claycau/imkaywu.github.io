@@ -1,6 +1,6 @@
 ---
 layout: post
-title: create tags page 
+title: Create tags page 
 tags: Jekyll tags
 categories: blog
 ---
