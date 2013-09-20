@@ -1,7 +1,6 @@
 ---
 layout: page 
 title: About Me
-permalink: /about/
 ---
 
 I'm currently an undergraduate student majoring in Electric Engineer in [Beijing University of Posts & Telecom](http://www.bupt.edu.cn/‎). I'm a keen programmer and willing to try out new stuffs.
