@@ -6,11 +6,18 @@
 
   <url>
     <loc>http://imkaywu.com</loc>
-    <lastmod>2013-09-19</lastmod>
+    <lastmod>2013-09-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>http://imkaywu.com/blog/2013/09/19/Jekyll-creating-tags-page/</loc>
+    <lastmod>2013-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
   <url>
     <loc>http://imkaywu.com/blog/2013/09/18/My-first-blog/</loc>
@@ -37,7 +44,7 @@
     
       <url>
         <loc>http://imkaywu.com/about/</loc>
-        <lastmod>2013-09-19</lastmod>
+        <lastmod>2013-09-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
       </url>
