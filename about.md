@@ -3,7 +3,7 @@ layout: page
 title: About Me
 ---
 
-I'm currently an undergraduate student majoring in Electric Engineer in [Beijing University of Posts & Telecom](http://www.bupt.edu.cn/‎). I'm a keen programmer and willing to try out new stuffs.
+I'm currently an undergraduate student majoring in [Electric Engineer](http://see.bupt.edu.cn/school/) in [Beijing University of Posts & Telecom](http://www.bupt.edu.cn/). I'm a keen programmer and willing to try out new stuffs.
 
 I'm not a CS/SE student, I self-learn how to code and find it really satisfactory when I write something cool and amazing. When I'm coding, I can just sit there for hours and concentrate on the problem I want to solve. I also love Linux and all the cool stuffs it offers. I'm willing to spend days of time just sitting in front my computer doing things that other people find meaningless. Like configuring my Vim editor, try out the plugins for my firefox/chrome browsers(I'm a hardcore user of firefox), install new versions of software to check out the new features it offers, install small gadget(like dock, clover) to make my machine cooler. I just find it fun to do so, nothing more.
 
