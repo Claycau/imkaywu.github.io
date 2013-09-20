@@ -13,7 +13,7 @@
 				<title>create tags page</title>
 				<description>&lt;p&gt;I&amp;#39;m a organized person, so I want my blogs to be organized as well. I want to organize the posts according to their tags. Unfortunately, it&amp;#39;s not that convient to create that kind of a page. After searching the internet for a while, I found some solutions, here is the one I&amp;#39;m using now.&lt;/p&gt;
 
-&lt;p&gt;First, in the directory &lt;em&gt;/categories&lt;/em&gt;, I created an &lt;em&gt;index_blog.html&amp;quot; file&lt;/em&gt; and pasted the following code inside.&lt;/p&gt;
+&lt;p&gt;First, in the directory &lt;em&gt;/categories&lt;/em&gt;, I created an &lt;em&gt;index_blog.html&lt;/em&gt; file and pasted the following code inside.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;
   &lt;pre&gt;&lt;code class=&quot;html&quot;&gt;---
@@ -85,7 +85,7 @@ title: Blog
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;And this suffice to do the trick. However, I still have some bugs to fix and the fond and color of the text is not elegant at all. So still got a lot of things to do. &lt;/p&gt;
+&lt;p&gt;And this suffice to do the trick. However, I still have some bugs to fix and the fond and color of the text is not elegant at all. So still got a lot of things to do. You can fork this project in github and see the raw code, or if you have any suggestion and ideas, feel free to email me or @ me in weibo.&lt;/p&gt;
 </description>
 				<pubDate>Thu, 19 Sep 2013 00:00:00 +0800</pubDate>
 				<link>http://imkaywu.com/blog/2013/09/19/Jekyll-creating-tags-page/</link>

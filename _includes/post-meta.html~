@@ -7,6 +7,6 @@
     <li class=publish-time><i class=icon-calendar></i>{{ item.date | date: "%B %d, %Y" }}</li>
     {% for tag in item.tags %}
         <li>&middot;</li>
-        <li><a href="/index_blog/#{{ tag }}">#{{ tag }}</a></li>
+        <li><a href="/categories/#{{ tag }}">#{{ tag }}</a></li>
     {% endfor %}
 </ul>
