@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Create tags page 
+title: Creating a page to organize tags
 tags: Jekyll tags
 categories: blog
 ---
