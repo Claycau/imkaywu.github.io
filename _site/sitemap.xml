@@ -4,11 +4,18 @@
 
   <url>
     <loc>http://imkaywu.com</loc>
-    <lastmod>2013-09-21</lastmod>
+    <lastmod>2013-09-22</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>http://imkaywu.com/blog/2013/09/22/%E6%94%BE%E5%BC%83%E4%BF%9D%E7%A0%94/</loc>
+    <lastmod>2013-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
   <url>
     <loc>http://imkaywu.com/blog/2013/09/21/%E7%94%B5%E8%AE%BE%E6%80%BB%E7%BB%93-%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93%E5%BC%80%E7%AB%AF%E7%AF%87/</loc>
@@ -61,7 +68,7 @@
     
       <url>
         <loc>http://imkaywu.com/about.html</loc>
-        <lastmod>2013-09-21</lastmod>
+        <lastmod>2013-09-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
       </url>
