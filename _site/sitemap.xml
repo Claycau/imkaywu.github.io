@@ -4,11 +4,25 @@
 
   <url>
     <loc>http://imkaywu.com</loc>
-    <lastmod>2013-09-22</lastmod>
+    <lastmod>2013-10-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>http://imkaywu.com/blog/2013/10/19/An-implementation-of-the-distance-transform-algorithm-using-MATLAB/</loc>
+    <lastmod>2013-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://imkaywu.com/blog/2013/10/19/A-weird-erroe-caused-by-jekyll/</loc>
+    <lastmod>2013-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
   <url>
     <loc>http://imkaywu.com/blog/2013/09/22/%E6%94%BE%E5%BC%83%E4%BF%9D%E7%A0%94/</loc>
@@ -68,7 +82,7 @@
     
       <url>
         <loc>http://imkaywu.com/about.html</loc>
-        <lastmod>2013-09-22</lastmod>
+        <lastmod>2013-10-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
       </url>

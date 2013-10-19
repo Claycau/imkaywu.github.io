@@ -1,8 +1,8 @@
 ---
-layout:post
-title:A MATLAB implementation of distance transform algorithm
-tag:[computer vision, image process, distance transform, MATLAB]
-categories:blog
+layout: post
+title: A MATLAB implementation of distance transform algorithm
+tag: [computer vision, image process, distance transform, MATLAB]
+categories: blog
 ---
 
 In the gesture recognition algorithms we are developing, I need to calculate the transform distance of a binary image. Though the MATLAB has a function for just that purpose, I decided to dig around and find more efficient ways to implement this algorithm.
@@ -45,7 +45,6 @@ end for
 
 And the MATLAB code is as follows:
 
-{% highlight MATLAB %}
 function dt=dist_trans(mat)
     row=size(mat,1);
     colum=size(mat,2);
@@ -89,6 +88,5 @@ function dt=dist_trans(mat)
     end
     dt=mat;
 end
-{% endhightlight %}
 
 The advantage of this algorithm is its simlicity and easy to understand. There are lots of research in improving this algorithm and I'm just started my own research. So I hope more sophisticated and faster algorithms can come up later.
