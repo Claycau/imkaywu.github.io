@@ -21,11 +21,10 @@ layout: default
   <section class="post">
   {{ content }}
   </section>
-  {% if page.guid %}
-  <div class="divider"></div>
-  <section class="comment">
+  <div style='height:1px;background-color:#C3C3C3;line-height:1px;clear:both;display:block;overflow:hidden'> </div>
+  <br>
   <!--codes for Disqus-->
-	<div id="disqus_thread"></div>
+  <div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'kaystechblog'; // required: replace example with your forum shortname
@@ -39,7 +38,5 @@ layout: default
     </script>
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-	<!--end of code-->
-  </section>
-  {% endif %}
+    <!--end of code-->
 </article>
