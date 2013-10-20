@@ -7,7 +7,7 @@ categories: blog
 
 In the gesture recognition algorithms we are developing, I need to calculate the transform distance of a binary image. Though the MATLAB has a function for just that purpose, I decided to dig around and find more efficient ways to implement this algorithm.
 
-For folks who are not familiar with distance transform, there is a great post[http://homepages.inf.ed.ac.uk/rbf/HIPR2/distance.htm] for you. This can give a big picture of what this task is about.
+For folks who are not familiar with distance transform, there is a great [post](http://homepages.inf.ed.ac.uk/rbf/HIPR2/distance.htm) for you. This can give a big picture of what this task is about.
 
 The algorithm I implement is using **chessboard** distance metric. And I'm still working on some other metrics. For instance, **Euclidean** and **city block** metrics.
 

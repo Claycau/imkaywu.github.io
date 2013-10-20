@@ -10,27 +10,27 @@ This blog is my learning notes of Jekyll which is the static web engine I use fo
 
 ###_config.yml
 
-* replace “[YOUR DOMAIN]” with your website’s domain name after **url**, without a trailing slash
+`replace “[YOUR DOMAIN]” with your website’s domain name after **url**, without a trailing slash`
 
-* not need to surround a string with quotation marks unless it contains specific characters, like the colon (“:”) in the URL.
+`not need to surround a string with quotation marks unless it contains specific characters, like the colon (“:”) in the URL.`
 
 ###_includes
 
-* files shared between posts and pages.
+`files shared between posts and pages.`
 
-* Files and folders with underscores prepending the name will not be copied to the final, generated website.
+`Files and folders with underscores prepending the name will not be copied to the final, generated website.`
 
 ###_layout
 
-* posts' layout files.
+`posts' layout files.`
 
 ###_posts
 
-* source Markdown files for your blog posts.
+`source Markdown files for your blog posts.`
 
 ###_site
 
-* in the root directory of your project, enter *jekyll serve* in the Terminal, a **_site** directory will be created.
+`in the root directory of your project, enter *jekyll serve* in the Terminal, a **_site** directory will be created.`
 
 
 
