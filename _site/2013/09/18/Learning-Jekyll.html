@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Linghua Zhang" />
+    
+    <title>Learning Jekyll</title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/atom.xml" rel="alternate" title="The journey is the award" type="application/atom+xml" />
+    <link rel="stylesheet" href="/media/css/style.css">
+    <link rel="stylesheet" href="/media/css/github.css">
+    <link rel="stylesheet" href="/media/css/fontawesome.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/media/css/fontawesome-ie7.css">
+    <![endif]-->
+    <script type="text/javascript" src="/media/js/highlight.pack.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="The journey is the award" class="" href="/">The journey is the award</a></h1>
+          </div>
+          <nav>
+            <span><a title="Archive" class="icon-list-ul" href="/archive.html"></a></span>
+            <span><a title="Tags" class="icon-tags" href="/tags.html"></a></span>
+            <span><a title="About" class="icon-user" href="/about.html"></a></span>
+            <span><a title="Projects" class="icon-film" href="/projects.html"></a></span>
+            <span><a title="Resume" class="icon-link" href="/resume.html"></a></span>
+            <span><a title="Subscribe" class="icon-rss" href="/atom.xml"></a></span>
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>Learning Jekyll </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2013-09-18">2013-09-18</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#Jekyll" title="Jekyll">#Jekyll</a>
+    
+  </span>
+  
+  </section>
+  <section class="post">
+  <p>This blog is my learning notes of Jekyll which is the static web engine I use for my blog. And I'll only record the important points to me. The original site is <a href="http://www.andrewmunsell.com/tutorials/jekyll-by-example/index.html">here</a>.</p>
+
+<!-- truncate_here -->
+
+
+<h3>_config.yml</h3>
+
+<ul>
+<li><p>replace “[YOUR DOMAIN]” with your website’s domain name after <strong>url</strong>, without a trailing slash</p></li>
+<li><p>not need to surround a string with quotation marks unless it contains specific characters, like the colon (“:”) in the URL.</p></li>
+</ul>
+
+
+<h3>_includes</h3>
+
+<ul>
+<li><p>files shared between posts and pages.</p></li>
+<li><p>Files and folders with underscores prepending the name will not be copied to the final, generated website.</p></li>
+</ul>
+
+
+<h3>_layout</h3>
+
+<ul>
+<li>posts' layout files.</li>
+</ul>
+
+
+<h3>_posts</h3>
+
+<ul>
+<li>source Markdown files for your blog posts.</li>
+</ul>
+
+
+<h3>_site</h3>
+
+<ul>
+<li>in the root directory of your project, enter <em>jekyll serve</em> in the Terminal, a <strong>_site</strong> directory will be created.</li>
+</ul>
+
+
+  </section>
+  
+</article>
+
+        </div>
+        <footer>
+          <div>
+            &copy; 2013 Kay | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/imkaywu/imkaywu.github.io" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+	  <!--codes to DISPLAY COMMENT COUNT-->
+		<script type="text/javascript">
+    	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    	var disqus_shortname = 'kaystechblog'; // required: replace example with your forum shortname
+
+    	/* * * DON'T EDIT BELOW THIS LINE * * */
+    	(function () {
+        	var s = document.createElement('script'); s.async = true;
+        	s.type = 'text/javascript';
+        	s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        	(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    	}());
+    	</script>
+		<!--end of code-->
+  </body>
+</html>

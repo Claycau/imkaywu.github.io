@@ -1,0 +1,9 @@
+---
+layout: none
+title: Resume
+---
+
+{% assign pages = site.tags.resume %}
+{% for page in pages %}
+    {{ page.content }}
+{% endfor %}

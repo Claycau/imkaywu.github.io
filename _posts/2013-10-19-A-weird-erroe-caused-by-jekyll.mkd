@@ -7,6 +7,6 @@ categories: blog
 
 I haven't got the chance to update my blog for a while. When I did today and tried to run it locally in my machine, I ran into some error.
 
-![jekyll_error](/images/jekyll error.png)
+![jekyll_error](/media/images/jekyll error.png)
 
 I googled and found the solution. Because the default format of YAML is **parameter+: +white space**, so if you happen to forget the white space, you gonna run into the same error as I did. So simple solution is adding the white space.

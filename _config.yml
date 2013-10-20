@@ -1,35 +1,7 @@
-name: Kay Wu
-description: Kay's Tech Blog
 url: "http://imkaywu.com"
-
-# Author info
-author_name: Kay Wu
-author_image_path: /images/author-image.jpeg
-author_bio: |
-    Electric Engineer student in BUPT.
-    A keen programmer and music & movie lover.
-    More <a href=/about.html>about me</a>.
-
-# External services
-github_url: "https://github.com/imkaywu"
-weibo_url: "http://weibo.com/imkaywu"
-linkedin_url: "https://linkedin.com/in/imkaywu"
-feed_url: "http://feeds.feedburner.com/eyeshalfclosed"
-email: "imkaywu@gmail.com"
-
-# Markdown rendering
-markdown: kramdown
-kramdown:
-  smart_quotes: apos,apos,quot,quot
-  parse_block_html: true
-
-# Site settings
-permalink: /blog/:year/:month/:day/:title/
-relative_permalinks: false
+markdown: rdiscount
 pygments: true
-
-assets:
-  sources:
-    - assets/css
-    - assets/js
-  debug: false
+permalink: /:year/:month/:day/:title.html
+title: "Kay's teck blog"
+name: "The journey is the award"
+markdown: rdiscount

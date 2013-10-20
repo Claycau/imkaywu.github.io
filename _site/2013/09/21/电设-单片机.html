@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Linghua Zhang" />
+    
+    <title>C8051F单片机开发</title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/atom.xml" rel="alternate" title="The journey is the award" type="application/atom+xml" />
+    <link rel="stylesheet" href="/media/css/style.css">
+    <link rel="stylesheet" href="/media/css/github.css">
+    <link rel="stylesheet" href="/media/css/fontawesome.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/media/css/fontawesome-ie7.css">
+    <![endif]-->
+    <script type="text/javascript" src="/media/js/highlight.pack.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="The journey is the award" class="" href="/">The journey is the award</a></h1>
+          </div>
+          <nav>
+            <span><a title="Archive" class="icon-list-ul" href="/archive.html"></a></span>
+            <span><a title="Tags" class="icon-tags" href="/tags.html"></a></span>
+            <span><a title="About" class="icon-user" href="/about.html"></a></span>
+            <span><a title="Projects" class="icon-film" href="/projects.html"></a></span>
+            <span><a title="Resume" class="icon-link" href="/resume.html"></a></span>
+            <span><a title="Subscribe" class="icon-rss" href="/atom.xml"></a></span>
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>C8051F单片机开发 </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2013-09-21">2013-09-21</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#电设" title="电设">#电设</a>
+    
+    <a href="/tags.html#单片机" title="单片机">#单片机</a>
+    
+  </span>
+  
+  </section>
+  <section class="post">
+  <p>可能这个题目起得有些大，但也不想纠结这种事了。这块单片机对于入门来说我觉得还是有些困难的。当我一开始看源代码时，有一种想屎一赤又一赤的冲动。因为它的寄存器太过于丰富，而且对于某一模块的寄存器需要进行正确的配置之后，你写的代码才有可能按照你的预想去执行（也就是说没有程序出来奇葩结果的原因有两个：1.配置问题；2.逻辑问题，而且你刚开始很难知道是哪个）。我主要想记录下我在这个平台上开发时发生的各种奇葩蛋疼的事情，各种无法用逻辑解释的现象。</p>
+
+<h3>AD模块</h3>
+
+<p>这块真心没什么好说的，按着手册把寄存器配置好后，接收AD的输出数据就可以了。但关键是AD的精度并不是很准。当我输入给的是直流时，用串口输出AD输出值，数据竟然都有很大的波动。不过我之所以要记录这一块是因为这差不算是我正儿八经地学单片机程序后的第一个程序，对我观念上的转变还是挺大的。在软件中，当我要实现一个功能时，我必须自己思考逻辑，然后编出代码实现这个功能。但在硬件中，你要实现的功能都已经有硬件替你完成了，编程人员所要做的唯一要做的一件事情就是告诉硬件它要怎么获得输入，它该怎么处理这些输入，编程人员又该怎么得到它处理后的输出。至于它的处理过程，并不是编程人员考虑的。这一开始让我很不习惯，也让我感受到了硬件编程和软件编程第一个不一样的地方。</p>
+
+<h3>DA模块</h3>
+
+<p>这个我是和键盘一起做的，通过键盘控制输出的波形。其实还是如何给输入，给什么样的输入的问题。至于数字信号如何转变成模拟信号的，全有硬件来做。</p>
+
+<h3>矩阵键盘</h3>
+
+<p>之所以用矩阵键盘，是因为单片机的端口数量有限，矩阵键盘可以减少端口数的使用个数。但这也意味着键盘的检测就要稍微复杂一些了。</p>
+
+<p><strong>矩阵键盘原理图</strong></p>
+
+<p><img src="/media/images/keyboard.jpeg" alt="keyboard" /></p>
+
+<p>如图所示，将行设为输入，列设为输出，我们要做的就是不停的对列进行扫描，同时检测行的电平。具体来说，对某一列输出一个低电平，如果没有任何按键被按下，则行一直为高电平。</p>
+
+  </section>
+  
+</article>
+
+        </div>
+        <footer>
+          <div>
+            &copy; 2013 Kay | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/imkaywu/imkaywu.github.io" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+	  <!--codes to DISPLAY COMMENT COUNT-->
+		<script type="text/javascript">
+    	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    	var disqus_shortname = 'kaystechblog'; // required: replace example with your forum shortname
+
+    	/* * * DON'T EDIT BELOW THIS LINE * * */
+    	(function () {
+        	var s = document.createElement('script'); s.async = true;
+        	s.type = 'text/javascript';
+        	s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        	(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    	}());
+    	</script>
+		<!--end of code-->
+  </body>
+</html>

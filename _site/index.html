@@ -1,285 +1,220 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset=utf-8>
-        <meta name=viewport content="width=device-width, initial-scale=1.0">
-        <meta name=description content="Kay's Tech Blog">
-        
-        <title>Kay's Tech Blog | Kay Wu</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Linghua Zhang" />
+    
+    <title>Kay's teck blog</title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/atom.xml" rel="alternate" title="The journey is the award" type="application/atom+xml" />
+    <link rel="stylesheet" href="/media/css/style.css">
+    <link rel="stylesheet" href="/media/css/github.css">
+    <link rel="stylesheet" href="/media/css/fontawesome.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/media/css/fontawesome-ie7.css">
+    <![endif]-->
+    <script type="text/javascript" src="/media/js/highlight.pack.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="The journey is the award" class="" href="/">The journey is the award</a></h1>
+          </div>
+          <nav>
+            <span><a title="Archive" class="icon-list-ul" href="/archive.html"></a></span>
+            <span><a title="Tags" class="icon-tags" href="/tags.html"></a></span>
+            <span><a title="About" class="icon-user" href="/about.html"></a></span>
+            <span><a title="Projects" class="icon-film" href="/projects.html"></a></span>
+            <span><a title="Resume" class="icon-link" href="/resume.html"></a></span>
+            <span><a title="Subscribe" class="icon-rss" href="/atom.xml"></a></span>
+          </nav>
+        </header>
+        <div id="content">
+        <div>
+  <ul class="listing">
+  
+  <article class="content">
+    <section class="title">
+      <h2><a href="/2013/10/19/An-implementation-of-the-distance-transform-algorithm-using-MATLAB.html">A MATLAB implementation of distance transform algorithm</a></h2>
+    </section>
+    <section class="meta">
+    <span class="time">
+      <time datetime="2013-10-19">2013-10-19</time>
+    </span>
+    
+    <span class="tags">
+      
+      <a href="/tags.html#computer vision" title="computer vision">#computer vision</a>
+      
+      <a href="/tags.html#image process" title="image process">#image process</a>
+      
+      <a href="/tags.html#distance transform" title="distance transform">#distance transform</a>
+      
+      <a href="/tags.html#MATLAB" title="MATLAB">#MATLAB</a>
+      
+    </span>
+    
+    </section>
+    <section class="post">
+    <p>In the gesture recognition algorithms we are developing, I need to calculate the transform distance of a binary image. Though the MATLAB has a function for just that purpose, I decided to dig around and find more efficient ways to implement this algorithm.</p>
 
-        <script src=http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML.js type=text/javascript></script>
-        <script>
-            MathJax.Hub.Config({
-              "HTML-CSS": {
-                linebreaks: {
-                    automatic: true,
-                    width: "70% container"
-                },
-                styles: {
-                    ".MathJax .math": {
-                        "border": "1px solid #ccc",
-                        "margin": "0.1em 0",
-                        "padding": "0.3em",
-                        "vertical-align": "middle"
-                    },
-                    ".MathJax_Display .math": {
-                        "border": "none",
-                        "padding": "0",
-                    }
-                },
-                scale: 90
-              }
-            });
-        </script>
-                
-        <link rel=stylesheet type=text/css href=/assets/css/pure-min.css>
-        <link rel=stylesheet type=text/css href=/assets/css/github.css>
-        <link rel=stylesheet type=text/css href=/assets/css/styles.css>
-        <link rel=stylesheet type=text/css href=/assets/css/font-awesome/css/font-awesome.min.css>
-        <link rel=alternate type=application/rss+xml title="RSS feed for eyeshalfclosed.com" href="/feed.xml">
-    </head>
-    <body>
-		<header>
-			<div class="header">
-  <div class="pure-menu pure-menu-fixed pure-menu-open pure-menu-horizontal">
-    <a class="pure-menu-heading" style="padding: 8px 20px;" href="/">Kay Wu</a>
-    <div class="phone expand-icon"><a class="clickable" onclick="toggleMenu()"><i class="icon-reorder"></i></a></div>
-    <ul>
-      <div id="links" class="hidden-phone">
-        <li><a href="/categories/projects/">Projects</a></li>
-        <br class="phone" />
-        <li><a href="/categories/blog/">Blog</a></li>
-        <br class="phone" />
-        <li><a href="/categories/resume/">Resume</a></li>
-      </div>
-    </ul>
-  </div>
-</div>
+<p>For folks who are not familiar with distance transform, there is a great post[http://homepages.inf.ed.ac.uk/rbf/HIPR2/distance.htm] for you. This can give a big picture of what this task is about.</p>
 
-		</header>
-        <div class="container pure-g-r">
-            <div class=pure-u-1-4>
-                <div class=author-info>
-    <img src="/images/author-image.jpeg" class=author-image />
-    <h1 class=author-name><a href=/>Kay Wu</a></h1>
-    <div class=nav>
-        <a href="https://github.com/imkaywu"><i class=icon-github-alt></i></a>
-        <a href="http://weibo.com/imkaywu"><i class=icon-weibo></i></a>
-        <a href="https://linkedin.com/in/imkaywu"><i class=icon-linkedin></a></i>
-        <a href="mailto:imkaywu@gmail.com"><i class=icon-envelope-alt></i></a>
-    </div>
-    <p class=author-bio>Electric Engineer student in BUPT.
-A keen programmer and music & movie lover.
-More <a href=/about.html>about me</a>.
-</p>
-</div>
+<p>The algorithm I implement is using <strong>chessboard</strong> distance metric. And I'm still working on some other metrics. For instance, <strong>Euclidean</strong> and <strong>city block</strong> metrics.</p>
 
-            </div>
-            <div class=pure-u-3-4>
-                <div class=right-column>
-                    
-<div class=post>
-    
-    <h1 class=title><a href="/blog/2013/10/19/An-implementation-of-the-distance-transform-algorithm-using-MATLAB/">A MATLAB implementation of distance transform algorithm</a></h1>
-    <div class=content>
-        <p>In the gesture recognition algorithms we are developing, I need to calculate the transform distance of a binary image. Though the MATLAB has a function for just that purpose, I decided to dig around and find more efficient ways to implement this algorithm.</p>
+<p>First, we assume that the pixel value of the object is 1, and that of the background is 0. Then distance transform is defined as the smallest distance between the object and background pixels. And this value is used to replace the pixel value of the object.</p>
 
+<h2>Logic of the algorithm</h2>
 
-    </div>
-    <ul class=post-meta>
-    
-    <li class=publish-time><i class=icon-calendar></i>October 19, 2013</li>
-    
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#computer vision">#computer vision</a></li>
-    
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#image process">#image process</a></li>
-    
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#distance transform">#distance transform</a></li>
-    
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#MATLAB">#MATLAB</a></li>
-    
-</ul>
+<pre><code>direction: up-left to bottom-right
+    for each pixel
+    if the value is greater than 0 (namely, object pixel)
+        get the pixels from the *left*, *up-left*, *up*, *up-right*   directions
+        add 1 to the minimum value, assign it to the object pixel
+    end if
+end for
 
-</div>
+direction: bottom-right to up-left
+    for each pixel
+    if the value is greater than 0 (namely, object pixel)
+        get the pixels from the *right*, *bottom-right*, *bottom*, *bottom-left* directions
+        add 1 to the minimum value, assign it to the object pixel
+    end if
+end for
+</code></pre>
 
-<div class=post>
-    
-    <h1 class=title><a href="/blog/2013/10/19/A-weird-erroe-caused-by-jekyll/">A weird error caused by jekyll</a></h1>
-    <div class=content>
-        <p>I haven&#39;t got the chance to update my blog for a while. When I did today and tried to run it locally in my machine, I ran into some error.</p>
+<p>And the MATLAB code is as follows:</p>
 
+<pre><code>function dt=dist_trans(mat)
+row=size(mat,1);
+colum=size(mat,2);
+index0=(mat==0);
+index1=(mat==1);
+mat(index0)=1;
+mat(index1)=0;
 
-    </div>
-    <ul class=post-meta>
-    
-    <li class=publish-time><i class=icon-calendar></i>October 19, 2013</li>
-    
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#Jekyll">#Jekyll</a></li>
-    
-</ul>
+for i=1:row
+    for j=1:colum
+        if(mat(i,j)&gt;=1)
+            if((i==1)&amp;&amp;(j==1));
+            elseif(i==1)
+                mat(i,j)=min(mat(i,j-1))+1;
+            elseif(j==1)
+                mat(i,j)=min([mat(i-1,j),mat(i-1,j+1)])+1;
+            elseif(j==colum)
+                mat(i,j)=min([mat(i,j-1),mat(i-1,j-1),mat(i-1,j)])+1;
+            else
+                mat(i,j)=min([mat(i,j-1),mat(i-1,j-1),mat(i-1,j),mat(i-1,j+1)])+1;
+            end
+        end
+    end
+end
 
-</div>
+for i=row:-1:1
+    for j=colum:-1:1
+        if(mat(i,j)&gt;=1)
+            if((i==row)&amp;&amp;(j==colum));
+            elseif(i==row)
+                mat(i,j)=mat(i,j+1)+1;
+            elseif(j==colum)
+                mat(i,j)=min([mat(i+1,j),mat(i+1,j-1)])+1;
+            elseif(j==1)
+                mat(i,j)=min([mat(i,j+1),mat(i+1,j+1),mat(i+1,j)])+1;
+            else
+                mat(i,j)=min([mat(i,j+1),mat(i+1,j+1),mat(i+1,j),mat(i+1,j-1)])+1;
+            end
+        end
+    end
+end
+dt=mat;
+end
+</code></pre>
 
-<div class=post>
-    
-    <h1 class=title><a href="/blog/2013/09/22/%E6%94%BE%E5%BC%83%E4%BF%9D%E7%A0%94/">放弃保研</a></h1>
-    <div class=content>
-        <p>今天早上还没睡醒，就要起床去签什么破协议。到了那里之后，没想到人会这么多，教务的效率未免有点低啊，不能分批去吗？我本来就不喜欢呆在人多的地方，只一心想着签完之后早点走掉。签字的时候感脚心里有点小波澜——一个是前途有保障的未来，一个则是完全未知，不知道能否成功，但是却为之努力了这么久的事情。但我觉得我还是做了正确的选择，与其选择一个自己不想要的安全的生活，在接下来的日子里过着吃薯片，看美剧的生活，我宁愿拼一把，冒一次险。即使失败了，大不了从头来过，哥们才21岁，有的是青春和时间来挥霍。No guts, no glory。</p>
+<p>The advantage of this algorithm is its simlicity and easy to understand. There are lots of research in improving this algorithm and I'm just started my own research. So I hope more sophisticated and faster algorithms can come up later.</p>
 
-
-    </div>
-    <ul class=post-meta>
+    </section>
+    </article>
+  
+  </ul>
+  <div class="divider"></div>
+  <ul class="listing main-listing">
+    <li class="listing-seperator">Happend earlier this year</i>
+  
+  
     
-    <li class=publish-time><i class=icon-calendar></i>September 22, 2013</li>
     
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#保研">#保研</a></li>
+    <li class="listing-item">
+      <time datetime="2013-10-19">2013-10-19</time>
+      <a href="/2013/10/19/A-weird-erroe-caused-by-jekyll.html" title="A weird error caused by jekyll">A weird error caused by jekyll</a>
+    </li>
+  
     
-</ul>
-
-</div>
-
-<div class=post>
     
-    <h1 class=title><a href="/blog/2013/09/21/%E7%94%B5%E8%AE%BE%E6%80%BB%E7%BB%93-%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93%E5%BC%80%E7%AB%AF%E7%AF%87/">电设总结</a></h1>
-    <div class=content>
-        <p>这次电设学到了很多东西，虽然跟高手还有很大的差距，但比起自己刚开始的时候进步还是很大的。因为学了蛮多的技术，编了挺多的代码的，所以就把它们写在博客里，一来梳理一下学过的东东，而来供以后查找使用。这一篇blog就算给自己挖一个坑，日后一点一点的慢慢补。因为我觉得针对某一个具体的开发平台写的话太流水帐了，所以我只记录我认为比较有趣的点。</p>
-
-
-    </div>
-    <ul class=post-meta>
+    <li class="listing-item">
+      <time datetime="2013-09-22">2013-09-22</time>
+      <a href="/2013/09/22/%E6%94%BE%E5%BC%83%E4%BF%9D%E7%A0%94.html" title="放弃保研">放弃保研</a>
+    </li>
+  
     
-    <li class=publish-time><i class=icon-calendar></i>September 21, 2013</li>
     
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#电设">#电设</a></li>
+    <li class="listing-item">
+      <time datetime="2013-09-21">2013-09-21</time>
+      <a href="/2013/09/21/%E7%94%B5%E8%AE%BE%E6%80%BB%E7%BB%93-%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93%E5%BC%80%E7%AB%AF%E7%AF%87.html" title="电设总结">电设总结</a>
+    </li>
+  
     
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#单片机">#单片机</a></li>
     
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#FPGA">#FPGA</a></li>
+    <li class="listing-item">
+      <time datetime="2013-09-21">2013-09-21</time>
+      <a href="/2013/09/21/%E7%94%B5%E8%AE%BE-%E5%8D%95%E7%89%87%E6%9C%BA.html" title="C8051F单片机开发">C8051F单片机开发</a>
+    </li>
+  
     
-</ul>
-
-</div>
-
-<div class=post>
     
-    <p class=feature-image>
-        <img src="/images/C8051F.png"/>
-    </p> 
+    <li class="listing-item">
+      <time datetime="2013-09-20">2013-09-20</time>
+      <a href="/2013/09/20/My-favorite-BSB-songs.html" title="My favorite BSB songs">My favorite BSB songs</a>
+    </li>
+  
     
-    <h1 class=title><a href="/blog/2013/09/21/%E7%94%B5%E8%AE%BE-%E5%8D%95%E7%89%87%E6%9C%BA/">C8051F单片机开发</a></h1>
-    <div class=content>
-        <p>可能这个题目起得有些大，但也不想纠结这种事了。这块单片机对于入门来说我觉得还是有些困难的。当我一开始看源代码时，有一种想屎一赤又一赤的冲动。因为它的寄存器太过于丰富，而且对于某一模块的寄存器需要进行正确的配置之后，你写的代码才有可能按照你的预想去执行（也就是说没有程序出来奇葩结果的原因有两个：1.配置问题；2.逻辑问题，而且你刚开始很难知道是哪个）。我主要想记录下我在这个平台上开发时发生的各种奇葩蛋疼的事情，各种无法用逻辑解释的现象。</p>
-
-
-    </div>
-    <ul class=post-meta>
     
-    <li class=publish-time><i class=icon-calendar></i>September 21, 2013</li>
+    <li class="listing-item">
+      <time datetime="2013-09-19">2013-09-19</time>
+      <a href="/2013/09/19/Jekyll-creating-tags-page.html" title="Creating a page to organize tags">Creating a page to organize tags</a>
+    </li>
+  
     
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#电设">#电设</a></li>
     
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#单片机">#单片机</a></li>
+    <li class="listing-item">
+      <time datetime="2013-09-18">2013-09-18</time>
+      <a href="/2013/09/18/My-first-blog.html" title="My first blog">My first blog</a>
+    </li>
+  
     
-</ul>
-
-</div>
-
-<div class=post>
     
-    <h1 class=title><a href="/blog/2013/09/20/My-favorite-BSB-songs/">My favorite BSB songs</a></h1>
-    <div class=content>
-        <p>I began listen to the songs of BSB in June, and fell in love with their beautiful melodies. Even more, their harmony is perfect and it sounds like one voice. So with no more words, let me introduce my favorite BSB&#39;s songs. <strong>The loading may be a little slow, please wait patiently, it&#39;s worth waiting.</strong></p>
-
-
-    </div>
-    <ul class=post-meta>
-    
-    <li class=publish-time><i class=icon-calendar></i>September 20, 2013</li>
-    
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#music">#music</a></li>
-    
-</ul>
-
-</div>
-
-<div class=post>
-    
-    <h1 class=title><a href="/blog/2013/09/19/Jekyll-creating-tags-page/">Creating a page to organize tags</a></h1>
-    <div class=content>
-        <p>I&#39;m a organized person, so I want my blogs to be organized as well. I want to organize the posts according to their tags. Unfortunately, it&#39;s not that convient to create that kind of a page. After searching the internet for a while, I found some solutions, here is the one I&#39;m using now.</p>
-
-
-    </div>
-    <ul class=post-meta>
-    
-    <li class=publish-time><i class=icon-calendar></i>September 19, 2013</li>
-    
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#Jekyll">#Jekyll</a></li>
-    
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#tags">#tags</a></li>
-    
-</ul>
-
-</div>
-
-<div class=post>
-    
-    <h1 class=title><a href="/blog/2013/09/18/My-first-blog/">My first blog</a></h1>
-    <div class=content>
-        <p>Hello, everyone! This is the first page of my blog and from today on, I&#39;m gonna share my thoughts and coding experience in this blog, hopefully, these blogs will help the folks who neet it. The primary motivation for me to setup this blog is to record my journey as the learner of programming and help myself to be more professional in the coming days. Besides, I&#39;m also gonna share things like my favorite musics and movies and talk about my feeling towards these stuffs cause that&#39;s something I love. So this is a day to remember, and I hope I can have fun writing this blog.<!-- truncate_here --></p>
-
-
-    </div>
-    <ul class=post-meta>
-    
-    <li class=publish-time><i class=icon-calendar></i>September 18, 2013</li>
-    
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#introduction">#introduction</a></li>
-    
-</ul>
-
-</div>
-
-<div class=post>
-    
-    <h1 class=title><a href="/blog/2013/09/18/Learning-Jekyll/">Learning Jekyll</a></h1>
-    <div class=content>
-        <p>This blog is my learning notes of Jekyll which is the static web engine I use for my blog. And I&#39;ll only record the important points to me. The original site is <a href="http://www.andrewmunsell.com/tutorials/jekyll-by-example/index.html">here</a>.
-<!-- truncate_here --></p>
-
-
-    </div>
-    <ul class=post-meta>
-    
-    <li class=publish-time><i class=icon-calendar></i>September 18, 2013</li>
-    
-        <li>&middot;</li>
-        <li><a href="/categories/blog/#Jekyll">#Jekyll</a></li>
-    
-</ul>
-
+    <li class="listing-item">
+      <time datetime="2013-09-18">2013-09-18</time>
+      <a href="/2013/09/18/Learning-Jekyll.html" title="Learning Jekyll">Learning Jekyll</a>
+    </li>
+  
+    <li class="listing-seperator"><a href="/archive.html">Long long ago</a></li>
+  </ul>
 </div>
 
 
-                </div>
-            </div>
         </div>
-		<!--codes to DISPLAY COMMENT COUNT-->
+        <footer>
+          <div>
+            &copy; 2013 Kay | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/imkaywu/imkaywu.github.io" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+	  <!--codes to DISPLAY COMMENT COUNT-->
 		<script type="text/javascript">
     	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     	var disqus_shortname = 'kaystechblog'; // required: replace example with your forum shortname
@@ -293,5 +228,5 @@ More <a href=/about.html>about me</a>.
     	}());
     	</script>
 		<!--end of code-->
-    </body>
+  </body>
 </html>

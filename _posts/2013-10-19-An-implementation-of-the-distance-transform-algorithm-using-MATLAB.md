@@ -15,37 +15,27 @@ First, we assume that the pixel value of the object is 1, and that of the backgr
 
 ##Logic of the algorithm
 
-direction: up-left to bottom-right
 
-for each pixel
+	direction: up-left to bottom-right
+    	for each pixel
+		if the value is greater than 0 (namely, object pixel)
+			get the pixels from the *left*, *up-left*, *up*, *up-right*   directions
+			add 1 to the minimum value, assign it to the object pixel
+		end if
+	end for
 
-	if the value is greater than 0 (namely, object pixel)
+	direction: bottom-right to up-left
+    	for each pixel
+		if the value is greater than 0 (namely, object pixel)
+			get the pixels from the *right*, *bottom-right*, *bottom*, *bottom-left* directions
+			add 1 to the minimum value, assign it to the object pixel
+		end if
+	end for
 
-		get the pixels from the *left*, *up-left*, *up*, *up-right* directions
-
-		add 1 to the minimum value, assign it to the object pixel
-
-	end if
-
-end for
-
-direction: bottom-right to up-left
-
-for each pixel
-
-	if the value is greater than 0 (namely, object pixel)
-
-		get the pixels from the *right*, *bottom-right*, *bottom*, *bottom-left* directions
-
-		add 1 to the minimum value, assign it to the object pixel
-
-	end if
-
-end for
 
 And the MATLAB code is as follows:
 
-function dt=dist_trans(mat)
+    function dt=dist_trans(mat)
     row=size(mat,1);
     colum=size(mat,2);
     index0=(mat==0);
@@ -87,6 +77,6 @@ function dt=dist_trans(mat)
         end
     end
     dt=mat;
-end
+    end
 
 The advantage of this algorithm is its simlicity and easy to understand. There are lots of research in improving this algorithm and I'm just started my own research. So I hope more sophisticated and faster algorithms can come up later.

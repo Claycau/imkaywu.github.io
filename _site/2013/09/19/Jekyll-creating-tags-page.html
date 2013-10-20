@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Linghua Zhang" />
+    
+    <title>Creating a page to organize tags</title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/atom.xml" rel="alternate" title="The journey is the award" type="application/atom+xml" />
+    <link rel="stylesheet" href="/media/css/style.css">
+    <link rel="stylesheet" href="/media/css/github.css">
+    <link rel="stylesheet" href="/media/css/fontawesome.css">
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/media/css/fontawesome-ie7.css">
+    <![endif]-->
+    <script type="text/javascript" src="/media/js/highlight.pack.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="The journey is the award" class="" href="/">The journey is the award</a></h1>
+          </div>
+          <nav>
+            <span><a title="Archive" class="icon-list-ul" href="/archive.html"></a></span>
+            <span><a title="Tags" class="icon-tags" href="/tags.html"></a></span>
+            <span><a title="About" class="icon-user" href="/about.html"></a></span>
+            <span><a title="Projects" class="icon-film" href="/projects.html"></a></span>
+            <span><a title="Resume" class="icon-link" href="/resume.html"></a></span>
+            <span><a title="Subscribe" class="icon-rss" href="/atom.xml"></a></span>
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>Creating a page to organize tags </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2013-09-19">2013-09-19</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#Jekyll" title="Jekyll">#Jekyll</a>
+    
+    <a href="/tags.html#tags" title="tags">#tags</a>
+    
+  </span>
+  
+  </section>
+  <section class="post">
+  <p>I'm a organized person, so I want my blogs to be organized as well. I want to organize the posts according to their tags. Unfortunately, it's not that convient to create that kind of a page. After searching the internet for a while, I found some solutions, here is the one I'm using now.</p>
+
+<p>First, in the directory <em>/categories</em>, I created an <em>index_blog.html</em> file and pasted the following code inside.</p>
+
+<div class="highlight"><pre><code class="html">---
+layout: default
+title: Blog
+---
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&#39;tag_cloud&#39;</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#FPGA&quot;</span> <span class="na">title=</span><span class="s">&quot;FPGA&quot;</span> <span class="na">rel=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>FPGA<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#MATLAB&quot;</span> <span class="na">title=</span><span class="s">&quot;MATLAB&quot;</span> <span class="na">rel=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>MATLAB<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#music&quot;</span> <span class="na">title=</span><span class="s">&quot;music&quot;</span> <span class="na">rel=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>music<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#image process&quot;</span> <span class="na">title=</span><span class="s">&quot;image process&quot;</span> <span class="na">rel=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>image process<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#保研&quot;</span> <span class="na">title=</span><span class="s">&quot;保研&quot;</span> <span class="na">rel=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>保研<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#computer vision&quot;</span> <span class="na">title=</span><span class="s">&quot;computer vision&quot;</span> <span class="na">rel=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>computer vision<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#单片机&quot;</span> <span class="na">title=</span><span class="s">&quot;单片机&quot;</span> <span class="na">rel=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>单片机<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#distance transform&quot;</span> <span class="na">title=</span><span class="s">&quot;distance transform&quot;</span> <span class="na">rel=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>distance transform<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#introduction&quot;</span> <span class="na">title=</span><span class="s">&quot;introduction&quot;</span> <span class="na">rel=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>introduction<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#tags&quot;</span> <span class="na">title=</span><span class="s">&quot;tags&quot;</span> <span class="na">rel=</span><span class="s">&quot;1&quot;</span><span class="nt">&gt;</span>tags<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#电设&quot;</span> <span class="na">title=</span><span class="s">&quot;电设&quot;</span> <span class="na">rel=</span><span class="s">&quot;2&quot;</span><span class="nt">&gt;</span>电设<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;#Jekyll&quot;</span> <span class="na">title=</span><span class="s">&quot;Jekyll&quot;</span> <span class="na">rel=</span><span class="s">&quot;3&quot;</span><span class="nt">&gt;</span>Jekyll<span class="nt">&lt;/a&gt;</span>
+
+<span class="nt">&lt;/div&gt;</span>
+ 
+<span class="nt">&lt;ul</span> <span class="na">id=</span><span class="s">&#39;tag_list&#39;</span><span class="nt">&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;FPGA&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>FPGA<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/21/%E7%94%B5%E8%AE%BE%E6%80%BB%E7%BB%93-%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93%E5%BC%80%E7%AB%AF%E7%AF%87.html&quot;</span> <span class="na">title=</span><span class="s">&quot;电设总结&quot;</span><span class="nt">&gt;</span>21 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>电设总结<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;MATLAB&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>MATLAB<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/10/19/An-implementation-of-the-distance-transform-algorithm-using-MATLAB.html&quot;</span> <span class="na">title=</span><span class="s">&quot;A MATLAB implementation of distance transform algorithm&quot;</span><span class="nt">&gt;</span>19 October 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>A MATLAB implementation of distance transform algorithm<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;music&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>music<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/20/My-favorite-BSB-songs.html&quot;</span> <span class="na">title=</span><span class="s">&quot;My favorite BSB songs&quot;</span><span class="nt">&gt;</span>20 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>My favorite BSB songs<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;image process&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>image process<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/10/19/An-implementation-of-the-distance-transform-algorithm-using-MATLAB.html&quot;</span> <span class="na">title=</span><span class="s">&quot;A MATLAB implementation of distance transform algorithm&quot;</span><span class="nt">&gt;</span>19 October 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>A MATLAB implementation of distance transform algorithm<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;保研&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>保研<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/22/%E6%94%BE%E5%BC%83%E4%BF%9D%E7%A0%94.html&quot;</span> <span class="na">title=</span><span class="s">&quot;放弃保研&quot;</span><span class="nt">&gt;</span>22 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>放弃保研<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;computer vision&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>computer vision<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/10/19/An-implementation-of-the-distance-transform-algorithm-using-MATLAB.html&quot;</span> <span class="na">title=</span><span class="s">&quot;A MATLAB implementation of distance transform algorithm&quot;</span><span class="nt">&gt;</span>19 October 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>A MATLAB implementation of distance transform algorithm<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;单片机&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>单片机<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/21/%E7%94%B5%E8%AE%BE%E6%80%BB%E7%BB%93-%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93%E5%BC%80%E7%AB%AF%E7%AF%87.html&quot;</span> <span class="na">title=</span><span class="s">&quot;电设总结&quot;</span><span class="nt">&gt;</span>21 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>电设总结<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/21/%E7%94%B5%E8%AE%BE-%E5%8D%95%E7%89%87%E6%9C%BA.html&quot;</span> <span class="na">title=</span><span class="s">&quot;C8051F单片机开发&quot;</span><span class="nt">&gt;</span>21 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>C8051F单片机开发<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;distance transform&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>distance transform<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/10/19/An-implementation-of-the-distance-transform-algorithm-using-MATLAB.html&quot;</span> <span class="na">title=</span><span class="s">&quot;A MATLAB implementation of distance transform algorithm&quot;</span><span class="nt">&gt;</span>19 October 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>A MATLAB implementation of distance transform algorithm<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;introduction&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>introduction<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/18/My-first-blog.html&quot;</span> <span class="na">title=</span><span class="s">&quot;My first blog&quot;</span><span class="nt">&gt;</span>18 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>My first blog<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;tags&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>tags<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/19/Jekyll-creating-tags-page.html&quot;</span> <span class="na">title=</span><span class="s">&quot;Creating a page to organize tags&quot;</span><span class="nt">&gt;</span>19 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>Creating a page to organize tags<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;电设&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>电设<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/21/%E7%94%B5%E8%AE%BE%E6%80%BB%E7%BB%93-%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93%E5%BC%80%E7%AB%AF%E7%AF%87.html&quot;</span> <span class="na">title=</span><span class="s">&quot;电设总结&quot;</span><span class="nt">&gt;</span>21 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>电设总结<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/21/%E7%94%B5%E8%AE%BE-%E5%8D%95%E7%89%87%E6%9C%BA.html&quot;</span> <span class="na">title=</span><span class="s">&quot;C8051F单片机开发&quot;</span><span class="nt">&gt;</span>21 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>C8051F单片机开发<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_item&#39;</span> <span class="na">id=</span><span class="s">&quot;Jekyll&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&#39;tag_name&#39;</span><span class="nt">&gt;</span>Jekyll<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+      <span class="nt">&lt;ul&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/10/19/A-weird-erroe-caused-by-jekyll.html&quot;</span> <span class="na">title=</span><span class="s">&quot;A weird error caused by jekyll&quot;</span><span class="nt">&gt;</span>19 October 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>A weird error caused by jekyll<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/19/Jekyll-creating-tags-page.html&quot;</span> <span class="na">title=</span><span class="s">&quot;Creating a page to organize tags&quot;</span><span class="nt">&gt;</span>19 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>Creating a page to organize tags<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">&#39;tag_post&#39;</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">&quot;/2013/09/18/Learning-Jekyll.html&quot;</span> <span class="na">title=</span><span class="s">&quot;Learning Jekyll&quot;</span><span class="nt">&gt;</span>18 September 2013<span class="ni">&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</span>Learning Jekyll<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+      
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+
+<span class="nt">&lt;/ul&gt;</span>
+ 
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/assets/js/jquery-2.0.3.min.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/assets/js/jquery.tagcloud.js&quot;</span> <span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span> 
+<span class="nt">&lt;script </span><span class="na">language=</span><span class="s">&quot;javascript&quot;</span><span class="nt">&gt;</span>
+<span class="nx">$</span><span class="p">.</span><span class="nx">fn</span><span class="p">.</span><span class="nx">tagcloud</span><span class="p">.</span><span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="p">{</span><span class="nx">start</span><span class="o">:</span> <span class="mf">0.9</span><span class="p">,</span> <span class="nx">end</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">unit</span><span class="o">:</span> <span class="s1">&#39;em&#39;</span><span class="p">},</span>
+      <span class="nx">color</span><span class="o">:</span> <span class="p">{</span><span class="nx">start</span><span class="o">:</span> <span class="s1">&#39;#e77471&#39;</span><span class="p">,</span> <span class="nx">end</span><span class="o">:</span> <span class="s1">&#39;#f62817&#39;</span><span class="p">}</span>
+<span class="p">};</span>
+ 
+<span class="nx">$</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tag_cloud a&#39;</span><span class="p">).</span><span class="nx">tagcloud</span><span class="p">();</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
+
+
+<p>And this suffice to do the trick. However, I still have some bugs to fix and the fond and color of the text is not elegant at all. So still got a lot of things to do. You can fork this project in github and see the raw code, or if you have any suggestion and ideas, feel free to email me or @ me in weibo.</p>
+
+  </section>
+  
+</article>
+
+        </div>
+        <footer>
+          <div>
+            &copy; 2013 Kay | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/imkaywu/imkaywu.github.io" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+	  <!--codes to DISPLAY COMMENT COUNT-->
+		<script type="text/javascript">
+    	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    	var disqus_shortname = 'kaystechblog'; // required: replace example with your forum shortname
+
+    	/* * * DON'T EDIT BELOW THIS LINE * * */
+    	(function () {
+        	var s = document.createElement('script'); s.async = true;
+        	s.type = 'text/javascript';
+        	s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        	(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    	}());
+    	</script>
+		<!--end of code-->
+  </body>
+</html>

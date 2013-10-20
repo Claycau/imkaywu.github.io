@@ -1,20 +1,30 @@
 ---
 layout: default
 ---
-<div class=post>
-    {% if page.feature %}
-    <div class=feature-image>
-        <img src="{{ page.feature }}"/>
-    </div>
-    {% endif %}
-    {% include post-meta.html %}
-    <h1 class=title-large>{{ page.title }}</h1>
-    <div class=content>
-        {{ content }}
-    </div>
-	<div style='height:1px;background-color:#C3C3C3;line-height:1px;clear:both;display:block;overflow:hidden'> </div>
-	<br>
-	<!--codes for Disqus-->
+
+<article>
+  <section class="title">
+    <h2>{{ page.title }} </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date:"%Y-%m-%d" }}</time>
+  </span>
+  {% if page.tags %}
+  <span class="tags">
+    {% for tag in page.tags %}
+    <a href="/tags.html#{{ tag }}" title="{{ tag }}">#{{ tag }}</a>
+    {% endfor %}
+  </span>
+  {% endif %}
+  </section>
+  <section class="post">
+  {{ content }}
+  </section>
+  {% if page.guid %}
+  <div class="divider"></div>
+  <section class="comment">
+  <!--codes for Disqus-->
 	<div id="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -30,4 +40,6 @@ layout: default
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 	<!--end of code-->
-</div>
+  </section>
+  {% endif %}
+</article>
