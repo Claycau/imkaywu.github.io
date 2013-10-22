@@ -5,7 +5,7 @@ tags: Jekyll
 categories: blog
 ---
 
-I haven't got the chance to update my blog for a while. When I did today and tried to run it locally in my machine, I ran into some error.
+I haven't got the chance to update my blog for a while. When I did today and tried to run it locally in my machine, I ran into an error.
 
 ![jekyll_error](/media/images/jekyll error.png)
 

@@ -5,7 +5,7 @@ layout: page
 
 a
 
-> Minimalist | Appleist | Unixer | Coder
+> Minimalist | Linuxer | Coder
 
 who involved in 
 
@@ -13,10 +13,10 @@ who involved in
 
 mail 
 
-> echo srvpqxfbyqfvpdtkbjwt | tr yxwvtsrqpkjfdb zuonmlihgeca@.
+> [imkaywu@gmail.com](mailto:imkaywu@gmail.com)
 
-or follow 
+or follow Sina Weibo
 
-> [@imkaywu](https://weibo.com/imkaywu)
+> [@imkaywu](http://weibo.com/imkaywu)
 
 to reach me

@@ -12,6 +12,7 @@ layout: default
     </section>
     <section class="meta">
     <span class="time">
+      <i class=icon-calendar></i>
       <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
     </span>
     {% if post.tags %}
