@@ -5,7 +5,7 @@ layout: page
 
 a
 
-> Minimalist | Linuxer | Coder
+> Minimalist | Linuxer | Coder | Movie & music lover
 
 who involved in 
 
