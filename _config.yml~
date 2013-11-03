@@ -1,6 +1,7 @@
+url: "http://imkaywu.com"
 markdown: rdiscount
 pygments: true
 permalink: /:year/:month/:day/:title.html
 title: "Kay's teck blog"
-name: "The journey is the award"
+name: "The Journey is the Reward"
 markdown: rdiscount
