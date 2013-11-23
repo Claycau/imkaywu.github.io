@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-23T15:25:20+08:00</updated>
+ <updated>2013-11-23T15:26:30+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -117,14 +117,7 @@ end
 fingervalley(finger_remove(1:find(finger_remove, 1, 'last')))=[];
 
 % find the fingertips of the hand
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;%     length=find(fingervalley, 1, 'last');
-%     if(length==1)
-%         fingervalley=[1,fingervalley(1),find(degree,1,'last')];
-%     end&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;length=find(fingervalley, 1, 'last');
+length=find(fingervalley, 1, 'last');
 fingertip=zeros(1,5);
 for i=1:length
     if(i==length)

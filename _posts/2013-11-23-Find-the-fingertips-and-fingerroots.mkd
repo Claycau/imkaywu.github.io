@@ -69,10 +69,6 @@ The code for this task is as follows:
     fingervalley(finger_remove(1:find(finger_remove, 1, 'last')))=[];
     
     % find the fingertips of the hand
-%     length=find(fingervalley, 1, 'last');
-%     if(length==1)
-%         fingervalley=[1,fingervalley(1),find(degree,1,'last')];
-%     end
     length=find(fingervalley, 1, 'last');
     fingertip=zeros(1,5);
     for i=1:length
