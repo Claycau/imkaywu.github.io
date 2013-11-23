@@ -39,4 +39,4 @@ Another method is called the **Distance Transform**. You can refer to my other p
         end
     end
 
-Here is the result and choose the latter methods.
+Here is the result and we choose the latter methods.
