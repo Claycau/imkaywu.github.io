@@ -5,19 +5,19 @@ tags: [Hand Gesture Recognition]
 categories: blog
 ---
 
-This is a post to give a brief description of the algorithm of hand gesture recognition that I developed. It serve as a reminder of what has been and what remains to be done. But first thing first, let me introduce our algorithm step by step.
+This is a post to give a brief description of the algorithm of hand gesture recognition that I developed. It serve as a reminder of what has been done and what remains to be done. You can download the codes in [Github](https://github.com/imkaywu/Gesture-Recognition).First thing first, let me introduce our algorithm step by step.
 
 > 1. [Find the contour vertex and connect them in a consecutive manner](http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html).
 
-> 2. Find the centroid of hand gestures using **distance transform**.
+> 2. [Find the centroid of hand gestures using **distance transform**.](http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html)
 
-> 3. Find the direction of hand gestures using the relative positions of contour vertex, then find the line which crosses the centroid and is perpendicular to the direction, this line and the contour have two intersected points.
+> 3. [Find the direction of hand gestures using the relative positions of contour vertex, then find the line which crosses the centroid and is perpendicular to the direction, this line and the contour have two intersected points.](http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html)
 
-> 4. Transform the hand contour (points above the intersected points) into a *time-series curve* which records the relative distance between each contour vertex to the centroid.
+> 4. [Transform the hand contour (points above the intersected points) into a *time-series curve* which records the relative distance between each contour vertex to the centroid.](http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html)
 
-> 5. Find the positions (represent by degree) of fingertips and fingerroots.
+> 5. [Find the positions (represent by degree) of fingertips and fingerroots.](http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html)
 
-> 6. Find the direction of each fingers using the positions of fingertips and fingerroots, then find the accurate direction of hand using the directions of fingers.
+> 6. [Find the direction of each fingers using the positions of fingertips and fingerroots, then find the accurate direction of hand using the directions of fingers.](http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html)
 
 > 7. Repeat step 4, 5. Now we've got the accurate positions (degrees) of the fingerroots.
 

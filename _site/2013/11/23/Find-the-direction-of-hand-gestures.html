@@ -52,9 +52,9 @@
   
   </section>
   <section class="post">
-  <p>After detecting the contour of the hand gestures, we represent it as a [time-series curce], as shown in the following images.</p>
+  <p>After detecting the contour of the hand gestures, we represent it as a <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html">time-series curce</a>, as shown in the following images.</p>
 
-<p>The [time-series curve] records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. So what we gonna do is finding this reference points and it has to be relatively fixed, otherwise the degree of the ensuing points may vary among different images. We choose to first detect the direction of the hand, then locate this reference point in the wrist area.</p>
+<p>The <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html">time-series curve</a> records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. So what we gonna do is finding this reference points and it has to be relatively fixed, otherwise the degree of the ensuing points may vary among different images. We choose to first detect the direction of the hand, then locate this reference point in the wrist area.</p>
 
 <h3>Plan A</h3>
 
@@ -199,7 +199,7 @@ end
 end
 </code></pre>
 
-<p>Then, I transform the hand contour to a [time-series graph] to [find the fingertip and fingervalleys]. These positions of fingers are the key to find out the accurate positions of each finger, and we assume that the directions of the fingers represent the direction of the hand, thus the direction detected using this method is much more accurate and reliable.</p>
+<p>Then, I transform the hand contour to a <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html">time-series graph</a> to <a href="http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html">find the fingertip and fingervalleys</a>. These positions of fingers are the key to find out the accurate positions of each finger, and we assume that the directions of the fingers represent the direction of the hand, thus the direction detected using this method is much more accurate and reliable.</p>
 
 <p>Here is the code to find the accurate direction of fingers and hand</p>
 
@@ -222,6 +222,8 @@ for i=1:2*size(fingertip,2)
 end
 direction_angle1=mean(direction/2);
 </code></pre>
+
+<p>After finding out the accurate direction of the hand, we can find the positions of fingerroots more accurately, this is the key to accurate recognition of hand gestures in our algorithm.</p>
 
   </section>
   <div style='height:1px;background-color:#C3C3C3;line-height:1px;clear:both;display:block;overflow:hidden'> </div>
