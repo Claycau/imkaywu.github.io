@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-23T15:11:10+08:00</updated>
+ <updated>2013-11-23T15:12:02+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -56,7 +56,7 @@ end
 
 &lt;p&gt;After the fingervalleys are detected, it's easy to detect the fingertip, you just have to find the highest points in the graph.&lt;/p&gt;
 
-&lt;p&gt;After finding the fingertips, we need to locate the fingerroots for every finger (the points are the root of every finger). This is done by comparing the neighboring widths below every fingertip, if &gt;&gt;the latter width &gt; constant * the former width&lt;/p&gt;
+&lt;p&gt;After finding the fingertips, we need to locate the fingerroots for every finger (the points are the root of every finger). This is done by comparing the neighboring widths below every fingertip, if &gt; the latter width &gt;constant * the former width&lt;/p&gt;
 </content>
  </entry>
  

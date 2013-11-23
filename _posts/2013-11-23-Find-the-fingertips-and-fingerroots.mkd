@@ -11,4 +11,4 @@ I decided to find the lowest points between every two fingers and the ones at th
 
 After the fingervalleys are detected, it's easy to detect the fingertip, you just have to find the highest points in the graph.
 
-After finding the fingertips, we need to locate the fingerroots for every finger (the points are the root of every finger). This is done by comparing the neighboring widths below every fingertip, if >>the latter width > constant * the former width
+After finding the fingertips, we need to locate the fingerroots for every finger (the points are the root of every finger). This is done by comparing the neighboring widths below every fingertip, if > the latter width >constant * the former width
