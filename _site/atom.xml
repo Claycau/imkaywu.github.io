@@ -4,13 +4,61 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-23T14:47:57+08:00</updated>
+ <updated>2013-11-23T15:10:18+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
    <email>linghua.zhang@me.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Transform to Time-series curve</title>
+   <link href="http://lhzhang.com/2013/11/23/Transform-to-time-series-curve.html"/>
+   <updated>2013-11-23T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/11/23/Transform-to-time-series-curve</id>
+   <content type="html">&lt;p&gt;After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a &lt;em&gt;time-series curve&lt;/em&gt;. The time-series curve records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function [degree,norm_distance]=trans_graph1(x_array,y_array,x_center,y_center)
+    length=find(x_array, 1, 'last');
+    radius=atan2(y_array(1:length)-y_center,x_array(1:length)-x_center);
+    degree=radius./pi*180;
+    degree(degree&amp;gt;0)=360-degree(degree&amp;gt;0);    % -180~+180=&amp;gt;0~360
+    degree(degree&amp;lt;0)=abs(degree(degree&amp;lt;0));
+    degree=degree-degree(1);
+    degree(degree&amp;gt;0)=360-degree(degree&amp;gt;0);
+    degree(degree&amp;lt;0)=-degree(degree&amp;lt;0);
+    degree=degree/360;
+
+    x_distance=x_array-x_center;
+    y_distance=y_array-y_center;
+    distance=zeros(1,length);
+    for i=1:length
+        distance(i)=norm([x_distance(i),y_distance(i)]);
+    end
+    min_distance=min(distance);
+    norm_distance=distance./min_distance;
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This &lt;em&gt;time-series curve&lt;/em&gt; is used to find the positions of fingertips and fingervalleys for further determine the accurate direction of hand.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Find the position of fingertips and fingervalleys</title>
+   <link href="http://lhzhang.com/2013/11/23/Find-the-fingertips-and-fingerroots.html"/>
+   <updated>2013-11-23T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/11/23/Find-the-fingertips-and-fingerroots</id>
+   <content type="html">&lt;p&gt;After obtaining the &lt;em&gt;time-series curve&lt;/em&gt;, we can find the positions of the fingertips and fingerroots.&lt;/p&gt;
+
+&lt;p&gt;I decided to find the lowest points between every two fingers and the ones at the start of the thumb and end of the little finger (I refer them as fingervalleys). How to do that? Well, I assume they are all the lowest points in the time-series curve. But this brings another issue, because there are many points thet are locally lowest, but they are not the points I was looking for. So in order to eliminate these error points, I assume that for every fingervalley, there is also a fingertip whose height should surpass a certain threshold.&lt;/p&gt;
+
+&lt;p&gt;After the fingervalleys are detected, it's easy to detect the fingertip, you just have to find the highest points in the graph.&lt;/p&gt;
+
+&lt;p&gt;After finding the fingertips, we need to locate the fingerroots for every finger (the points are the root of every finger). This is done by comparing the neighboring widths below every fingertip, if &gt;the latter width &gt; constant * the former width&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Find the direction of hand</title>
@@ -497,152 +545,6 @@ end
    <updated>2013-09-21T00:00:00+08:00</updated>
    <id>http://lhzhang.com/2013/09/21/电设总结-技术总结开端篇</id>
    <content type="html">&lt;p&gt;这次电设学到了很多东西，虽然跟高手还有很大的差距，但比起自己刚开始的时候进步还是很大的。因为学了蛮多的技术，编了挺多的代码的，所以就把它们写在博客里，一来梳理一下学过的东东，而来供以后查找使用。这一篇blog就算给自己挖一个坑，日后一点一点的慢慢补。因为我觉得针对某一个具体的开发平台写的话太流水帐了，所以我只记录我认为比较有趣的点。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>C8051F单片机开发</title>
-   <link href="http://lhzhang.com/2013/09/21/%E7%94%B5%E8%AE%BE-%E5%8D%95%E7%89%87%E6%9C%BA.html"/>
-   <updated>2013-09-21T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/09/21/电设-单片机</id>
-   <content type="html">&lt;p&gt;可能这个题目起得有些大，但也不想纠结这种事了。这块单片机对于入门来说我觉得还是有些困难的。当我一开始看源代码时，有一种想屎一赤又一赤的冲动。因为它的寄存器太过于丰富，而且对于某一模块的寄存器需要进行正确的配置之后，你写的代码才有可能按照你的预想去执行（也就是说没有程序出来奇葩结果的原因有两个：1.配置问题；2.逻辑问题，而且你刚开始很难知道是哪个）。我主要想记录下我在这个平台上开发时发生的各种奇葩蛋疼的事情，各种无法用逻辑解释的现象。&lt;/p&gt;
-
-&lt;h3&gt;AD模块&lt;/h3&gt;
-
-&lt;p&gt;这块真心没什么好说的，按着手册把寄存器配置好后，接收AD的输出数据就可以了。但关键是AD的精度并不是很准。当我输入给的是直流时，用串口输出AD输出值，数据竟然都有很大的波动。不过我之所以要记录这一块是因为这差不算是我正儿八经地学单片机程序后的第一个程序，对我观念上的转变还是挺大的。在软件中，当我要实现一个功能时，我必须自己思考逻辑，然后编出代码实现这个功能。但在硬件中，你要实现的功能都已经有硬件替你完成了，编程人员所要做的唯一要做的一件事情就是告诉硬件它要怎么获得输入，它该怎么处理这些输入，编程人员又该怎么得到它处理后的输出。至于它的处理过程，并不是编程人员考虑的。这一开始让我很不习惯，也让我感受到了硬件编程和软件编程第一个不一样的地方。&lt;/p&gt;
-
-&lt;h3&gt;DA模块&lt;/h3&gt;
-
-&lt;p&gt;这个我是和键盘一起做的，通过键盘控制输出的波形。其实还是如何给输入，给什么样的输入的问题。至于数字信号如何转变成模拟信号的，全有硬件来做。&lt;/p&gt;
-
-&lt;h3&gt;矩阵键盘&lt;/h3&gt;
-
-&lt;p&gt;之所以用矩阵键盘，是因为单片机的端口数量有限，矩阵键盘可以减少端口数的使用个数。但这也意味着键盘的检测就要稍微复杂一些了。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;矩阵键盘原理图&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/keyboard.jpeg&quot; alt=&quot;keyboard&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;如图所示，将行设为输入，列设为输出，我们要做的就是不停的对列进行扫描，同时检测行的电平。具体来说，对某一列输出一个低电平，如果没有任何按键被按下，则行一直为高电平。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>My favorite BSB songs</title>
-   <link href="http://lhzhang.com/2013/09/20/My-favorite-BSB-songs.html"/>
-   <updated>2013-09-20T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/09/20/My-favorite-BSB-songs</id>
-   <content type="html">&lt;p&gt;I began listen to the songs of BSB in June, and fell in love with their beautiful melodies. Even more, their harmony is perfect and it sounds like one voice. So with no more words, let me introduce my favorite BSB's songs. &lt;strong&gt;The loading may be a little slow, please wait patiently, it's worth waiting.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3&gt;1. As long as you love me&lt;/h3&gt;
-
-&lt;p&gt;It's the second BSB song I listened, and I just love the solo part sang by Nick and B-rock.&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/as_long_as_you_love_me.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/as_long_as_you_love_me.mp3&quot;&gt;
-&lt;/audio&gt;&lt;/p&gt;
-
-&lt;h3&gt;2. I want it that way&lt;/h3&gt;
-
-&lt;p&gt;It's their biggest single and I believe everybody has listened to this one even if they are not familiar with BSB. The best part is when B-rock sings &lt;strong&gt;tell me why, ahhhhh&lt;/strong&gt; in the end. It's also a pity that Nick no long sings &lt;strong&gt;don't wanna hear you&lt;/strong&gt;, it's also one of my favorite.&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/I_want_it_that_way.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/I_want_it_that_way.mp3&quot;&gt;
-&lt;/audio&gt;&lt;/p&gt;
-
-&lt;h3&gt;3. Shape of my heart&lt;/h3&gt;
-
-&lt;p&gt;For me, it's more than just a love song. It's a song about being true to oneself. And the lyrics is really moving.&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/shape_of_my_heart.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/shape_of_my_heart.mp3&quot;&gt;
-&lt;/audio&gt;&lt;/p&gt;
-
-&lt;h3&gt;4. All I have to give&lt;/h3&gt;
-
-&lt;p&gt;Another love song that I like, B-rock's voice is just amazing. Wonderful solo, wonderful harmony. The melody is perfect.&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/all_I_have_to_give.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/all_I_have_to_give.mp3&quot;&gt;
-&lt;/audio&gt;&lt;/p&gt;
-
-&lt;h3&gt;5. Drowing&lt;/h3&gt;
-
-&lt;p&gt;The same reasons as that of AIHTG, great solo, great harmony. And the title &amp;amp; lyrics is kinda interesting.&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/drowing.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/drowing.mp3&quot;&gt;
-&lt;/audio&gt;&lt;/p&gt;
-
-&lt;h3&gt;6. Quit playing games with my heart&lt;/h3&gt;
-
-&lt;p&gt;This is actually a quite contradictory song. The melody is kinda positive while the lyrics is relatively negative. The biggest reason I like this song is because it's almost a solo performance of B-rock and I really enjoy his vocal performance.&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/quit_playing_games_with_my_heart.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/quit_playing_games_with_my_heart.mp3&quot;&gt;
-&lt;/audio&gt;&lt;/p&gt;
-
-&lt;h3&gt;7. How did I fall in love with you&lt;/h3&gt;
-
-&lt;p&gt;Wonderful melody. Howie's single is actually pretty good.&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/how_did_I_fall_in_love_with_you.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/how_did_I_fall_in_love_with_you.mp3&quot;&gt;
-&lt;/audio&gt;&lt;/p&gt;
-
-&lt;h3&gt;8. Show me the meaning of being lonely&lt;/h3&gt;
-
-&lt;p&gt;It's a song about life and reflection about loss in our lives. Great song.&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/show_me_the_meaning_of_being_lonely.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/show_me_the_meaning_of_being_lonely.mp3&quot;&gt;
-&lt;/audio&gt;&lt;/p&gt;
-
-&lt;h3&gt;9. Like a child&lt;/h3&gt;
-
-&lt;p&gt;Another BSB love song.&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/like_a_child.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/like_a_child.mp3&quot;&gt;
-&lt;/audio&gt;&lt;/p&gt;
-
-&lt;h3&gt;10. Everybody &amp;middot; Larger than life &amp;middot; The one&lt;/h3&gt;
-
-&lt;p&gt;Three BSB's most dynamic songs.&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/everybody.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/everybody.mp3&quot;&gt;
-&lt;/audio&gt;
-&lt;strong&gt;Everybody&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/larger_than_life.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/larger_than_life.mp3&quot;&gt;
-&lt;/audio&gt;
-&lt;strong&gt;Larger than life&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/the_one.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/the_one.mp3&quot;&gt;
-&lt;/audio&gt;
-&lt;strong&gt;The one&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h3&gt;11. I will never break your heart&lt;/h3&gt;
-
-&lt;p&gt;&lt;audio controls&gt;
-  &lt;source src=&quot;/media/musics/I_will_never_break_your_heart.mp3&quot; type=&quot;audio/mpeg&quot;&gt;
-  &lt;embed height=&quot;80&quot; width=&quot;200&quot; src=&quot;/musics/I_will_never_break_your_heart.mp3&quot;&gt;
-&lt;/audio&gt;&lt;/p&gt;
 </content>
  </entry>
  

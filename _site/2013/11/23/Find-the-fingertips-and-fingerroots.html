@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Linghua Zhang" />
+    
+    <title>Find the position of fingertips and fingervalleys</title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type=text/css href="/media/css/style.css">
+    <link rel="stylesheet" type=text/css href="/media/css/github.css">
+    <link rel="stylesheet" type=text/css href="/media/css/fontawesome.css">
+	<link href="/atom.xml" rel="alternate" title="The Journey Is the Reward" type="application/atom+xml" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/media/css/fontawesome-ie7.css">
+    <![endif]-->
+    <script type="text/javascript" src="/media/js/highlight.pack.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="The Journey Is the Reward" class="" href="/">The Journey Is the Reward</a></h1>
+          </div>
+          <nav>
+            <span><a title="Archive" class="icon-list-ul" href="/archive.html"></a></span>
+            <span><a title="Tags" class="icon-tags" href="/tags.html"></a></span>
+            <span><a title="About" class="icon-user" href="/about.html"></a></span>
+            <span><a title="Projects" class="icon-film" href="/projects.html"></a></span>
+            <span><a title="Resume" class="icon-link" href="/Curriculum_Vitae.pdf"></a></span>
+            <span><a title="Subscribe" class="icon-rss" href="/atom.xml"></a></span>
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>Find the position of fingertips and fingervalleys </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2013-11-23">2013-11-23</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#Hand Gesture Recognition" title="Hand Gesture Recognition">#Hand Gesture Recognition</a>
+    
+  </span>
+  
+  </section>
+  <section class="post">
+  <p>After obtaining the <em>time-series curve</em>, we can find the positions of the fingertips and fingerroots.</p>
+
+<p>I decided to find the lowest points between every two fingers and the ones at the start of the thumb and end of the little finger (I refer them as fingervalleys). How to do that? Well, I assume they are all the lowest points in the time-series curve. But this brings another issue, because there are many points thet are locally lowest, but they are not the points I was looking for. So in order to eliminate these error points, I assume that for every fingervalley, there is also a fingertip whose height should surpass a certain threshold.</p>
+
+<p>After the fingervalleys are detected, it's easy to detect the fingertip, you just have to find the highest points in the graph.</p>
+
+<p>After finding the fingertips, we need to locate the fingerroots for every finger (the points are the root of every finger). This is done by comparing the neighboring widths below every fingertip, if >the latter width > constant * the former width</p>
+
+  </section>
+  <div style='height:1px;background-color:#C3C3C3;line-height:1px;clear:both;display:block;overflow:hidden'> </div>
+  <br>
+  <!--codes for Disqus-->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'kaystechblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <!--end of code-->
+</article>
+
+        </div>
+        <footer>
+          <div>
+            &copy; 2013 Kay | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/imkaywu/imkaywu.github.io" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+  </body>
+</html>

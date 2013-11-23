@@ -1,0 +1,14 @@
+---
+layout: post
+title: Find the position of fingertips and fingervalleys
+tags: [Hand Gesture Recognition]
+categories: blog
+---
+
+After obtaining the *time-series curve*, we can find the positions of the fingertips and fingerroots.
+
+I decided to find the lowest points between every two fingers and the ones at the start of the thumb and end of the little finger (I refer them as fingervalleys). How to do that? Well, I assume they are all the lowest points in the time-series curve. But this brings another issue, because there are many points thet are locally lowest, but they are not the points I was looking for. So in order to eliminate these error points, I assume that for every fingervalley, there is also a fingertip whose height should surpass a certain threshold.
+
+After the fingervalleys are detected, it's easy to detect the fingertip, you just have to find the highest points in the graph.
+
+After finding the fingertips, we need to locate the fingerroots for every finger (the points are the root of every finger). This is done by comparing the neighboring widths below every fingertip, if >the latter width > constant * the former width

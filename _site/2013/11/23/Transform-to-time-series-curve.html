@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Linghua Zhang" />
+    
+    <title>Transform to Time-series curve</title>
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" type=text/css href="/media/css/style.css">
+    <link rel="stylesheet" type=text/css href="/media/css/github.css">
+    <link rel="stylesheet" type=text/css href="/media/css/fontawesome.css">
+	<link href="/atom.xml" rel="alternate" title="The Journey Is the Reward" type="application/atom+xml" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/media/css/fontawesome-ie7.css">
+    <![endif]-->
+    <script type="text/javascript" src="/media/js/highlight.pack.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="The Journey Is the Reward" class="" href="/">The Journey Is the Reward</a></h1>
+          </div>
+          <nav>
+            <span><a title="Archive" class="icon-list-ul" href="/archive.html"></a></span>
+            <span><a title="Tags" class="icon-tags" href="/tags.html"></a></span>
+            <span><a title="About" class="icon-user" href="/about.html"></a></span>
+            <span><a title="Projects" class="icon-film" href="/projects.html"></a></span>
+            <span><a title="Resume" class="icon-link" href="/Curriculum_Vitae.pdf"></a></span>
+            <span><a title="Subscribe" class="icon-rss" href="/atom.xml"></a></span>
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>Transform to Time-series curve </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2013-11-23">2013-11-23</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#Hand Gesture Recognition" title="Hand Gesture Recognition">#Hand Gesture Recognition</a>
+    
+  </span>
+  
+  </section>
+  <section class="post">
+  <p>After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a <em>time-series curve</em>. The time-series curve records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.</p>
+
+<pre><code>function [degree,norm_distance]=trans_graph1(x_array,y_array,x_center,y_center)
+    length=find(x_array, 1, 'last');
+    radius=atan2(y_array(1:length)-y_center,x_array(1:length)-x_center);
+    degree=radius./pi*180;
+    degree(degree&gt;0)=360-degree(degree&gt;0);    % -180~+180=&gt;0~360
+    degree(degree&lt;0)=abs(degree(degree&lt;0));
+    degree=degree-degree(1);
+    degree(degree&gt;0)=360-degree(degree&gt;0);
+    degree(degree&lt;0)=-degree(degree&lt;0);
+    degree=degree/360;
+
+    x_distance=x_array-x_center;
+    y_distance=y_array-y_center;
+    distance=zeros(1,length);
+    for i=1:length
+        distance(i)=norm([x_distance(i),y_distance(i)]);
+    end
+    min_distance=min(distance);
+    norm_distance=distance./min_distance;
+end
+</code></pre>
+
+<p>This <em>time-series curve</em> is used to find the positions of fingertips and fingervalleys for further determine the accurate direction of hand.</p>
+
+  </section>
+  <div style='height:1px;background-color:#C3C3C3;line-height:1px;clear:both;display:block;overflow:hidden'> </div>
+  <br>
+  <!--codes for Disqus-->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'kaystechblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <!--end of code-->
+</article>
+
+        </div>
+        <footer>
+          <div>
+            &copy; 2013 Kay | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/imkaywu/imkaywu.github.io" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+  </body>
+</html>
