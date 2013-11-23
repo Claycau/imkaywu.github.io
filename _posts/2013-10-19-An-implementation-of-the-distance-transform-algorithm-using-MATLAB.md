@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A MATLAB implementation of distance transform algorithm
-tag: [computer vision, image process, distance transform, MATLAB]
+tag: [Distance Transform]
 categories: blog
 ---
 
