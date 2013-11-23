@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-23T16:05:44+08:00</updated>
+ <updated>2013-11-23T16:07:16+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -41,7 +41,7 @@
 end
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;This &lt;em&gt;time-series curve&lt;/em&gt; is used to find the positions of fingertips and fingervalleys for further determine the accurate direction of hand.&lt;/p&gt;
+&lt;p&gt;This &lt;em&gt;time-series curve&lt;/em&gt; is used to find the positions of &lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html&quot;&gt;fingertips and fingerroots&lt;/a&gt; for further determine the accurate direction of hand.&lt;/p&gt;
 </content>
  </entry>
  

@@ -28,4 +28,4 @@ After obtaining the contour vertex and the direction of hand, we can transform t
         norm_distance=distance./min_distance;
     end
 
-This *time-series curve* is used to find the positions of fingertips and fingervalleys for further determine the accurate direction of hand.
+This *time-series curve* is used to find the positions of [fingertips and fingerroots](http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html) for further determine the accurate direction of hand.
