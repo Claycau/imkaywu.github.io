@@ -9,7 +9,7 @@ This is a post to give a brief description of the algorithm of hand gesture reco
 
 > 1. [Find the contour vertex and connect them in a consecutive manner](http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html).
 
-> 2. [Find the centroid of hand gestures using **distance transform**.](http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html)
+> 2. [Find the centroid of hand gestures using **distance transform**.](http://imkaywu.com/2013/11/23/Find-the-centroid-of-the-hand-gestures.html)
 
 > 3. [Find the direction of hand gestures using the relative positions of contour vertex, then find the line which crosses the centroid and is perpendicular to the direction, this line and the contour have two intersected points.](http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html)
 
