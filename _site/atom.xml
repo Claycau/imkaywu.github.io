@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-23T15:24:34+08:00</updated>
+ <updated>2013-11-23T15:25:20+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -61,9 +61,9 @@ end
 &lt;p&gt;After finding the fingertips, we need to locate the fingerroots for every finger (the points are the root of every finger). This is done by comparing the neighboring widths below every fingertip, the search begins from the fingertips and ends to the fingervalleys, the detail is below:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;if (the latter width &amp;gt; constant * the former width &amp;amp;&amp;amp; the fingerroots are at the bottom of fingers)
-find the fingerroots
+    find the fingerroots
 else
-keep finding the next width
+    keep finding the next width
 end
 &lt;/code&gt;&lt;/pre&gt;
 
