@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-23T15:12:02+08:00</updated>
+ <updated>2013-11-23T15:22:32+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -50,13 +50,169 @@ end
    <link href="http://lhzhang.com/2013/11/23/Find-the-fingertips-and-fingerroots.html"/>
    <updated>2013-11-23T00:00:00+08:00</updated>
    <id>http://lhzhang.com/2013/11/23/Find-the-fingertips-and-fingerroots</id>
-   <content type="html">&lt;p&gt;After obtaining the &lt;em&gt;time-series curve&lt;/em&gt;, we can find the positions of the fingertips and fingerroots.&lt;/p&gt;
+   <content type="html">&lt;h3&gt;Plan A&lt;/h3&gt;
+
+&lt;p&gt;After obtaining the &lt;em&gt;time-series curve&lt;/em&gt;, we can find the positions of the fingertips and fingerroots.&lt;/p&gt;
 
 &lt;p&gt;I decided to find the lowest points between every two fingers and the ones at the start of the thumb and end of the little finger (I refer them as fingervalleys). How to do that? Well, I assume they are all the lowest points in the time-series curve. But this brings another issue, because there are many points thet are locally lowest, but they are not the points I was looking for. So in order to eliminate these error points, I assume that for every fingervalley, there is also a fingertip whose height should surpass a certain threshold.&lt;/p&gt;
 
 &lt;p&gt;After the fingervalleys are detected, it's easy to detect the fingertip, you just have to find the highest points in the graph.&lt;/p&gt;
 
-&lt;p&gt;After finding the fingertips, we need to locate the fingerroots for every finger (the points are the root of every finger). This is done by comparing the neighboring widths below every fingertip, if &gt; the latter width &gt;constant * the former width&lt;/p&gt;
+&lt;p&gt;After finding the fingertips, we need to locate the fingerroots for every finger (the points are the root of every finger). This is done by comparing the neighboring widths below every fingertip, the search begins from the fingertips and ends to the fingervalleys, the detail is below:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if (the latter width &amp;gt; constant * the former width &amp;amp;&amp;amp; the fingerroots are at the bottom of fingers &amp;amp;&amp;amp; )
+find the fingerroots
+else
+keep finding the next width
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The code for this task is as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function [fingeredge,fingertip]=finger_finder1(degree,norm_distance)
+j=1;
+firstTime=1;
+finger_edge=1;
+length=size(degree,2);
+fingervalley=zeros(1,6);
+min_distance=norm_distance(1);
+max_distance=norm_distance(1);
+for i=1:length
+    if(norm_distance(i)&amp;lt;min_distance)
+        min_distance=norm_distance(i);
+        max_distance=norm_distance(i);
+        if(min_distance-norm_distance(finger_edge)&amp;lt;0.027)
+            finger_edge=i;
+        end
+    elseif(norm_distance(i)&amp;lt;max_distance)
+        if(max_distance-norm_distance(finger_edge)&amp;gt;0.2)%0.26
+            fingervalley(j)=finger_edge;
+            j=j+1;
+            firstTime=~firstTime;
+        end
+        min_distance=norm_distance(i);
+        max_distance=norm_distance(i);
+    elseif(norm_distance(i)&amp;gt;max_distance)
+        if(firstTime)
+            finger_edge=i-1;
+            firstTime=~firstTime;
+        end
+        max_distance=norm_distance(i);
+    end
+end
+
+%remove invalid valley
+j=1;
+length=find(fingervalley, 1, 'last');
+finger_remove=zeros(1,6);
+for i=1:length-1
+    index1=i;
+    index2=i+1;
+    [a,index]=max(norm_distance(fingervalley(index1):fingervalley(index2)));
+    if(a-norm_distance(fingervalley(index2))&amp;lt;0.3)%a=norm_distance(finger(index1)+index-1)
+        finger_remove(j)=index2;
+        j=j+1;
+    end
+end
+fingervalley(finger_remove(1:find(finger_remove, 1, 'last')))=[];
+
+% find the fingertips of the hand
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;%     length=find(fingervalley, 1, 'last');
+%     if(length==1)
+%         fingervalley=[1,fingervalley(1),find(degree,1,'last')];
+%     end&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;length=find(fingervalley, 1, 'last');
+fingertip=zeros(1,5);
+for i=1:length
+    if(i==length)
+        [a,index]=max(norm_distance(fingervalley(i):find(degree,1,'last')));
+    else
+        [a,index]=max(norm_distance(fingervalley(i):fingervalley(i+1)));
+    end
+    fingertip(i)=fingervalley(i)+index-1;
+end
+
+%remove invalid fingertip
+length=find(fingertip,1,'last');
+fingertip_max=max(norm_distance(fingertip(1:length)));
+fingertip(norm_distance(fingertip(1:length))&amp;lt;0.52*fingertip_max)=[];
+
+%find the accurate positions of the edges of fingers
+length=find(fingertip,1,'last');
+fingeredge=zeros(1,2*length);
+degree_dist=0;
+fingervalley(length+1)=find(degree,1,'last');
+for i=1:length
+    index=fingertip(i)-1;
+    while(true)
+        [a,index1]=min(abs(norm_distance(fingertip(i):fingervalley(i+1))-norm_distance(index)));
+        index1=fingertip(i)+index1-1;
+        degree_dist1=degree(index1)-degree(index);
+        if((length==1&amp;amp;&amp;amp;norm_distance(index1)&amp;lt;0.4*norm_distance(fingertip(i))&amp;amp;&amp;amp;degree_dist~=0&amp;amp;&amp;amp;degree_dist1&amp;gt;1.01*degree_dist)||index==fingervalley(i))
+            break;
+        elseif((norm_distance(index1)&amp;lt;0.5*norm_distance(fingertip(i))&amp;amp;&amp;amp;norm_distance(index1)&amp;lt;1.05*(max([norm_distance(fingervalley(i)),norm_distance(fingervalley(i+1))]))&amp;amp;&amp;amp;degree_dist~=0&amp;amp;&amp;amp;degree_dist1&amp;gt;1.01*degree_dist)||index==fingervalley(i))
+            break;
+        end
+        degree_dist=degree_dist1;
+        index=index-1;
+    end
+    fingeredge([2*i-1,2*i])=[index,index1];
+end
+
+%narrow down the first and last finger
+length=find(fingertip,1,'last');
+flag1=1;
+flag2=1;
+if(length&amp;gt;1)
+    fingeredge_temp1=fingeredge(2);
+    fingeredge_temp2=fingeredge(end-1);
+    norm_distance_start=norm_distance(fingeredge(1));
+    norm_distance_end=norm_distance(fingeredge(end));
+    while(true)
+        if(degree(fingeredge(end))-degree(fingeredge(end-1))&amp;gt;0.07)%flag2&amp;amp;&amp;amp;degree(fingeredge(end))-degree(fingeredge_temp2)&amp;gt;0.07
+            fingeredge_temp2=fingeredge_temp2+1;
+            [a,index]=min(abs(norm_distance(fingertip(length):fingeredge(end))-norm_distance(fingeredge_temp2)));
+            fingeredge(end)=fingertip(length)+index-1;
+        else
+            if(norm_distance(fingeredge(end))&amp;gt;1.2*norm_distance_end)
+
+            flag2=0;
+        end
+        if(degree(fingeredge(2))-degree(fingeredge(1))&amp;gt;0.07)%flag1&amp;amp;&amp;amp;degree(fingeredge_temp1)-degree(fingeredge(1))&amp;gt;0.07
+            fingeredge_temp1=fingeredge_temp1-1;
+            [a,index]=min(abs(norm_distance(fingeredge(1):fingertip(1))-norm_distance(fingeredge_temp1)));
+            fingeredge(1)=fingeredge(1)+index-1;
+        else
+            flag1=0;
+        end
+        if(~(flag1||flag2))
+            break;
+        end
+    end
+else
+    fingeredge_temp=fingeredge(1);
+    while(true)
+        if(degree(fingeredge(end))-degree(fingeredge(1))&amp;gt;0.08)
+            fingeredge_temp=fingeredge_temp+1;
+            [a,index]=min(abs(norm_distance(fingertip(1):fingeredge(end))-norm_distance(fingeredge_temp)));
+            fingeredge(end)=fingertip(1)+index-1;
+            fingeredge(1)=fingeredge_temp;
+        else
+            break;
+        end
+    end
+end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the fingerroots are found, there is still in need of some adjustment in order to achievement the best performance. This is done according to the assumption that no single finger width can surpass a certain threshold. The code is shown at the end.&lt;/p&gt;
+
+&lt;h3&gt;Plan B&lt;/h3&gt;
+
+&lt;p&gt;This method is under development:)&lt;/p&gt;
 </content>
  </entry>
  
