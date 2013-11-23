@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-23T15:26:30+08:00</updated>
+ <updated>2013-11-23T15:29:18+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -13,43 +13,10 @@
 
  
  <entry>
-   <title>Transform to Time-series curve</title>
-   <link href="http://lhzhang.com/2013/11/23/Transform-to-time-series-curve.html"/>
-   <updated>2013-11-23T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/23/Transform-to-time-series-curve</id>
-   <content type="html">&lt;p&gt;After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a &lt;em&gt;time-series curve&lt;/em&gt;. The time-series curve records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function [degree,norm_distance]=trans_graph1(x_array,y_array,x_center,y_center)
-    length=find(x_array, 1, 'last');
-    radius=atan2(y_array(1:length)-y_center,x_array(1:length)-x_center);
-    degree=radius./pi*180;
-    degree(degree&amp;gt;0)=360-degree(degree&amp;gt;0);    % -180~+180=&amp;gt;0~360
-    degree(degree&amp;lt;0)=abs(degree(degree&amp;lt;0));
-    degree=degree-degree(1);
-    degree(degree&amp;gt;0)=360-degree(degree&amp;gt;0);
-    degree(degree&amp;lt;0)=-degree(degree&amp;lt;0);
-    degree=degree/360;
-
-    x_distance=x_array-x_center;
-    y_distance=y_array-y_center;
-    distance=zeros(1,length);
-    for i=1:length
-        distance(i)=norm([x_distance(i),y_distance(i)]);
-    end
-    min_distance=min(distance);
-    norm_distance=distance./min_distance;
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This &lt;em&gt;time-series curve&lt;/em&gt; is used to find the positions of fingertips and fingervalleys for further determine the accurate direction of hand.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
    <title>Find the position of fingertips and fingervalleys</title>
-   <link href="http://lhzhang.com/2013/11/23/Find-the-fingertips-and-fingerroots.html"/>
+   <link href="http://lhzhang.com/2013/11/23/Post-series-5-Find-the-fingertips-and-fingerroots.html"/>
    <updated>2013-11-23T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/23/Find-the-fingertips-and-fingerroots</id>
+   <id>http://lhzhang.com/2013/11/23/Post-series-5-Find-the-fingertips-and-fingerroots</id>
    <content type="html">&lt;h3&gt;Plan A&lt;/h3&gt;
 
 &lt;p&gt;After obtaining the &lt;em&gt;time-series curve&lt;/em&gt;, we can find the positions of the fingertips and fingerroots.&lt;/p&gt;
@@ -210,10 +177,43 @@ end
  </entry>
  
  <entry>
-   <title>Find the direction of hand</title>
-   <link href="http://lhzhang.com/2013/11/23/Find-the-direction-of-hand-gestures.html"/>
+   <title>Transform to Time-series curve</title>
+   <link href="http://lhzhang.com/2013/11/23/Post-series-4-Transform-to-time-series-curve.html"/>
    <updated>2013-11-23T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/23/Find-the-direction-of-hand-gestures</id>
+   <id>http://lhzhang.com/2013/11/23/Post-series-4-Transform-to-time-series-curve</id>
+   <content type="html">&lt;p&gt;After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a &lt;em&gt;time-series curve&lt;/em&gt;. The time-series curve records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function [degree,norm_distance]=trans_graph1(x_array,y_array,x_center,y_center)
+    length=find(x_array, 1, 'last');
+    radius=atan2(y_array(1:length)-y_center,x_array(1:length)-x_center);
+    degree=radius./pi*180;
+    degree(degree&amp;gt;0)=360-degree(degree&amp;gt;0);    % -180~+180=&amp;gt;0~360
+    degree(degree&amp;lt;0)=abs(degree(degree&amp;lt;0));
+    degree=degree-degree(1);
+    degree(degree&amp;gt;0)=360-degree(degree&amp;gt;0);
+    degree(degree&amp;lt;0)=-degree(degree&amp;lt;0);
+    degree=degree/360;
+
+    x_distance=x_array-x_center;
+    y_distance=y_array-y_center;
+    distance=zeros(1,length);
+    for i=1:length
+        distance(i)=norm([x_distance(i),y_distance(i)]);
+    end
+    min_distance=min(distance);
+    norm_distance=distance./min_distance;
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This &lt;em&gt;time-series curve&lt;/em&gt; is used to find the positions of fingertips and fingervalleys for further determine the accurate direction of hand.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Find the direction of hand</title>
+   <link href="http://lhzhang.com/2013/11/23/Post-series-3-Find-the-direction-of-hand-gestures.html"/>
+   <updated>2013-11-23T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/11/23/Post-series-3-Find-the-direction-of-hand-gestures</id>
    <content type="html">&lt;p&gt;After detecting the contour of the hand gestures, we represent it as a [time-series curce], as shown in the following images.&lt;/p&gt;
 
 &lt;p&gt;The [time-series curve] records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. So what we gonna do is finding this reference points and it has to be relatively fixed, otherwise the degree of the ensuing points may vary among different images. We choose to first detect the direction of the hand, then locate this reference point in the wrist area.&lt;/p&gt;
@@ -388,10 +388,55 @@ direction_angle1=mean(direction/2);
  </entry>
  
  <entry>
-   <title>Find the contour of the hand gestures</title>
-   <link href="http://lhzhang.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html"/>
+   <title>Find the centroid of the hand gestures</title>
+   <link href="http://lhzhang.com/2013/11/23/Post-series-2-Find-the-centroid-of-the-hand-gestures.html"/>
    <updated>2013-11-23T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/23/Find-the-contour-of-the-hand-gestures</id>
+   <id>http://lhzhang.com/2013/11/23/Post-series-2-Find-the-centroid-of-the-hand-gestures</id>
+   <content type="html">&lt;p&gt;For the next step, we need to find out the centroid of the hand. We employ two methods to this end, a simple one using all the points in the hand region, and another one called &lt;strong&gt;Distance Transform&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Because we know the points in the hand region have value 1 while others are 0. So we can easily use the points in the hand to calculate the centroid. Here is the code.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function [x_center,y_center]=center_finder(edge_map,binary_map,x_array,y_array)
+    %% ----find the center point, solution 1---- %%
+    [y_binary,x_binary]=ind2sub(size(binary_map),find(binary_map));
+    x_center=round(mean(x_binary));
+    y_center=round(mean(y_binary));
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Another method is called the &lt;strong&gt;Distance Transform&lt;/strong&gt;. You can refer to my other post to check out concept or the algorithm I developed. Here is the code of centroid finger using &lt;strong&gt;Distance Transform&lt;/strong&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function [x_center,y_center]=center_finder(edge_map,binary_map,x_array,y_array)
+    %% ----find the center point, solution 2---- %%
+    max_distance=0;
+    dist_trans_map=bwdist(edge_map);
+    % dist_trans_map1=dist_trans(edge_map);    %distance transform I implement
+    dist_trans_map(binary_map==0)=0;
+    x_left=min(x_array(x_array~=0));
+    x_right=max(x_array);
+    y_up=min(y_array(y_array~=0));
+    y_bottom=max(y_array);
+    for i=x_left:x_right
+        for j=y_up:y_bottom
+            if(dist_trans_map(j,i)&amp;gt;max_distance)
+                x_center=i;
+                y_center=j;
+                max_distance=dist_trans_map(j,i);
+            end
+        end
+    end
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is the result and choose the latter methods.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Find the contour of the hand gestures</title>
+   <link href="http://lhzhang.com/2013/11/23/Post-series-1-Find-the-contour-of-the-hand-gestures.html"/>
+   <updated>2013-11-23T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/11/23/Post-series-1-Find-the-contour-of-the-hand-gestures</id>
    <content type="html">&lt;p&gt;Our algorithm of hand gesture recognition begins with the detection of the hand contour and connect these points in a consecutive manner. This problem may sound intuitive and simple for human beings, when it comes to the computer, the issue is a little more complicated. Here is why, because the contour is no longer smooth as we expect it would be, possibility is high that we may run into a deadend before we reach the end point, then what we get is no long the whole but part of the hand contour. The contour detection algorithm should be able to ignore all the noise points.&lt;/p&gt;
 
 &lt;p&gt;So what are exactly these noisy points we are talking about. Well, here are two images showing two typical scenarios. It's straightforward that when the computer runs into these points, it runs into a deadend.&lt;/p&gt;
@@ -519,51 +564,6 @@ end
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;So this the the result of our algorithm, and we've tested it on 200+ images and we will take more pictures to test the robustness of the algorithm.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Find the centroid of the hand gestures</title>
-   <link href="http://lhzhang.com/2013/11/23/Find-the-centroid-of-the-hand-gestures.html"/>
-   <updated>2013-11-23T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/23/Find-the-centroid-of-the-hand-gestures</id>
-   <content type="html">&lt;p&gt;For the next step, we need to find out the centroid of the hand. We employ two methods to this end, a simple one using all the points in the hand region, and another one called &lt;strong&gt;Distance Transform&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Because we know the points in the hand region have value 1 while others are 0. So we can easily use the points in the hand to calculate the centroid. Here is the code.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function [x_center,y_center]=center_finder(edge_map,binary_map,x_array,y_array)
-    %% ----find the center point, solution 1---- %%
-    [y_binary,x_binary]=ind2sub(size(binary_map),find(binary_map));
-    x_center=round(mean(x_binary));
-    y_center=round(mean(y_binary));
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Another method is called the &lt;strong&gt;Distance Transform&lt;/strong&gt;. You can refer to my other post to check out concept or the algorithm I developed. Here is the code of centroid finger using &lt;strong&gt;Distance Transform&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function [x_center,y_center]=center_finder(edge_map,binary_map,x_array,y_array)
-    %% ----find the center point, solution 2---- %%
-    max_distance=0;
-    dist_trans_map=bwdist(edge_map);
-    % dist_trans_map1=dist_trans(edge_map);    %distance transform I implement
-    dist_trans_map(binary_map==0)=0;
-    x_left=min(x_array(x_array~=0));
-    x_right=max(x_array);
-    y_up=min(y_array(y_array~=0));
-    y_bottom=max(y_array);
-    for i=x_left:x_right
-        for j=y_up:y_bottom
-            if(dist_trans_map(j,i)&amp;gt;max_distance)
-                x_center=i;
-                y_center=j;
-                max_distance=dist_trans_map(j,i);
-            end
-        end
-    end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here is the result and choose the latter methods.&lt;/p&gt;
 </content>
  </entry>
  
