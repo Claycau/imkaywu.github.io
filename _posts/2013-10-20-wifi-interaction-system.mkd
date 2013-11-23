@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Wifi-based classroom interaction system
-tags: Wifi-based classroom interaction system
+tags: [Wifi-based classroom interaction system]
 categories: projects
 ---
 In this project, we aimed to address the issue of lack of interaction between lecturers and students. With the help of our system, student can answer the multiple choice questions using the mobile app, the answers are dynamically changing according to the students' sending. Or students can send questions they don't understand to the PC program installed in the lecturers computer. The system requires no database or web server whatesoever, highly portable.
