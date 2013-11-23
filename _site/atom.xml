@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-23T15:31:16+08:00</updated>
+ <updated>2013-11-23T15:52:16+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -568,6 +568,29 @@ end
  </entry>
  
  <entry>
+   <title>Hand Gesture Recognition</title>
+   <link href="http://lhzhang.com/2013/11/22/Hand-gesture-recognition.html"/>
+   <updated>2013-11-22T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/11/22/Hand-gesture-recognition</id>
+   <content type="html">&lt;p&gt;This is a post to give a brief description of the algorithm of hand gesture recognition that I developed. It serve as a reminder of what has been and what remains to be done. But first thing first, let me introduce our algorithm step by step.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html&quot;&gt;Find the contour vertex and connect them in a consecutive manner&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Find the centroid of hand gestures using &lt;strong&gt;distance transform&lt;/strong&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Find the direction of hand gestures using the relative positions of contour vertex, then find the line which crosses the centroid and is perpendicular to the direction, this line and the contour have two intersected points.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Transform the hand contour (points above the intersected points) into a &lt;em&gt;time-series curve&lt;/em&gt; which records the relative distance between each contour vertex to the centroid.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Find the positions (represent by degree) of fingertips and fingerroots.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Find the direction of each fingers using the positions of fingertips and fingerroots, then find the accurate direction of hand using the directions of fingers.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Repeat step 4, 5. Now we've got the accurate positions (degrees) of the fingerroots.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Train the data using template images to get the locations of each finger, the recognition is performed by finding a combination of fingers that has the smallest Euclidean distance with the input hand.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is pretty much everything about our hand gesture recognition algorithm, for more details, please check the detailed posts.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Wifi-based classroom interaction system</title>
    <link href="http://lhzhang.com/2013/10/20/wifi-interaction-system.html"/>
    <updated>2013-10-20T00:00:00+08:00</updated>
@@ -685,15 +708,6 @@ end
    <updated>2013-09-22T00:00:00+08:00</updated>
    <id>http://lhzhang.com/2013/09/22/放弃保研</id>
    <content type="html">&lt;p&gt;今天早上还没睡醒，就要起床去签什么破协议。到了那里之后，没想到人会这么多，教务的效率未免有点低啊，不能分批去吗？我本来就不喜欢呆在人多的地方，只一心想着签完之后早点走掉。签字的时候感脚心里有点小波澜——一个是前途有保障的未来，一个则是完全未知，不知道能否成功，但是却为之努力了这么久的事情。但我觉得我还是做了正确的选择，与其选择一个自己不想要的安全的生活，在接下来的日子里过着吃薯片，看美剧的生活，我宁愿拼一把，冒一次险。即使失败了，大不了从头来过，哥们才21岁，有的是青春和时间来挥霍。No guts, no glory。&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>电设总结</title>
-   <link href="http://lhzhang.com/2013/09/21/%E7%94%B5%E8%AE%BE%E6%80%BB%E7%BB%93-%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93%E5%BC%80%E7%AB%AF%E7%AF%87.html"/>
-   <updated>2013-09-21T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/09/21/电设总结-技术总结开端篇</id>
-   <content type="html">&lt;p&gt;这次电设学到了很多东西，虽然跟高手还有很大的差距，但比起自己刚开始的时候进步还是很大的。因为学了蛮多的技术，编了挺多的代码的，所以就把它们写在博客里，一来梳理一下学过的东东，而来供以后查找使用。这一篇blog就算给自己挖一个坑，日后一点一点的慢慢补。因为我觉得针对某一个具体的开发平台写的话太流水帐了，所以我只记录我认为比较有趣的点。&lt;/p&gt;
 </content>
  </entry>
  
