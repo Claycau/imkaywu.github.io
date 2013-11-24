@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-23T16:10:36+08:00</updated>
+ <updated>2013-11-24T23:04:37+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -574,21 +574,40 @@ end
    <link href="http://lhzhang.com/2013/11/22/Hand-gesture-recognition.html"/>
    <updated>2013-11-22T00:00:00+08:00</updated>
    <id>http://lhzhang.com/2013/11/22/Hand-gesture-recognition</id>
-   <content type="html">&lt;p&gt;This is a post to give a brief description of the algorithm of hand gesture recognition that I developed. It serve as a reminder of what has been done and what remains to be done. You can download the codes in &lt;a href=&quot;https://github.com/imkaywu/Gesture-Recognition&quot;&gt;Github&lt;/a&gt;.First thing first, let me introduce our algorithm step by step.&lt;/p&gt;
+   <content type="html">&lt;p&gt;This is a post that gives a brief description of the algorithm of hand gesture recognition that I developed. It serves as a reminder of what has been done and what remains to be done. You can download the codes in &lt;a href=&quot;https://github.com/imkaywu/Gesture-Recognition&quot;&gt;Github&lt;/a&gt;.Let me introduce our algorithm step by step.&lt;/p&gt;
 
 &lt;blockquote&gt;&lt;ol&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html&quot;&gt;Find the contour vertex and connect them in a consecutive manner&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-centroid-of-the-hand-gestures.html&quot;&gt;Find the centroid of hand gestures using &lt;strong&gt;distance transform&lt;/strong&gt;.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the direction of hand gestures using the relative positions of contour vertex, then find the line which crosses the centroid and is perpendicular to the direction, this line and the contour have two intersected points.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html&quot;&gt;Transform the hand contour (points above the intersected points) into a &lt;em&gt;time-series curve&lt;/em&gt; which records the relative distance between each contour vertex to the centroid.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html&quot;&gt;Find the positions (represent by degree) of fingertips and fingerroots.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html&quot;&gt;Find the positions (represented by degrees) of fingertips and fingerroots.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the direction of each fingers using the positions of fingertips and fingerroots, then find the accurate direction of hand using the directions of fingers.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Repeat step 4, 5. Now we've got the accurate positions (degrees) of the fingerroots.&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Train the data using template images to get the locations of each finger, the recognition is performed by finding a combination of fingers that has the smallest Euclidean distance with the input hand.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;This is pretty much everything about our hand gesture recognition algorithm, for more details, please check the detailed posts.&lt;/p&gt;
+&lt;p&gt;This is pretty much everything about our hand gesture recognition algorithm, and I'm sitll developing the part to recognize the fingerroots using more robust method, the code is available in &lt;a href=&quot;https://github.com/imkaywu/Gesture-Recognition-1&quot;&gt;Github&lt;/a&gt; too. For more details, please check the detailed posts.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Push my code to Github</title>
+   <link href="http://lhzhang.com/2013/11/15/Push-my-code-to-Github.html"/>
+   <updated>2013-11-15T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/11/15/Push-my-code-to-Github</id>
+   <content type="html">&lt;p&gt;看了好多网上的例子，感觉好多都是互相抄的，对我的机子都没有用，经过自己的摸索，以下的命令是在我自己的机子上可行的。&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;在github上创建repository&lt;/p&gt;
+
+&lt;p&gt;git add -A&lt;/p&gt;
+
+&lt;p&gt;git remote set-url origin https://github.com/usrname/repo_name&lt;/p&gt;
+
+&lt;p&gt;git pull origin master&lt;/p&gt;
+
+&lt;p&gt;git push -u origin master&lt;/p&gt;&lt;/blockquote&gt;
 </content>
  </entry>
  
@@ -701,15 +720,6 @@ end
 &lt;p&gt;&lt;img src=&quot;/media/images/jekyll%20error.png&quot; alt=&quot;jekyll_error&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I googled and found the solution. Because the default format of YAML is &lt;strong&gt;parameter+: +white space&lt;/strong&gt;, so if you happen to forget the white space, you gonna run into the same error as I did. So simple solution is adding the white space.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>放弃保研</title>
-   <link href="http://lhzhang.com/2013/09/22/%E6%94%BE%E5%BC%83%E4%BF%9D%E7%A0%94.html"/>
-   <updated>2013-09-22T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/09/22/放弃保研</id>
-   <content type="html">&lt;p&gt;今天早上还没睡醒，就要起床去签什么破协议。到了那里之后，没想到人会这么多，教务的效率未免有点低啊，不能分批去吗？我本来就不喜欢呆在人多的地方，只一心想着签完之后早点走掉。签字的时候感脚心里有点小波澜——一个是前途有保障的未来，一个则是完全未知，不知道能否成功，但是却为之努力了这么久的事情。但我觉得我还是做了正确的选择，与其选择一个自己不想要的安全的生活，在接下来的日子里过着吃薯片，看美剧的生活，我宁愿拼一把，冒一次险。即使失败了，大不了从头来过，哥们才21岁，有的是青春和时间来挥霍。No guts, no glory。&lt;/p&gt;
 </content>
  </entry>
  

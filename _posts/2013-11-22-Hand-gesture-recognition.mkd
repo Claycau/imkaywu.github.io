@@ -5,7 +5,7 @@ tags: [Hand Gesture Recognition]
 categories: blog
 ---
 
-This is a post to give a brief description of the algorithm of hand gesture recognition that I developed. It serve as a reminder of what has been done and what remains to be done. You can download the codes in [Github](https://github.com/imkaywu/Gesture-Recognition).First thing first, let me introduce our algorithm step by step.
+This is a post that gives a brief description of the algorithm of hand gesture recognition that I developed. It serves as a reminder of what has been done and what remains to be done. You can download the codes in [Github](https://github.com/imkaywu/Gesture-Recognition).Let me introduce our algorithm step by step.
 
 > 1. [Find the contour vertex and connect them in a consecutive manner](http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html).
 
@@ -15,7 +15,7 @@ This is a post to give a brief description of the algorithm of hand gesture reco
 
 > 4. [Transform the hand contour (points above the intersected points) into a *time-series curve* which records the relative distance between each contour vertex to the centroid.](http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html)
 
-> 5. [Find the positions (represent by degree) of fingertips and fingerroots.](http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html)
+> 5. [Find the positions (represented by degrees) of fingertips and fingerroots.](http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html)
 
 > 6. [Find the direction of each fingers using the positions of fingertips and fingerroots, then find the accurate direction of hand using the directions of fingers.](http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html)
 
@@ -23,4 +23,4 @@ This is a post to give a brief description of the algorithm of hand gesture reco
 
 > 8. Train the data using template images to get the locations of each finger, the recognition is performed by finding a combination of fingers that has the smallest Euclidean distance with the input hand.
 
-This is pretty much everything about our hand gesture recognition algorithm, for more details, please check the detailed posts.
+This is pretty much everything about our hand gesture recognition algorithm, and I'm sitll developing the part to recognize the fingerroots using more robust method, the code is available in [Github](https://github.com/imkaywu/Gesture-Recognition-1) too. For more details, please check the detailed posts.
