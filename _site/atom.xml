@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-24T23:04:37+08:00</updated>
+ <updated>2013-11-24T23:09:17+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -365,9 +365,9 @@ end
 
 &lt;p&gt;Here is the code to find the accurate direction of fingers and hand&lt;/p&gt;
 
-&lt;p&gt;%% ----detect the direction again---- %%&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;%% ----detect the direction again---- %%
 
-&lt;pre&gt;&lt;code&gt;direction=zeros(1,size(fingertip,2));
+direction=zeros(1,size(fingertip,2));
 for i=1:2*size(fingertip,2)
     index=ceil(i/2);
     index1=mod(i,2);

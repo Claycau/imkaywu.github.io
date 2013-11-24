@@ -153,7 +153,8 @@ Then, I transform the hand contour to a [time-series graph](http://imkaywu.com/2
 
 Here is the code to find the accurate direction of fingers and hand
 
-%% ----detect the direction again---- %%
+    %% ----detect the direction again---- %%
+
     direction=zeros(1,size(fingertip,2));
     for i=1:2*size(fingertip,2)
         index=ceil(i/2);

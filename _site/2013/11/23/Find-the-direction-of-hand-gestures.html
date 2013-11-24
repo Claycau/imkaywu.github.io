@@ -203,9 +203,9 @@ end
 
 <p>Here is the code to find the accurate direction of fingers and hand</p>
 
-<p>%% ----detect the direction again---- %%</p>
+<pre><code>%% ----detect the direction again---- %%
 
-<pre><code>direction=zeros(1,size(fingertip,2));
+direction=zeros(1,size(fingertip,2));
 for i=1:2*size(fingertip,2)
     index=ceil(i/2);
     index1=mod(i,2);
