@@ -4,13 +4,25 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-11-24T23:09:17+08:00</updated>
+ <updated>2013-12-05T21:49:52+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
    <email>linghua.zhang@me.com</email>
  </author>
 
+ 
+ <entry>
+   <title>A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching</title>
+   <link href="http://lhzhang.com/2013/12/05/Paper-of-Hand-Gesture-Recognition.html"/>
+   <updated>2013-12-05T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/12/05/Paper-of-Hand-Gesture-Recognition</id>
+   <content type="html">&lt;p&gt;This is an excerpt of the paper of &lt;strong&gt;A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching&lt;/strong&gt;. It's about the algorithm of hand gesture recognition, You can refer to another &lt;a href=&quot;http://imkaywu.com/2013/11/22/Hand-gesture-recognition.html&quot;&gt;post&lt;/a&gt; for the berief of the algorithm&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/paper.pdf&quot;&gt;&lt;em&gt;Ren Y., Wu K., A Low Complex hand segment and recognition method for human-wearable device-interaction using
+priority-based scan-line stereo matching&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Transform to Time-series curve</title>
@@ -707,19 +719,6 @@ end
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;The advantage of this algorithm is its simlicity and easy to understand. There are lots of research in improving this algorithm and I'm just started my own research. So I hope more sophisticated and faster algorithms can come up later.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>A weird error caused by jekyll</title>
-   <link href="http://lhzhang.com/2013/10/19/A-weird-erroe-caused-by-jekyll.html"/>
-   <updated>2013-10-19T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/10/19/A-weird-erroe-caused-by-jekyll</id>
-   <content type="html">&lt;p&gt;I haven't got the chance to update my blog for a while. When I did today and tried to run it locally in my machine, I ran into an error.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/jekyll%20error.png&quot; alt=&quot;jekyll_error&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I googled and found the solution. Because the default format of YAML is &lt;strong&gt;parameter+: +white space&lt;/strong&gt;, so if you happen to forget the white space, you gonna run into the same error as I did. So simple solution is adding the white space.&lt;/p&gt;
 </content>
  </entry>
  
