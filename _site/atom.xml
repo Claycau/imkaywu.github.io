@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2013-12-05T21:49:52+08:00</updated>
+ <updated>2013-12-07T10:21:31+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -14,10 +14,10 @@
  
  <entry>
    <title>A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching</title>
-   <link href="http://lhzhang.com/2013/12/05/Paper-of-Hand-Gesture-Recognition.html"/>
+   <link href="http://lhzhang.com/2013/12/05/Paper.html"/>
    <updated>2013-12-05T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/12/05/Paper-of-Hand-Gesture-Recognition</id>
-   <content type="html">&lt;p&gt;This is an excerpt of the paper of &lt;strong&gt;A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching&lt;/strong&gt;. It's about the algorithm of hand gesture recognition, You can refer to another &lt;a href=&quot;http://imkaywu.com/2013/11/22/Hand-gesture-recognition.html&quot;&gt;post&lt;/a&gt; for the berief of the algorithm&lt;/p&gt;
+   <id>http://lhzhang.com/2013/12/05/Paper</id>
+   <content type="html">&lt;p&gt;This is an excerpt of the paper of &lt;strong&gt;A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching&lt;/strong&gt;. It's about the algorithm of hand gesture recognition, You can refer to another &lt;a href=&quot;http://imkaywu.com/2013/11/22/Hand-gesture-recognition.html&quot;&gt;post&lt;/a&gt; for a berief description of the algorithm. A .phf version is available below.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/paper.pdf&quot;&gt;&lt;em&gt;Ren Y., Wu K., A Low Complex hand segment and recognition method for human-wearable device-interaction using
 priority-based scan-line stereo matching&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;

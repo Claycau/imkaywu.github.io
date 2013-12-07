@@ -1,0 +1,11 @@
+---
+layout: post
+title: A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching
+tags: [Paper]
+categories: blog
+---
+
+This is an excerpt of the paper of **A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching**. It's about the algorithm of hand gesture recognition, You can refer to another [post](http://imkaywu.com/2013/11/22/Hand-gesture-recognition.html) for a berief description of the algorithm. A .phf version is available below.
+
+[*Ren Y., Wu K., A Low Complex hand segment and recognition method for human-wearable device-interaction using
+priority-based scan-line stereo matching*](/paper.pdf)
