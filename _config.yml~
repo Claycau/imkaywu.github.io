@@ -3,5 +3,5 @@ markdown: rdiscount
 pygments: true
 permalink: /:year/:month/:day/:title.html
 title: "Kay's teck blog"
-name: "The Journey is the Reward"
+name: "The Journey Is the Reward"
 markdown: rdiscount
