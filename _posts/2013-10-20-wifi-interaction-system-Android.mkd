@@ -14,4 +14,4 @@ Please refer to a [post][post] for further details.
 
 [Android app]: https://github.com/imkaywu/Clicker
 [PC Program]: https://github.com/imkaywu/PC-program
-[post]: http://imkaywu.com/2013/10/20/wifi-interaction-system.html
+[post]: wifi-interaction-system.html
