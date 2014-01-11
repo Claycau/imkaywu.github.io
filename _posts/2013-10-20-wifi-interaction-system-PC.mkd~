@@ -1,0 +1,16 @@
+---
+layout: post
+title: Wifi-based classroom interaction system (PC program)
+tags: [Wifi-based classroom interaction system, PC program]
+categories: projects
+thumb: [../media/images/程序主界面.png]
+---
+
+In this project, we aimed to address the issue of lack of interaction between lecturers and students. The answers sent by the students can displayed dynamically. The system can also act as a tracker of students' presence rate and academic performance. The system requires no database or web server whatesoever, highly portable.
+
+Please refer to a [post][post] for further details.
+
+[Android app][Android app] &sdot; [PC Program][PC Program]
+
+[Android app]: https://github.com/imkaywu/Clicker
+[PC Program]: https://github.com/imkaywu/PC-program

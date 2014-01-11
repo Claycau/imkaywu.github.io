@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-11T11:11:14+08:00</updated>
+ <updated>2014-01-11T15:06:04+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -624,101 +624,28 @@ end
  </entry>
  
  <entry>
-   <title>Wifi-based classroom interaction system</title>
-   <link href="http://lhzhang.com/2013/10/20/wifi-interaction-system.html"/>
+   <title>Wifi-based classroom interaction system (PC program)</title>
+   <link href="http://lhzhang.com/2013/10/20/wifi-interaction-system-PC.html"/>
    <updated>2013-10-20T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/10/20/wifi-interaction-system</id>
-   <content type="html">&lt;p&gt;In this project, we aimed to address the issue of lack of interaction between lecturers and students. With the help of our system, student can answer the multiple choice questions using the mobile app, the answers are dynamically changing according to the students' sending. Or students can send questions they don't understand to the PC program installed in the lecturers computer. The system requires no database or web server whatesoever, highly portable.&lt;/p&gt;
+   <id>http://lhzhang.com/2013/10/20/wifi-interaction-system-PC</id>
+   <content type="html">&lt;p&gt;In this project, we aimed to address the issue of lack of interaction between lecturers and students. The answers sent by the students can displayed dynamically. The system can also act as a tracker of students' presence rate and academic performance. The system requires no database or web server whatesoever, highly portable.&lt;/p&gt;
 
-&lt;p&gt;[app][app] &amp;mdash; [code][code] &amp;mdash; [hn]&lt;/p&gt;
+&lt;p&gt;Please refer to a &lt;a href=&quot;http://imkaywu.com/2013/10/20/wifi-interaction-system.html&quot;&gt;post&lt;/a&gt; for further details.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/imkaywu/Clicker&quot;&gt;Android app&lt;/a&gt; &amp;sdot; &lt;a href=&quot;https://github.com/imkaywu/PC-program&quot;&gt;PC Program&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
-   <title>A MATLAB implementation of distance transform algorithm</title>
-   <link href="http://lhzhang.com/2013/10/19/An-implementation-of-the-distance-transform-algorithm-using-MATLAB.html"/>
-   <updated>2013-10-19T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/10/19/An-implementation-of-the-distance-transform-algorithm-using-MATLAB</id>
-   <content type="html">&lt;p&gt;In the gesture recognition algorithms we are developing, I need to calculate the transform distance of a binary image. Though the MATLAB has a function for just that purpose, I decided to dig around and find more efficient ways to implement this algorithm.&lt;/p&gt;
+   <title>Wifi-based classroom interaction system (Android app)</title>
+   <link href="http://lhzhang.com/2013/10/20/wifi-interaction-system-Android.html"/>
+   <updated>2013-10-20T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/10/20/wifi-interaction-system-Android</id>
+   <content type="html">&lt;p&gt;In this project, we aimed to address the issue of lack of interaction between lecturers and students. With the help of our system, student can answer multiple choice questions with the mobile app, the answers are dynamically changed according to the students' choice. Or students can send questions they don't understand to the PC program in the form of text. The system requires no database or web server whatesoever, highly portable.&lt;/p&gt;
 
-&lt;p&gt;For folks who are not familiar with distance transform, there is a great &lt;a href=&quot;http://homepages.inf.ed.ac.uk/rbf/HIPR2/distance.htm&quot;&gt;post&lt;/a&gt; for you. This can give a big picture of what this task is about.&lt;/p&gt;
+&lt;p&gt;Please refer to a &lt;a href=&quot;http://imkaywu.com/2013/10/20/wifi-interaction-system.html&quot;&gt;post&lt;/a&gt; for further details.&lt;/p&gt;
 
-&lt;p&gt;The algorithm I implement is using &lt;strong&gt;chessboard&lt;/strong&gt; distance metric. And I'm still working on some other metrics. For instance, &lt;strong&gt;Euclidean&lt;/strong&gt; and &lt;strong&gt;city block&lt;/strong&gt; metrics.&lt;/p&gt;
-
-&lt;p&gt;First, we assume that the pixel value of the object is 1, and that of the background is 0. Then distance transform is defined as the smallest distance between the object and background pixels. And this value is used to replace the pixel value of the object.&lt;/p&gt;
-
-&lt;h2&gt;Logic of the algorithm&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;direction: up-left to bottom-right
-    for each pixel
-    if the value is greater than 0 (namely, object pixel)
-        get the pixels from the *left*, *up-left*, *up*, *up-right*   directions
-        add 1 to the minimum value, assign it to the object pixel
-    end if
-end for
-
-direction: bottom-right to up-left
-    for each pixel
-    if the value is greater than 0 (namely, object pixel)
-        get the pixels from the *right*, *bottom-right*, *bottom*, *bottom-left* directions
-        add 1 to the minimum value, assign it to the object pixel
-    end if
-end for
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;And the MATLAB code is as follows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function dt=dist_trans(mat)
-index0=(mat==0);
-index1=(mat==1);
-mat(index0)=1;
-mat(index1)=0;
-
-[y_index,x_index]=find(mat==0);
-x_min=min(x_index);
-x_max=max(x_index);
-y_min=min(y_index);
-y_max=max(y_index);
-for n=1:10
-for i=y_min:y_max
-    for j=x_min:x_max
-        if(mat(i,j)&amp;gt;0)
-            if((i==1)&amp;amp;&amp;amp;(j==1));
-            elseif(i==1)
-                mat(i,j)=mat(i,j-1)+1;
-            elseif(j==1)
-                mat(i,j)=min([mat(i-1,j),mat(i-1,j+1)])+1;
-            elseif(j==x_max)
-                mat(i,j)=min([mat(i,j-1),mat(i-1,j-1),mat(i-1,j)])+1;
-            else
-                mat(i,j)=min([mat(i,j-1),mat(i-1,j-1),mat(i-1,j),mat(i-1,j+1)])+1;
-            end
-        end
-    end
-end
-
-for i=y_max:-1:y_min
-    for j=x_max:-1:x_min
-        if(mat(i,j)&amp;gt;0)
-            if((i==y_max)&amp;amp;&amp;amp;(j==x_max));
-            elseif(i==y_max)
-                mat(i,j)=min([mat(i,j),mat(i,j+1)+1]);
-            elseif(j==x_max)
-                mat(i,j)=min([mat(i,j),mat(i+1,j)+1,mat(i+1,j-1)+1]);
-            elseif(j==1)
-                mat(i,j)=min([mat(i,j),mat(i,j+1)+1,mat(i+1,j+1)+1,mat(i+1,j)+1]);
-            else
-                mat(i,j)=min([mat(i,j),mat(i,j+1)+1,mat(i+1,j+1)+1,mat(i+1,j)+1,mat(i+1,j-1)+1]);
-            end
-        end
-    end
-end
-end
-dt=mat;
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The advantage of this algorithm is its simlicity and easy to understand. There are lots of research in improving this algorithm and I'm just started my own research. So I hope more sophisticated and faster algorithms can come up later.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/imkaywu/Clicker&quot;&gt;Android app&lt;/a&gt; &amp;sdot; &lt;a href=&quot;https://github.com/imkaywu/PC-program&quot;&gt;PC Program&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
