@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-11T15:06:04+08:00</updated>
+ <updated>2014-01-11T15:09:03+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -630,7 +630,7 @@ end
    <id>http://lhzhang.com/2013/10/20/wifi-interaction-system-PC</id>
    <content type="html">&lt;p&gt;In this project, we aimed to address the issue of lack of interaction between lecturers and students. The answers sent by the students can displayed dynamically. The system can also act as a tracker of students' presence rate and academic performance. The system requires no database or web server whatesoever, highly portable.&lt;/p&gt;
 
-&lt;p&gt;Please refer to a &lt;a href=&quot;http://imkaywu.com/2013/10/20/wifi-interaction-system.html&quot;&gt;post&lt;/a&gt; for further details.&lt;/p&gt;
+&lt;p&gt;Please refer to a &lt;a href=&quot;http://imkaywu.com/2013-10-20-wifi-interaction-system.html&quot;&gt;post&lt;/a&gt; for further details.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/imkaywu/Clicker&quot;&gt;Android app&lt;/a&gt; &amp;sdot; &lt;a href=&quot;https://github.com/imkaywu/PC-program&quot;&gt;PC Program&lt;/a&gt;&lt;/p&gt;
 </content>
