@@ -4,25 +4,13 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-11T15:12:56+08:00</updated>
+ <updated>2014-01-11T15:20:38+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
    <email>linghua.zhang@me.com</email>
  </author>
 
- 
- <entry>
-   <title>A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching</title>
-   <link href="http://lhzhang.com/2013/12/05/Paper.html"/>
-   <updated>2013-12-05T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/12/05/Paper</id>
-   <content type="html">&lt;p&gt;This is an excerpt of the paper of &lt;strong&gt;A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching&lt;/strong&gt;. It's about the algorithm of hand gesture recognition, You can refer to another &lt;a href=&quot;http://imkaywu.com/2013/11/22/Hand-gesture-recognition.html&quot;&gt;post&lt;/a&gt; for a berief description of the algorithm. A .phf version is available below.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/paper.pdf&quot;&gt;&lt;em&gt;Ren Y., Wu K., A Low Complex hand segment and recognition method for human-wearable device-interaction using
-priority-based scan-line stereo matching&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
-</content>
- </entry>
  
  <entry>
    <title>Transform to Time-series curve</title>
@@ -646,6 +634,76 @@ end
 &lt;p&gt;Please refer to a &lt;a href=&quot;wifi-interaction-system.html&quot;&gt;post&lt;/a&gt; for further details.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/imkaywu/Clicker&quot;&gt;Android app&lt;/a&gt; &amp;sdot; &lt;a href=&quot;https://github.com/imkaywu/PC-program&quot;&gt;PC Program&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Wifi-based classroom interaction system</title>
+   <link href="http://lhzhang.com/2013/10/20/wifi-interaction-system.html"/>
+   <updated>2013-10-20T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/10/20/wifi-interaction-system</id>
+   <content type="html">&lt;p&gt;In traditional Chinese lectures, there is a long-lasting problem, that is the lack of interaction between lecturers and students. To address this issue, we intend to develop a system that can let students participate in, yet not so obstrusively, the lecture. In the meantime, lecturers can keep track of the performance of each student.&lt;/p&gt;
+
+&lt;h3&gt;Scenario 1:&lt;/h3&gt;
+
+&lt;p&gt;The lecturer has some multiple choice questions and display them using PPT. The student can send their answers using this app. Moreover, any change during a single session is valid, that means, if you want to change your answer, just select another one and send it, this new answer will automatically overwrite the previous one. After the lecturer close the histogram graph, the answers for this question will automatically saved in a text format as a record.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UI of the android app for scenario 1&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/clicker02.png&quot; alt=&quot;clicker02&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UI of the PC program for scenario 1&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/%E6%8A%95%E7%A5%A8%E6%97%B6%E8%B7%B3%E5%87%BA%E7%9A%84%E7%AA%97%E5%8F%A3.png&quot; alt=&quot;投票时跳出的窗口&quot; /&gt;&lt;/p&gt;
+
+&lt;h3&gt;Scenario 2&lt;/h3&gt;
+
+&lt;p&gt;Students may have many questions to ask, but due to the limited time during the lectures and the unwillingness of students to ask questions in public, we designed a text-message like function for the app. The student can type in whatever questions they have and send to the PC. The PC program will automatically store the questions and for the review of the lecturers after lectures.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UI of the android app for scenario 2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/clicker03.png&quot; alt=&quot;clicker03&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UI of the PC program for scenario 2&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/%E6%8F%90%E9%97%AE%E6%98%BE%E7%A4%BA.png&quot; alt=&quot;提问显示&quot; /&gt;&lt;/p&gt;
+
+&lt;h3&gt;PC program UI&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Main UI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/%E7%A8%8B%E5%BA%8F%E4%B8%BB%E7%95%8C%E9%9D%A2.png&quot; alt=&quot;程序主界面&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Answer distribution UI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/%E9%A2%98%E7%9B%AE%E7%AD%94%E6%A1%88%E7%9A%84%E5%88%86%E5%B8%83.png&quot; alt=&quot;题目答案的分布&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Performance of Students&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/%E4%B8%8D%E5%90%8C%E9%A2%98%E7%9B%AE%E7%9A%84%E6%AD%A3%E8%AF%AF%E5%88%86%E5%B8%83.png&quot; alt=&quot;不同题目的正误分布&quot; /&gt;
+&lt;img src=&quot;/media/images/%E5%AD%A6%E7%94%9F%E7%9A%84%E7%AD%94%E9%A2%98%E8%A1%A8%E7%8E%B0.png&quot; alt=&quot;学生的答题表现&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Alert to the lecturer(when there are sufficient number of student can't follow the pace of the lecture)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/%E2%80%9C%E5%90%AC%E4%B8%8D%E6%87%82%E2%80%9D%E5%8A%9F%E8%83%BD.png&quot; alt=&quot;“听不懂”功能&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Presence rate&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/%E7%AD%BE%E5%88%B0%E5%8A%9F%E8%83%BD.png&quot; alt=&quot;签到功能&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Setting UI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2.png&quot; alt=&quot;设置界面&quot; /&gt;&lt;/p&gt;
+
+&lt;h3&gt;Android UI&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Login UI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/clicker01.png&quot; alt=&quot;clicker01&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;UI of Password Change&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/clicker07.png&quot; alt=&quot;clicker01&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
