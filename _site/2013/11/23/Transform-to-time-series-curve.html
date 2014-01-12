@@ -53,7 +53,7 @@
   
   </section>
   <section class="post">
-  <p>After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a <em>time-series curve</em>. The time-series curve records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.</p>
+  <p>After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a <em>time-series curve</em>. The <em>time-series curve</em> records the relative distance between each contour vertex to the centroid starting from the reference point(a relatively fixed point in hand gestures). The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.</p>
 
 <pre><code>function [degree,norm_distance]=trans_graph1(x_array,y_array,x_center,y_center)
     length=find(x_array, 1, 'last');
@@ -77,7 +77,15 @@
 end
 </code></pre>
 
-<p>This <em>time-series curve</em> is used to find the positions of <a href="http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html">fingertips and fingerroots</a> for further determine the accurate direction of hand.</p>
+<p>This <em>time-series curve</em> is used to find the positions of <a href="http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html">fingertips and fingerroots</a> for further determine the accurate direction of hand. Here are the original and transformed images of a hand gesture.</p>
+
+<p><strong>Original Image</strong></p>
+
+<p><img src="/media/images/original_image.png" alt="original image" /></p>
+
+<p><strong>Time-series curve</strong></p>
+
+<p><img src="/media/images/time-series.png" alt="Time-series curve" /></p>
 
   </section>
   <div style='height:1px;background-color:#C3C3C3;line-height:1px;clear:both;display:block;overflow:hidden'> </div>

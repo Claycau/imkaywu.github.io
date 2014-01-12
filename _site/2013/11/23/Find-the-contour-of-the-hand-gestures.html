@@ -53,133 +53,141 @@
   
   </section>
   <section class="post">
-  <p>Our algorithm of hand gesture recognition begins with the detection of the hand contour and connect these points in a consecutive manner. This problem may sound intuitive and simple for human beings, when it comes to the computer, the issue is a little more complicated. Here is why, because the contour is no longer smooth as we expect it would be, possibility is high that we may run into a deadend before we reach the end point, then what we get is no long the whole but part of the hand contour. The contour detection algorithm should be able to ignore all the noise points.</p>
+  <p>Our algorithm of hand gesture recognition begins with the detection of the hand contour and connect these points in a consecutive manner. This problem may sound intuitive and simple for human beings, when it comes to the computer, the issue is a little more complicated. Here is why, because the contour is no longer smooth as we expect it would be, possibility is high that we may run into a deadend before we reach the end point, then what we got is no long the whole but part of the hand contour. The contour detection algorithm should be able to ignore all the noise points and obtain the profile of hand.</p>
 
-<p>So what are exactly these noisy points we are talking about. Well, here are two images showing two typical scenarios. It's straightforward that when the computer runs into these points, it runs into a deadend.</p>
+<p>So what are exactly these noisy points we are talking about. Well, here are an image showing one typical scenario. It's straightforward that when the computer runs into these points, it runs into a deadend.</p>
 
-<p>Here is my solution to this problem, it's quite clear these points have two neighboring points up and down/left and right that have different values from themselves (the points in the hand region is 1 while the points outside is 0). So we can use a variable called edge_direction to indicate where their neighboring points are (up-down/left-down). If the points in the hand have both neighboring up-down/left-down points, it's the '<em>deadend</em>' points we are looking for.</p>
+<p><strong>Image that has noisy points</strong></p>
 
-<p>The above is just a simple depict of the hand contour detection algorithm, I think no other words are convincing than some codes, so check out my source code.</p>
+<p><img src="/media/images/edge_finder_unmodified.png" alt="edge_finder_unmodified" /></p>
+
+<p>Here is my solution to this problem, it's quite clear these points have two neighboring points up and down/left and right that have different values from themselves (the points in the hand region is 1 while the points outside is 0). So we can use a variable called edge_direction to indicate where their neighboring points are (up-down/left-down). If the points in the hand have both neighboring up-down/left-down points, it's the '<em>deadend</em>' points we are looking for. The result of the algorithm is shown below.</p>
+
+<p><strong>Image that has eliminated the noisy points</strong></p>
+
+<p><img src="/media/images/edge_finder_modified.png" alt="edge_finder_modified" /></p>
+
+<p>The above is just a simple depict of the hand contour detection algorithm, I think no other words are more convincing than the code, so check out my source code.</p>
 
 <pre><code>function edge_map=edge_finder(binary_map,row,colum)
-edge_map=zeros(size(binary_map));
-edge_direction=zeros(size(binary_map));
-for i=1:row
-    j=1;
-    while(true)
-        if(j==colum+1)
-            break;
-        elseif(i~=1&amp;&amp;j~=1&amp;&amp;i~=row&amp;&amp;j~=colum)
-            if(xor(binary_map(i,j),binary_map(i,j+1)))
-                if(edge_map(i,j+binary_map(i,j+1))==1&amp;&amp;(edge_direction(i,j+binary_map(i,j+1))==1||edge_direction(i,j+binary_map(i,j+1))==3))%可以去除想101图中的孤立的竖线
-                    edge_map(i,j+binary_map(i,j+1))=0;
-                    edge_direction(i,j+binary_map(i,j+1))=0;
-                    binary_map(i,j+binary_map(i,j+1))=0;
-                    continue;
-                else
-                    edge_map(i,j+binary_map(i,j+1))=1;
-                    edge_direction(i,j+binary_map(i,j+1))=edge_direction(i,j+binary_map(i,j+1))+1;
-                end
-            end
-            if(xor(binary_map(i,j),binary_map(i+1,j)))
-                if(edge_map(i+binary_map(i+1,j),j)==1&amp;&amp;(edge_direction(i+binary_map(i+1,j),j)==2||edge_direction(i+binary_map(i+1,j),j)==3))
-                    edge_map(i+binary_map(i+1,j),j)=0;
-                    binary_map(i+binary_map(i+1,j),j)=0;
-                    if(binary_map(i+binary_map(i+1,j),j-1))
-                        j=j-1;
+    edge_map=zeros(size(binary_map));
+    edge_direction=zeros(size(binary_map));
+    for i=1:row
+        j=1;
+        while(true)
+            if(j==colum+1)
+                break;
+            elseif(i~=1&amp;&amp;j~=1&amp;&amp;i~=row&amp;&amp;j~=colum)
+                if(xor(binary_map(i,j),binary_map(i,j+1)))
+                    if(edge_map(i,j+binary_map(i,j+1))==1&amp;&amp;(edge_direction(i,j+binary_map(i,j+1))==1||edge_direction(i,j+binary_map(i,j+1))==3))%可以去除想101图中的孤立的竖线
+                        edge_map(i,j+binary_map(i,j+1))=0;
+                        edge_direction(i,j+binary_map(i,j+1))=0;
+                        binary_map(i,j+binary_map(i,j+1))=0;
+                        continue;
+                    else
+                        edge_map(i,j+binary_map(i,j+1))=1;
+                        edge_direction(i,j+binary_map(i,j+1))=edge_direction(i,j+binary_map(i,j+1))+1;
                     end
-                    edge_direction(i+binary_map(i+1,j),j)=0;
-                    continue;
-                else
-                    edge_map(i+binary_map(i+1,j),j)=1;
-                    edge_direction(i+binary_map(i+1,j),j)=edge_direction(i+binary_map(i+1,j),j)+2;
+                end
+                if(xor(binary_map(i,j),binary_map(i+1,j)))
+                    if(edge_map(i+binary_map(i+1,j),j)==1&amp;&amp;(edge_direction(i+binary_map(i+1,j),j)==2||edge_direction(i+binary_map(i+1,j),j)==3))
+                        edge_map(i+binary_map(i+1,j),j)=0;
+                        binary_map(i+binary_map(i+1,j),j)=0;
+                        if(binary_map(i+binary_map(i+1,j),j-1))
+                            j=j-1;
+                        end
+                        edge_direction(i+binary_map(i+1,j),j)=0;
+                        continue;
+                    else
+                        edge_map(i+binary_map(i+1,j),j)=1;
+                        edge_direction(i+binary_map(i+1,j),j)=edge_direction(i+binary_map(i+1,j),j)+2;
+                    end
+                end
+            else
+                if(binary_map(i,j))
+                   edge_map(i,j)=1;
                 end
             end
-        else
-            if(binary_map(i,j))
-               edge_map(i,j)=1;
-            end
+            j=j+1;
         end
-        j=j+1;
     end
-end
 end
 </code></pre>
 
 <p>Here comes the codes to connect the contour points in a consecutive manner. We first consider the points in the neighborhood regions than that in the 8-neighborhood region.</p>
 
 <pre><code>function [x_array,y_array]=edge_connector(edge_map,row,colum)
-edge_map(row+1,:)=0;
-edge_map(:,colum+1)=0;
-% [y_origin,x_origin]=ind2sub(size(edge_map),min(find(edge_map)));
-[y_index,x_index]=find(edge_map==1);
-[y_origin,index]=max(y_index);
-x_origin=min(x_index(index));
-x_array=zeros(1,sum(sum(edge_map)));
-y_array=zeros(1,sum(sum(edge_map)));
-x_array(1)=x_origin;
-y_array(1)=y_origin;
-i=1;
+    edge_map(row+1,:)=0;
+    edge_map(:,colum+1)=0;
+    % [y_origin,x_origin]=ind2sub(size(edge_map),min(find(edge_map)));
+    [y_index,x_index]=find(edge_map==1);
+    [y_origin,index]=max(y_index);
+    x_origin=min(x_index(index));
+    x_array=zeros(1,sum(sum(edge_map)));
+    y_array=zeros(1,sum(sum(edge_map)));
+    x_array(1)=x_origin;
+    y_array(1)=y_origin;
+    i=1;
 
-while(1)
-    x_present=x_array(i);
-    y_present=y_array(i);
-    i=i+1;
-    if(sum(sum(edge_map(y_present-1:y_present,x_present-1:x_present)))&gt;1)%top left direction
-        if(edge_map(y_present-1,x_present))%top
-            x_array(i)=x_present;
-            y_array(i)=y_present-1;
-        elseif(edge_map(y_present,x_present-1))%left
-            x_array(i)=x_present-1;
-            y_array(i)=y_present;
-        else%top_left
-            x_array(i)=x_present-1;
-            y_array(i)=y_present-1;
+    while(1)
+        x_present=x_array(i);
+        y_present=y_array(i);
+        i=i+1;
+        if(sum(sum(edge_map(y_present-1:y_present,x_present-1:x_present)))&gt;1)%top left direction
+            if(edge_map(y_present-1,x_present))%top
+                x_array(i)=x_present;
+                y_array(i)=y_present-1;
+            elseif(edge_map(y_present,x_present-1))%left
+                x_array(i)=x_present-1;
+                y_array(i)=y_present;
+            else%top_left
+                x_array(i)=x_present-1;
+                y_array(i)=y_present-1;
+            end
+        elseif(sum(sum(edge_map(y_present-1:y_present,x_present:x_present+1)))&gt;1)%top right direction
+            if(edge_map(y_present-1,x_present))%top
+                x_array(i)=x_present;
+                y_array(i)=y_present-1;
+            elseif(edge_map(y_present,x_present+1))%right
+                x_array(i)=x_present+1;
+                y_array(i)=y_present;
+            else%top_right
+                x_array(i)=x_present+1;
+                y_array(i)=y_present-1;
+            end
+        elseif(sum(sum(edge_map(y_present:y_present+1,x_present:x_present+1)))&gt;1)%bottom_right direction
+            if(edge_map(y_present+1,x_present))%bottom
+                x_array(i)=x_present;
+                y_array(i)=y_present+1;
+            elseif(edge_map(y_present,x_present+1))%right
+                x_array(i)=x_present+1;
+                y_array(i)=y_present;
+            else%bottom_right
+                x_array(i)=x_present+1;
+                y_array(i)=y_present+1;
+            end
+        elseif(sum(sum(edge_map(y_present:y_present+1,x_present-1:x_present)))&gt;1)%bottom_left direction
+            if(edge_map(y_present+1,x_present))%bottom
+                x_array(i)=x_present;
+                y_array(i)=y_present+1;
+            elseif(edge_map(y_present,x_present-1))%left
+                x_array(i)=x_present-1;
+                y_array(i)=y_present;
+            else%bottom_left
+                x_array(i)=x_present-1;
+                y_array(i)=y_present+1;
+            end
+        else
+            break;
         end
-    elseif(sum(sum(edge_map(y_present-1:y_present,x_present:x_present+1)))&gt;1)%top right direction
-        if(edge_map(y_present-1,x_present))%top
-            x_array(i)=x_present;
-            y_array(i)=y_present-1;
-        elseif(edge_map(y_present,x_present+1))%right
-            x_array(i)=x_present+1;
-            y_array(i)=y_present;
-        else%top_right
-            x_array(i)=x_present+1;
-            y_array(i)=y_present-1;
-        end
-    elseif(sum(sum(edge_map(y_present:y_present+1,x_present:x_present+1)))&gt;1)%bottom_right direction
-        if(edge_map(y_present+1,x_present))%bottom
-            x_array(i)=x_present;
-            y_array(i)=y_present+1;
-        elseif(edge_map(y_present,x_present+1))%right
-            x_array(i)=x_present+1;
-            y_array(i)=y_present;
-        else%bottom_right
-            x_array(i)=x_present+1;
-            y_array(i)=y_present+1;
-        end
-    elseif(sum(sum(edge_map(y_present:y_present+1,x_present-1:x_present)))&gt;1)%bottom_left direction
-        if(edge_map(y_present+1,x_present))%bottom
-            x_array(i)=x_present;
-            y_array(i)=y_present+1;
-        elseif(edge_map(y_present,x_present-1))%left
-            x_array(i)=x_present-1;
-            y_array(i)=y_present;
-        else%bottom_left
-            x_array(i)=x_present-1;
-            y_array(i)=y_present+1;
-        end
-    else
-        break;
+        edge_map(y_present,x_present)=0;
     end
-    edge_map(y_present,x_present)=0;
-end
-x_array(x_array==0)=[];
-y_array(y_array==0)=[];
+    x_array(x_array==0)=[];
+    y_array(y_array==0)=[];
 end
 </code></pre>
 
-<p>So this the the result of our algorithm, and we've tested it on 200+ images and we will take more pictures to test the robustness of the algorithm.</p>
+<p>So this the the result of our algorithm, and we've tested it on 600+ images and we will take more pictures to test the robustness of the algorithm.</p>
 
   </section>
   <div style='height:1px;background-color:#C3C3C3;line-height:1px;clear:both;display:block;overflow:hidden'> </div>

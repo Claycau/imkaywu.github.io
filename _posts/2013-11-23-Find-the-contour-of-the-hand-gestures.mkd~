@@ -137,4 +137,4 @@ Here comes the codes to connect the contour points in a consecutive manner. We f
 		y_array(y_array==0)=[];
     end
 
-So this the the result of our algorithm, and we've tested it on 600+ images and we will take more pictures to test the robustness of the algorithm.
+So this the the result of our algorithm, and we've tested it on 200+ images and we will take more pictures to test the robustness of the algorithm.

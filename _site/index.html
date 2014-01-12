@@ -57,7 +57,7 @@
     
     </section>
     <section class="post">
-    <p>After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a <em>time-series curve</em>. The time-series curve records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.</p>
+    <p>After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a <em>time-series curve</em>. The <em>time-series curve</em> records the relative distance between each contour vertex to the centroid starting from the reference point(a relatively fixed point in hand gestures). The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.</p>
 
 
     </section>
@@ -81,7 +81,7 @@
     
     </section>
     <section class="post">
-    <h3>Plan A</h3>
+    <h3>Step 1</h3>
 
 
 
@@ -110,7 +110,7 @@
     
     </section>
     <section class="post">
-    <p>After detecting the contour of the hand gestures, we represent it as a <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html">time-series curce</a>, as shown in the following images.</p>
+    <p>After detecting the contour of the hand gestures, we represent it as a <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html">time-series curce</a>, refer to <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html">this post</a> for more details.</p>
 
 
     </section>
@@ -134,7 +134,7 @@
     
     </section>
     <section class="post">
-    <p>Our algorithm of hand gesture recognition begins with the detection of the hand contour and connect these points in a consecutive manner. This problem may sound intuitive and simple for human beings, when it comes to the computer, the issue is a little more complicated. Here is why, because the contour is no longer smooth as we expect it would be, possibility is high that we may run into a deadend before we reach the end point, then what we get is no long the whole but part of the hand contour. The contour detection algorithm should be able to ignore all the noise points.</p>
+    <p>Our algorithm of hand gesture recognition begins with the detection of the hand contour and connect these points in a consecutive manner. This problem may sound intuitive and simple for human beings, when it comes to the computer, the issue is a little more complicated. Here is why, because the contour is no longer smooth as we expect it would be, possibility is high that we may run into a deadend before we reach the end point, then what we got is no long the whole but part of the hand contour. The contour detection algorithm should be able to ignore all the noise points and obtain the profile of hand.</p>
 
 
     </section>

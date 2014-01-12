@@ -5,6 +5,7 @@ tags: [Hand Gesture Recognition]
 categories: blog
 ---
 ### Step 1
+
 After obtaining the *time-series curve*, we can find the positions of the fingertips and fingerroots.
 
 The fingertips are definded as the locally highest point and the fingervalleys as locally lowest ones. The result of the initial detection of fingertips and fingervalleys is shown below.
