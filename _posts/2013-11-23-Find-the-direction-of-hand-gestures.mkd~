@@ -5,9 +5,7 @@ tags: [Hand Gesture Recognition]
 categories: blog
 ---
 
-After detecting the contour of the hand gestures, we represent it as a [time-series curce](http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html), refer to [this post](http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html) for more details. 
-
-The [*time-series curve*](http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html) records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. So what we gonna do is finding this reference points and it has to be relatively fixed, otherwise the degree of the contour points may vary among different images. We choose to first detect the direction(also called orientation or slope) of the hand, then locate this reference point that is perpendicular to hand direction.
+After detecting the contour of the hand gestures, we need to find the direction(also called as orientation or slope) of the hand in order to make the feature vector we extracted later be rotation invariant.
 
 ### Step 1
 
@@ -96,27 +94,11 @@ I decide to predefine 16 different directions and refer to the image for visuali
 		end
     end
 
-Then we need to locate the reference point in the image, the reference point is perpendicular to the hand direction.
-
-    function [x_refer,y_refer,index]=refer_point(x_array,y_array,x_center,y_center,direction_angle)
-		direction_angle1=atan2((y_array-y_center),(x_array-x_center))/pi*180;
-		direction_angle1(direction_angle1>0)=360-direction_angle1(direction_angle1>0);    % -180~+180=>0~360
-		direction_angle1(direction_angle1<0)=-direction_angle1(direction_angle1<0);
-		direction_angle1=direction_angle1-direction_angle-180;%this may have problems
-		while(true)
-		    [a,index]=min(abs(direction_angle1));
-		    x_refer=x_array(index);
-		    y_refer=y_array(index);
-		    if(y_refer>y_center)
-		        break;
-		    end
-		    direction_angle1(index)=360;
-		end
-    end
-
 ### Step 2
 
-This method mentioned above is not all that accurate, especially when the hands are tilted. So I came up with something more accurate. We assume that the direction of the hand can be presented by the overal direction of stretched fingers. So we first detect the directions of the fingers, then the direction of the hand. Besides, because it's intuitive that the contour points that are below the centroid actually contribute less to the direction of hand, and even worse have nothing to do with the direction(e.g. the contour points in the wrist). So I only use those above the centroid to calculate the directione.
+This method mentioned above is not all that accurate, especially when the hands are tilted. So I came up with something more accurate. We assume that the direction of the hand can be presented by the overall direction of the stretched fingers. So we first detect the directions of the fingers, then the direction of the hand. Besides, because it's intuitive that the contour points that are below the centroid actually contribute less to the direction of hand, and even worse have nothing to do with the direction(e.g. the contour points in the wrist). So I only use those above the centroid to calculate the directione.
+
+> direction_hand = mean(direction_fingers);
 
 First, I need to find out the points that are above the centroid using the initial detected hand direction.
 
@@ -178,4 +160,20 @@ Here is the code to find the accurate direction of fingers and hand and the imag
 		direction_angle=direction_angle/2;
 	end
 
-After finding out the accurate direction of the hand, we can find the positions of fingerroots more accurately, this is the key to accurate recognition of hand gestures in our algorithm.
+After finding out the accurate direction of the hand, we need to locate the reference point in the image, the reference point is perpendicular to the hand direction. In this way, the degree between the fingertips(or fingerroots) and the reference point relative to the centroid is scale and orientation invariant. This is the key to robust recognition result.
+
+    function [x_refer,y_refer,index]=refer_point(x_array,y_array,x_center,y_center,direction_angle)
+		direction_angle1=atan2((y_array-y_center),(x_array-x_center))/pi*180;
+		direction_angle1(direction_angle1>0)=360-direction_angle1(direction_angle1>0);    % -180~+180=>0~360
+		direction_angle1(direction_angle1<0)=-direction_angle1(direction_angle1<0);
+		direction_angle1=direction_angle1-direction_angle-180;%this may have problems
+		while(true)
+		    [a,index]=min(abs(direction_angle1));
+		    x_refer=x_array(index);
+		    y_refer=y_array(index);
+		    if(y_refer>y_center)
+		        break;
+		    end
+		    direction_angle1(index)=360;
+		end
+    end

@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-12T19:29:12+08:00</updated>
+ <updated>2014-01-12T20:18:38+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -13,51 +13,154 @@
 
  
  <entry>
-   <title>Transform to Time-series curve</title>
-   <link href="http://lhzhang.com/2013/11/23/Transform-to-time-series-curve.html"/>
-   <updated>2013-11-23T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/23/Transform-to-time-series-curve</id>
-   <content type="html">&lt;p&gt;After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a &lt;em&gt;time-series curve&lt;/em&gt;. The &lt;em&gt;time-series curve&lt;/em&gt; records the relative distance between each contour vertex to the centroid starting from the reference point(a relatively fixed point in hand gestures). The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.&lt;/p&gt;
+   <title>Two Recognition Schemes</title>
+   <link href="http://lhzhang.com/2014/01/12/two-recognition-schemes.html"/>
+   <updated>2014-01-12T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2014/01/12/two-recognition-schemes</id>
+   <content type="html">&lt;h3&gt;Scheme 1&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;function [degree,norm_distance]=trans_graph1(x_array,y_array,x_center,y_center)
-    length=find(x_array, 1, 'last');
-    radius=atan2(y_array(1:length)-y_center,x_array(1:length)-x_center);
-    degree=radius./pi*180;
-    degree(degree&amp;gt;0)=360-degree(degree&amp;gt;0);    % -180~+180=&amp;gt;0~360
-    degree(degree&amp;lt;0)=abs(degree(degree&amp;lt;0));
-    degree=degree-degree(1);
-    degree(degree&amp;gt;0)=360-degree(degree&amp;gt;0);
-    degree(degree&amp;lt;0)=-degree(degree&amp;lt;0);
-    degree=degree/360;
+&lt;p&gt;After we obtain the accurate hand direction, we can find a relatively fixed reference point in the hand gesture. The reference point is chosen using the following rule. As is shown in the following image.&lt;/p&gt;
 
-    x_distance=x_array-x_center;
-    y_distance=y_array-y_center;
-    distance=zeros(1,length);
-    for i=1:length
-        distance(i)=norm([x_distance(i),y_distance(i)]);
+&lt;blockquote&gt;&lt;p&gt;The line crosses the reference point and the centroid is perpendicular to the hand direction.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Then we can calculate the degree between the fingertips (or fingerroots) and the reference point. Because the hand direction is rotation invariant and the reference point is relatively fixed, this should suffice to recognition the gestures.&lt;/p&gt;
+
+&lt;h3&gt;Scheme 2&lt;/h3&gt;
+
+&lt;p&gt;We transform the contour points above the centroid into a time-series curve again. Now this time, we don't need to find the fingertips and fingerroots, we take samples in this curve. Because the time-series is the description of the hand profile, this extracted samples also serve as a coarse description of the hand profile. See the following two images.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Samples in the original image&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/sample_original.png&quot; alt=&quot;Samples in the original image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Samples in the time-series curve&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/sample_time_series.png&quot; alt=&quot;edge_finder_unmodified&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We then use machine learning algorithm(Logistic Regression) to train the data for recognition. The source code is as follows&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function  result_table = main_logistic_regression_hand
+    times = 1;
+    result_table = 0;
+    for ii = 1 : times
+        [ result_table_temp , theta ]= logistic_regression_hand;
+        result_table = result_table + result_table_temp;
+        save( strcat('theta',num2str(ii),'.mat'),'theta');
     end
-    min_distance=min(distance);
-    norm_distance=distance./min_distance;
+    result_table = result_table / times;
+end
+
+function [ result_table , theta ] = logistic_regression_hand
+    %% Read in data &amp;amp; select data
+    str = 'data\Test data\gesture';
+    file_index = 2 : 14;
+    [ x_all , groung_truth_gesture_index_all , same_gesture_number_all ] = read_in_distance_sample_map_data( str , file_index );
+    [ y , train_set , test_set , test_index ] = data_select( x_all , same_gesture_number_all , 0.8 , 'random_on'  );
+    %% Traing
+    theta = zeros( size( y , 2 ) , size( train_set , 2 ) );%theta(number of gestures, number of features)
+    for kk = 1 : size( y , 2 )
+        theta(kk,:) = Logistic_Regression_Gradient_Descent_Hand( y( : , kk ) , train_set);
+    end
+    %% Result
+    test_gesture_index = groung_truth_gesture_index_all( test_index );
+    test_gesture_number = zeros( length( same_gesture_number_all ) , 1 );
+    init_gesture = [ 1 , 1 , 1 , 4 , 4 , 4 , 4 , 8 , 8 , 8 , 8 , 12 , 13 ];
+    recognized_gesture_index = zeros( length( test_gesture_index ) ,1 );
+    result_table = zeros( length( same_gesture_number_all ) , length( same_gesture_number_all ) );
+    result = test_set * ( theta' );
+    for ii = 1 : length( same_gesture_number_all )
+        test_gesture_number( ii ) = sum( test_gesture_index == ii );
+    end
+    for ii = 1 : length( same_gesture_number_all )
+        [ maxVal , maxInd ] = max( result( sum( test_gesture_number( 1 : ii-1 ) ) + 1 : sum( test_gesture_number( 1 : ii ) ) , init_gesture == init_gesture( ii ) ) , [] , 2 );
+        recognized_gesture_index( sum( test_gesture_number( 1 : ii-1 ) ) + 1 : sum( test_gesture_number( 1 : ii ) ) ) = maxInd + init_gesture( ii ) - 1;
+    end
+
+    for ii = 1 : length( recognized_gesture_index )
+        result_table( recognized_gesture_index(ii) , test_gesture_index( ii ) ) = result_table( recognized_gesture_index(ii) , test_gesture_index( ii ) ) + 1;
+    end
+    for ii = 1 : length( same_gesture_number_all )
+        result_table( : , ii ) = result_table( : , ii ) ./ sum( test_gesture_number( ii ) );
+    end
+end
+%% Logistic Regression and Gradient Descent
+function theta = Logistic_Regression_Gradient_Descent_Hand( y , x )
+    epsilon = 1e-5;
+    num_feature = size( x , 2 );
+    theta = zeros( 1 , num_feature );
+    jVal = 0;
+    jVal_old = 100 * epsilon;
+    while( abs( jVal_old - jVal ) &amp;gt;= epsilon )
+        jVal_old = jVal;
+        theta = Gradient_Descent_hand( y , x , theta );
+        jVal = y .* log( h_theta( x , theta) )+ ( 1 - y ) .* log( 1 - h_theta( x , theta) );
+        jVal = sum( jVal );
+    end
+end
+
+function theta = Gradient_Descent_hand( y , x , theta )
+    num_feature = size( x , 2 );
+    alpha = 0.001;
+    tempVal1 = y - h_theta( x , theta );
+    tempVal2 = repmat( tempVal1 ,1 , num_feature );
+    tempVal3 = tempVal2 .* x;
+    tempVal4 = sum( tempVal3 );
+    theta = theta + alpha * tempVal4;
+end
+
+function hVal = h_theta( x , theta)
+    hVal = 1 ./ ( 1 + exp( - x * theta' ) );
+end
+%% Read in the data of each type of gesture
+function [ x , gesture_index , same_gesture_number ] = read_in_distance_sample_map_data( str , file_index )
+    x = []; gesture_index = []; same_gesture_number = [];
+    new_gesture_index_num = 1;
+    for ii = file_index
+        load( strcat( str , num2str(ii) , '_test_data') );
+        m = size(distance_sample_map,1);
+        same_gesture_number = [ same_gesture_number ; m ];
+        gesture_index = [ gesture_index ; new_gesture_index_num*ones(m,1)];
+        new_gesture_index_num = new_gesture_index_num + 1;
+        x = [ x ; distance_sample_map ]; 
+    end
+    clear ii jj m;
+end
+%% Select the training set and test set, store separately in x and z; x_all is the gesture set, gesture_number_all is the number of each gesture type, percent is the percentage of training set, CW_random=='random_on' means select the training set randomly.
+function [ y , x , z ,index ] = data_select( x_all , gesture_number_all , percent , CW_random )
+    dif_gesture_num = size( gesture_number_all , 1 );%Size of each gesture
+    feature_num = size( x_all , 2 );
+    selected_same_gesture_num = floor( percent * gesture_number_all );%Size of each gesture in the training set
+    unselected_same_gesture_num = gesture_number_all - selected_same_gesture_num;%Size of each gesture in the test set
+
+    y = zeros( sum( selected_same_gesture_num ) , dif_gesture_num );
+    x = zeros( sum( selected_same_gesture_num ) , feature_num );
+    index = zeros( sum( unselected_same_gesture_num ) , 1 );
+
+    for ii = 1 : dif_gesture_num
+        if strcmp( CW_random , 'random_on' )
+            index_all_random = randperm( gesture_number_all(ii) );
+            index_select = index_all_random( 1 : selected_same_gesture_num(ii) );
+            index_unselect = index_all_random( selected_same_gesture_num(ii)+1 : end );
+        else
+            index_select = 1 : selected_same_gesture_num(ii);
+            index_unselect = selected_same_gesture_num(ii)+1 : gesture_number_all(ii);
+        end
+
+        x( sum( selected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( selected_same_gesture_num( 1 : ii  ) ) , : ) = x_all( sum( gesture_number_all( 1 : ii -1 ) ) +  index_select , : );
+        y( sum( selected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( selected_same_gesture_num( 1 : ii  ) ) , ii ) = 1;
+        index( sum( unselected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( unselected_same_gesture_num( 1 : ii ) ) ) = sum( gesture_number_all( 1 : ii -1 ) ) + index_unselect;
+    end
+    z = x_all( index , : );
 end
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This &lt;em&gt;time-series curve&lt;/em&gt; is used to find the positions of &lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html&quot;&gt;fingertips and fingerroots&lt;/a&gt; for further determine the accurate direction of hand. Here are the original and transformed images of a hand gesture.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Original Image&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/original_image.png&quot; alt=&quot;original image&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Time-series curve&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/time-series.png&quot; alt=&quot;Time-series curve&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  
  <entry>
    <title>Find the position of fingertips and fingervalleys</title>
-   <link href="http://lhzhang.com/2013/11/23/Find-the-fingertips-and-fingerroots.html"/>
-   <updated>2013-11-23T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/23/Find-the-fingertips-and-fingerroots</id>
+   <link href="http://lhzhang.com/2013/11/24/Find-the-fingertips-and-fingerroots.html"/>
+   <updated>2013-11-24T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/11/24/Find-the-fingertips-and-fingerroots</id>
    <content type="html">&lt;h3&gt;Step 1&lt;/h3&gt;
 
 &lt;p&gt;After obtaining the &lt;em&gt;time-series curve&lt;/em&gt;, we can find the positions of the fingertips and fingerroots.&lt;/p&gt;
@@ -342,13 +445,52 @@ end
  </entry>
  
  <entry>
+   <title>Transform to Time-series curve</title>
+   <link href="http://lhzhang.com/2013/11/23/Transform-to-time-series-curve.html"/>
+   <updated>2013-11-23T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/11/23/Transform-to-time-series-curve</id>
+   <content type="html">&lt;p&gt;After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a &lt;em&gt;time-series curve&lt;/em&gt;. The &lt;em&gt;time-series curve&lt;/em&gt; records the relative distance between each contour vertex to the centroid starting from the reference point(a relatively fixed point in hand gestures). The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function [degree,norm_distance]=trans_graph1(x_array,y_array,x_center,y_center)
+    length=find(x_array, 1, 'last');
+    radius=atan2(y_array(1:length)-y_center,x_array(1:length)-x_center);
+    degree=radius./pi*180;
+    degree(degree&amp;gt;0)=360-degree(degree&amp;gt;0);    % -180~+180=&amp;gt;0~360
+    degree(degree&amp;lt;0)=abs(degree(degree&amp;lt;0));
+    degree=degree-degree(1);
+    degree(degree&amp;gt;0)=360-degree(degree&amp;gt;0);
+    degree(degree&amp;lt;0)=-degree(degree&amp;lt;0);
+    degree=degree/360;
+
+    x_distance=x_array-x_center;
+    y_distance=y_array-y_center;
+    distance=zeros(1,length);
+    for i=1:length
+        distance(i)=norm([x_distance(i),y_distance(i)]);
+    end
+    min_distance=min(distance);
+    norm_distance=distance./min_distance;
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This &lt;em&gt;time-series curve&lt;/em&gt; is used to find the positions of &lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html&quot;&gt;fingertips and fingerroots&lt;/a&gt; to further determine the accurate direction of hand or serve as high-level features for recognition phase. Here are the original and transformed images of a hand gesture.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Original Image&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/original_image.png&quot; alt=&quot;original image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Time-series curve&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/time-series.png&quot; alt=&quot;Time-series curve&quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Find the direction of hand</title>
    <link href="http://lhzhang.com/2013/11/23/Find-the-direction-of-hand-gestures.html"/>
    <updated>2013-11-23T00:00:00+08:00</updated>
    <id>http://lhzhang.com/2013/11/23/Find-the-direction-of-hand-gestures</id>
-   <content type="html">&lt;p&gt;After detecting the contour of the hand gestures, we represent it as a &lt;a href=&quot;http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html&quot;&gt;time-series curce&lt;/a&gt;, refer to &lt;a href=&quot;http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html&quot;&gt;this post&lt;/a&gt; for more details.&lt;/p&gt;
-
-&lt;p&gt;The &lt;a href=&quot;http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html&quot;&gt;&lt;em&gt;time-series curve&lt;/em&gt;&lt;/a&gt; records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. So what we gonna do is finding this reference points and it has to be relatively fixed, otherwise the degree of the contour points may vary among different images. We choose to first detect the direction(also called orientation or slope) of the hand, then locate this reference point that is perpendicular to hand direction.&lt;/p&gt;
+   <content type="html">&lt;p&gt;After detecting the contour of the hand gestures, we need to find the direction(also called as orientation or slope) of the hand in order to make the feature vector we extracted later be rotation invariant.&lt;/p&gt;
 
 &lt;h3&gt;Step 1&lt;/h3&gt;
 
@@ -440,9 +582,11 @@ end
 
 &lt;h3&gt;Step 2&lt;/h3&gt;
 
-&lt;p&gt;This method mentioned above is not all that accurate, especially when the hands are tilted. So I came up with something more accurate. We assume that the direction of the hand can be presented by the overal direction of stretched fingers. So we first detect the directions of the fingers, then the direction of the hand. Besides, because it's intuitive that the contour points that are below the centroid actually contribute less to the direction of hand, and even worse have nothing to do with the direction(e.g. the contour points in the wrist). So I only use those above the centroid to calculate the directione.&lt;/p&gt;
+&lt;p&gt;This method mentioned above is not all that accurate, especially when the hands are tilted. So I came up with something more accurate. We assume that the direction of the hand can be presented by the overall direction of the stretched fingers. So we first detect the directions of the fingers, then the direction of the hand. Besides, because it's intuitive that the contour points that are below the centroid actually contribute less to the direction of hand, and even worse have nothing to do with the direction(e.g. the contour points in the wrist). So I only use those above the centroid to calculate the directione.&lt;/p&gt;
 
-&lt;p&gt;First, I need to find out the points that are above the centroid using the initial detected hand direction.&lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;direction_hand = mean(direction_fingers);&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;First, I need to find out the points that are above the centroid which contribute more to hand direction with the aid of the initially detected hand direction.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;function [start_index,end_index]=start_end_points(x_array,y_array,x_center,y_center,direction_angle)
     flag1=1;
@@ -721,14 +865,15 @@ end
    <content type="html">&lt;p&gt;This is a post that gives a brief description of the algorithm of hand gesture recognition that I developed. It serves as a reminder of what has been done and what remains to be done. You can download the codes in &lt;a href=&quot;https://github.com/imkaywu/Gesture-Recognition&quot;&gt;Github&lt;/a&gt;.Let me introduce our algorithm step by step.&lt;/p&gt;
 
 &lt;blockquote&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html&quot;&gt;Find the contour vertex and connect them in a consecutive manner&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-centroid-of-the-hand-gestures.html&quot;&gt;Find the centroid of hand gestures using &lt;strong&gt;distance transform&lt;/strong&gt;.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the direction of hand gestures using the relative positions of contour vertex, then find the line which crosses the centroid and is perpendicular to the direction, this line and the contour have two intersected points.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html&quot;&gt;Transform the hand contour (points above the intersected points) into a &lt;em&gt;time-series curve&lt;/em&gt; which records the relative distance between each contour vertex to the centroid.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-fingertips-and-fingerroots.html&quot;&gt;Find the positions (represented by degrees) of fingertips and fingerroots.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the direction of each fingers using the positions of fingertips and fingerroots, then find the accurate direction of hand using the directions of fingers.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Repeat step 4, 5. Now we've got the accurate positions (degrees) of the fingerroots.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Train the data using template images to get the locations of each finger, the recognition is performed by finding a combination of fingers that has the smallest Euclidean distance with the input hand.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html&quot;&gt;Find the contour points and connect them in a consecutive manner&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-centroid-of-the-hand-gestures.html&quot;&gt;Find the centroid of hand gesture using &lt;strong&gt;distance transform&lt;/strong&gt;.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the direction of the hand gesture using the relative positions of contour points (using just Step 1).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html&quot;&gt;Transform the hand contour (points above the centroid, which contribute more to the hand direction) into a &lt;em&gt;time-series curve&lt;/em&gt;.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/24/Find-the-fingertips-and-fingerroots.html&quot;&gt;Find the initial positions of the fingertips and fingerroots (using just Step 1).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/24/Find-the-fingertips-and-fingerroots.html&quot;&gt;Refine the positions of fingertips and fingerroots(using Step 2).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the accurate direction of the hand gesture using the directions of fingers(using Step 2).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;&quot;&gt;Recognition scheme 1: Use the positions of the fingertips and fingerroots for recognition.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;&quot;&gt;Recognition scheme 2: Transform the contour points into the time-series curve again and take samples. For each gesture, we can obtain a feature vector. Use Machine Learning algorithm to train the data for recognition.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
 
@@ -778,76 +923,6 @@ end
 &lt;p&gt;Please refer to a &lt;a href=&quot;wifi-interaction-system.html&quot;&gt;post&lt;/a&gt; for further details.&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://github.com/imkaywu/Clicker&quot;&gt;Android app&lt;/a&gt; &amp;sdot; &lt;a href=&quot;https://github.com/imkaywu/PC-program&quot;&gt;PC Program&lt;/a&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Wifi-based classroom interaction system</title>
-   <link href="http://lhzhang.com/2013/10/20/wifi-interaction-system.html"/>
-   <updated>2013-10-20T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/10/20/wifi-interaction-system</id>
-   <content type="html">&lt;p&gt;In traditional Chinese lectures, there is a long-lasting problem, that is the lack of interaction between lecturers and students. To address this issue, we intend to develop a system that can let students participate in, yet not so obstrusively, the lecture. In the meantime, lecturers can keep track of the performance of each student.&lt;/p&gt;
-
-&lt;h3&gt;Scenario 1:&lt;/h3&gt;
-
-&lt;p&gt;The lecturer has some multiple choice questions and display them using PPT. The student can send their answers using this app. Moreover, any change during a single session is valid, that means, if you want to change your answer, just select another one and send it, this new answer will automatically overwrite the previous one. After the lecturer close the histogram graph, the answers for this question will automatically saved in a text format as a record.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UI of the android app for scenario 1&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/clicker02.png&quot; alt=&quot;clicker02&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UI of the PC program for scenario 1&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/%E6%8A%95%E7%A5%A8%E6%97%B6%E8%B7%B3%E5%87%BA%E7%9A%84%E7%AA%97%E5%8F%A3.png&quot; alt=&quot;投票时跳出的窗口&quot; /&gt;&lt;/p&gt;
-
-&lt;h3&gt;Scenario 2&lt;/h3&gt;
-
-&lt;p&gt;Students may have many questions to ask, but due to the limited time during the lectures and the unwillingness of students to ask questions in public, we designed a text-message like function for the app. The student can type in whatever questions they have and send to the PC. The PC program will automatically store the questions and for the review of the lecturers after lectures.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UI of the android app for scenario 2&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/clicker03.png&quot; alt=&quot;clicker03&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UI of the PC program for scenario 2&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/%E6%8F%90%E9%97%AE%E6%98%BE%E7%A4%BA.png&quot; alt=&quot;提问显示&quot; /&gt;&lt;/p&gt;
-
-&lt;h3&gt;PC program UI&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Main UI&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/%E7%A8%8B%E5%BA%8F%E4%B8%BB%E7%95%8C%E9%9D%A2.png&quot; alt=&quot;程序主界面&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Answer distribution UI&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/%E9%A2%98%E7%9B%AE%E7%AD%94%E6%A1%88%E7%9A%84%E5%88%86%E5%B8%83.png&quot; alt=&quot;题目答案的分布&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Performance of Students&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/%E4%B8%8D%E5%90%8C%E9%A2%98%E7%9B%AE%E7%9A%84%E6%AD%A3%E8%AF%AF%E5%88%86%E5%B8%83.png&quot; alt=&quot;不同题目的正误分布&quot; /&gt;
-&lt;img src=&quot;/media/images/%E5%AD%A6%E7%94%9F%E7%9A%84%E7%AD%94%E9%A2%98%E8%A1%A8%E7%8E%B0.png&quot; alt=&quot;学生的答题表现&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Alert to the lecturer(when there are sufficient number of student can't follow the pace of the lecture)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/%E2%80%9C%E5%90%AC%E4%B8%8D%E6%87%82%E2%80%9D%E5%8A%9F%E8%83%BD.png&quot; alt=&quot;“听不懂”功能&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Presence rate&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/%E7%AD%BE%E5%88%B0%E5%8A%9F%E8%83%BD.png&quot; alt=&quot;签到功能&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Setting UI&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/%E8%AE%BE%E7%BD%AE%E7%95%8C%E9%9D%A2.png&quot; alt=&quot;设置界面&quot; /&gt;&lt;/p&gt;
-
-&lt;h3&gt;Android UI&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;Login UI&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/clicker01.png&quot; alt=&quot;clicker01&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;UI of Password Change&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/clicker07.png&quot; alt=&quot;clicker01&quot; /&gt;&lt;/p&gt;
 </content>
  </entry>
  

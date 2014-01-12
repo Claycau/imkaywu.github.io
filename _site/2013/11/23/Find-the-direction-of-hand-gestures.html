@@ -53,9 +53,7 @@
   
   </section>
   <section class="post">
-  <p>After detecting the contour of the hand gestures, we represent it as a <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html">time-series curce</a>, refer to <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html">this post</a> for more details.</p>
-
-<p>The <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html"><em>time-series curve</em></a> records the relative distance between each contour vertex to the centroid starting from the reference point. The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. So what we gonna do is finding this reference points and it has to be relatively fixed, otherwise the degree of the contour points may vary among different images. We choose to first detect the direction(also called orientation or slope) of the hand, then locate this reference point that is perpendicular to hand direction.</p>
+  <p>After detecting the contour of the hand gestures, we need to find the direction(also called as orientation or slope) of the hand in order to make the feature vector we extracted later be rotation invariant.</p>
 
 <h3>Step 1</h3>
 
@@ -147,9 +145,11 @@ end
 
 <h3>Step 2</h3>
 
-<p>This method mentioned above is not all that accurate, especially when the hands are tilted. So I came up with something more accurate. We assume that the direction of the hand can be presented by the overal direction of stretched fingers. So we first detect the directions of the fingers, then the direction of the hand. Besides, because it's intuitive that the contour points that are below the centroid actually contribute less to the direction of hand, and even worse have nothing to do with the direction(e.g. the contour points in the wrist). So I only use those above the centroid to calculate the directione.</p>
+<p>This method mentioned above is not all that accurate, especially when the hands are tilted. So I came up with something more accurate. We assume that the direction of the hand can be presented by the overall direction of the stretched fingers. So we first detect the directions of the fingers, then the direction of the hand. Besides, because it's intuitive that the contour points that are below the centroid actually contribute less to the direction of hand, and even worse have nothing to do with the direction(e.g. the contour points in the wrist). So I only use those above the centroid to calculate the directione.</p>
 
-<p>First, I need to find out the points that are above the centroid using the initial detected hand direction.</p>
+<blockquote><p>direction_hand = mean(direction_fingers);</p></blockquote>
+
+<p>First, I need to find out the points that are above the centroid which contribute more to hand direction with the aid of the initially detected hand direction.</p>
 
 <pre><code>function [start_index,end_index]=start_end_points(x_array,y_array,x_center,y_center,direction_angle)
     flag1=1;

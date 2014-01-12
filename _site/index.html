@@ -42,11 +42,11 @@
   
   <article class="content">
     <section class="title">
-      <h2><a href="/2013/11/23/Transform-to-time-series-curve.html">Transform to Time-series curve</a></h2>
+      <h2><a href="/2014/01/12/two-recognition-schemes.html">Two Recognition Schemes</a></h2>
     </section>
     <section class="meta">
     <span class="time">
-      <time datetime="2013-11-23">2013-11-23</time>
+      <time datetime="2014-01-12">2014-01-12</time>
     </span>
     
     <span class="tags">
@@ -57,7 +57,12 @@
     
     </section>
     <section class="post">
-    <p>After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a <em>time-series curve</em>. The <em>time-series curve</em> records the relative distance between each contour vertex to the centroid starting from the reference point(a relatively fixed point in hand gestures). The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.</p>
+    <h3>Scheme 1</h3>
+
+
+
+
+<p>After we obtain the accurate hand direction, we can find a relatively fixed reference point in the hand gesture. The reference point is chosen using the following rule. As is shown in the following image.</p>
 
 
     </section>
@@ -66,11 +71,11 @@
   
   <article class="content">
     <section class="title">
-      <h2><a href="/2013/11/23/Find-the-fingertips-and-fingerroots.html">Find the position of fingertips and fingervalleys</a></h2>
+      <h2><a href="/2013/11/24/Find-the-fingertips-and-fingerroots.html">Find the position of fingertips and fingervalleys</a></h2>
     </section>
     <section class="meta">
     <span class="time">
-      <time datetime="2013-11-23">2013-11-23</time>
+      <time datetime="2013-11-24">2013-11-24</time>
     </span>
     
     <span class="tags">
@@ -95,6 +100,30 @@
   
   <article class="content">
     <section class="title">
+      <h2><a href="/2013/11/23/Transform-to-time-series-curve.html">Transform to Time-series curve</a></h2>
+    </section>
+    <section class="meta">
+    <span class="time">
+      <time datetime="2013-11-23">2013-11-23</time>
+    </span>
+    
+    <span class="tags">
+      
+      <a href="/tags.html#Hand Gesture Recognition" title="Hand Gesture Recognition">#Hand Gesture Recognition</a>
+      
+    </span>
+    
+    </section>
+    <section class="post">
+    <p>After obtaining the contour vertex and the direction of hand, we can transform the contour vertex into a <em>time-series curve</em>. The <em>time-series curve</em> records the relative distance between each contour vertex to the centroid starting from the reference point(a relatively fixed point in hand gestures). The horizontal axis denotes the angle between each contour vertex and the reference point relative to the centroid, normalized by 360. The vertical axis denotes the Euclidean distance between the contour vertices and the centroid, normalized by the radius of the inscribed circle. Here is how it's done.</p>
+
+
+    </section>
+    </article>
+    <div class="divider"></div>
+  
+  <article class="content">
+    <section class="title">
       <h2><a href="/2013/11/23/Find-the-direction-of-hand-gestures.html">Find the direction of hand</a></h2>
     </section>
     <section class="meta">
@@ -110,7 +139,7 @@
     
     </section>
     <section class="post">
-    <p>After detecting the contour of the hand gestures, we represent it as a <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html">time-series curce</a>, refer to <a href="http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html">this post</a> for more details.</p>
+    <p>After detecting the contour of the hand gestures, we need to find the direction(also called as orientation or slope) of the hand in order to make the feature vector we extracted later be rotation invariant.</p>
 
 
     </section>
