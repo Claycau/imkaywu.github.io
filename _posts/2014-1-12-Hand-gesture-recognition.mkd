@@ -5,7 +5,7 @@ tags: [Hand Gesture Recognition]
 categories: blog
 ---
 
-This is a post that gives a brief description of the algorithm of hand gesture recognition that I developed. It serves as a reminder of what has been done and what remains to be done. You can download the codes in [Github](https://github.com/imkaywu/Gesture-Recognition).Let me introduce our algorithm step by step.
+This is a post that gives a brief description of the algorithm of hand gesture recognition that I developed. It serves as a reminder of what has been done and what remains to be done. You can download the codes in [Github](https://github.com/imkaywu/Gesture-Recognition-3), feel free to try out and change the code.Let me introduce our algorithm step by step.
 
 > 1. [Find the contour points and connect them in a consecutive manner](http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html).
 
@@ -25,4 +25,4 @@ This is a post that gives a brief description of the algorithm of hand gesture r
 
 > 8. [Recognition scheme 2: Transform the contour points into the time-series curve again and take samples. For each gesture, we can obtain a feature vector. Use Machine Learning algorithm to train the data for recognition.]()
 
-This is pretty much everything about our hand gesture recognition algorithm, and I'm sitll developing the part to recognize the fingerroots using more robust method, the code is available in [Github](https://github.com/imkaywu/Gesture-Recognition-1) too. For more details, please check the detailed posts.
+This is pretty much everything about our hand gesture recognition algorithm, the source code is constantly changing because I am still refining the algorithm. If you are interested, please go to my [Github page](https://github.com/imkaywu/) to download the [latest version](https://github.com/imkaywu/Gesture-Recognition-3).

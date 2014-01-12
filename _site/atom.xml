@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-12T20:18:38+08:00</updated>
+ <updated>2014-01-12T20:26:02+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -13,146 +13,26 @@
 
  
  <entry>
-   <title>Two Recognition Schemes</title>
-   <link href="http://lhzhang.com/2014/01/12/two-recognition-schemes.html"/>
+   <title>Hand Gesture Recognition</title>
+   <link href="http://lhzhang.com/2014/01/12/Hand-gesture-recognition.html"/>
    <updated>2014-01-12T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2014/01/12/two-recognition-schemes</id>
-   <content type="html">&lt;h3&gt;Scheme 1&lt;/h3&gt;
+   <id>http://lhzhang.com/2014/01/12/Hand-gesture-recognition</id>
+   <content type="html">&lt;p&gt;This is a post that gives a brief description of the algorithm of hand gesture recognition that I developed. It serves as a reminder of what has been done and what remains to be done. You can download the codes in &lt;a href=&quot;https://github.com/imkaywu/Gesture-Recognition-3&quot;&gt;Github&lt;/a&gt;, feel free to try out and change the code.Let me introduce our algorithm step by step.&lt;/p&gt;
 
-&lt;p&gt;After we obtain the accurate hand direction, we can find a relatively fixed reference point in the hand gesture. The reference point is chosen using the following rule. As is shown in the following image.&lt;/p&gt;
+&lt;blockquote&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html&quot;&gt;Find the contour points and connect them in a consecutive manner&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-centroid-of-the-hand-gestures.html&quot;&gt;Find the centroid of hand gesture using &lt;strong&gt;distance transform&lt;/strong&gt;.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the direction of the hand gesture using the relative positions of contour points (using just Step 1).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html&quot;&gt;Transform the hand contour (points above the centroid, which contribute more to the hand direction) into a &lt;em&gt;time-series curve&lt;/em&gt;.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/24/Find-the-fingertips-and-fingerroots.html&quot;&gt;Find the initial positions of the fingertips and fingerroots (using just Step 1).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/24/Find-the-fingertips-and-fingerroots.html&quot;&gt;Refine the positions of fingertips and fingerroots(using Step 2).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the accurate direction of the hand gesture using the directions of fingers(using Step 2).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;&quot;&gt;Recognition scheme 1: Use the positions of the fingertips and fingerroots for recognition.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;&quot;&gt;Recognition scheme 2: Transform the contour points into the time-series curve again and take samples. For each gesture, we can obtain a feature vector. Use Machine Learning algorithm to train the data for recognition.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 
-&lt;blockquote&gt;&lt;p&gt;The line crosses the reference point and the centroid is perpendicular to the hand direction.&lt;/p&gt;&lt;/blockquote&gt;
-
-&lt;p&gt;Then we can calculate the degree between the fingertips (or fingerroots) and the reference point. Because the hand direction is rotation invariant and the reference point is relatively fixed, this should suffice to recognition the gestures.&lt;/p&gt;
-
-&lt;h3&gt;Scheme 2&lt;/h3&gt;
-
-&lt;p&gt;We transform the contour points above the centroid into a time-series curve again. Now this time, we don't need to find the fingertips and fingerroots, we take samples in this curve. Because the time-series is the description of the hand profile, this extracted samples also serve as a coarse description of the hand profile. See the following two images.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Samples in the original image&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/sample_original.png&quot; alt=&quot;Samples in the original image&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Samples in the time-series curve&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/sample_time_series.png&quot; alt=&quot;edge_finder_unmodified&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We then use machine learning algorithm(Logistic Regression) to train the data for recognition. The source code is as follows&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function  result_table = main_logistic_regression_hand
-    times = 1;
-    result_table = 0;
-    for ii = 1 : times
-        [ result_table_temp , theta ]= logistic_regression_hand;
-        result_table = result_table + result_table_temp;
-        save( strcat('theta',num2str(ii),'.mat'),'theta');
-    end
-    result_table = result_table / times;
-end
-
-function [ result_table , theta ] = logistic_regression_hand
-    %% Read in data &amp;amp; select data
-    str = 'data\Test data\gesture';
-    file_index = 2 : 14;
-    [ x_all , groung_truth_gesture_index_all , same_gesture_number_all ] = read_in_distance_sample_map_data( str , file_index );
-    [ y , train_set , test_set , test_index ] = data_select( x_all , same_gesture_number_all , 0.8 , 'random_on'  );
-    %% Traing
-    theta = zeros( size( y , 2 ) , size( train_set , 2 ) );%theta(number of gestures, number of features)
-    for kk = 1 : size( y , 2 )
-        theta(kk,:) = Logistic_Regression_Gradient_Descent_Hand( y( : , kk ) , train_set);
-    end
-    %% Result
-    test_gesture_index = groung_truth_gesture_index_all( test_index );
-    test_gesture_number = zeros( length( same_gesture_number_all ) , 1 );
-    init_gesture = [ 1 , 1 , 1 , 4 , 4 , 4 , 4 , 8 , 8 , 8 , 8 , 12 , 13 ];
-    recognized_gesture_index = zeros( length( test_gesture_index ) ,1 );
-    result_table = zeros( length( same_gesture_number_all ) , length( same_gesture_number_all ) );
-    result = test_set * ( theta' );
-    for ii = 1 : length( same_gesture_number_all )
-        test_gesture_number( ii ) = sum( test_gesture_index == ii );
-    end
-    for ii = 1 : length( same_gesture_number_all )
-        [ maxVal , maxInd ] = max( result( sum( test_gesture_number( 1 : ii-1 ) ) + 1 : sum( test_gesture_number( 1 : ii ) ) , init_gesture == init_gesture( ii ) ) , [] , 2 );
-        recognized_gesture_index( sum( test_gesture_number( 1 : ii-1 ) ) + 1 : sum( test_gesture_number( 1 : ii ) ) ) = maxInd + init_gesture( ii ) - 1;
-    end
-
-    for ii = 1 : length( recognized_gesture_index )
-        result_table( recognized_gesture_index(ii) , test_gesture_index( ii ) ) = result_table( recognized_gesture_index(ii) , test_gesture_index( ii ) ) + 1;
-    end
-    for ii = 1 : length( same_gesture_number_all )
-        result_table( : , ii ) = result_table( : , ii ) ./ sum( test_gesture_number( ii ) );
-    end
-end
-%% Logistic Regression and Gradient Descent
-function theta = Logistic_Regression_Gradient_Descent_Hand( y , x )
-    epsilon = 1e-5;
-    num_feature = size( x , 2 );
-    theta = zeros( 1 , num_feature );
-    jVal = 0;
-    jVal_old = 100 * epsilon;
-    while( abs( jVal_old - jVal ) &amp;gt;= epsilon )
-        jVal_old = jVal;
-        theta = Gradient_Descent_hand( y , x , theta );
-        jVal = y .* log( h_theta( x , theta) )+ ( 1 - y ) .* log( 1 - h_theta( x , theta) );
-        jVal = sum( jVal );
-    end
-end
-
-function theta = Gradient_Descent_hand( y , x , theta )
-    num_feature = size( x , 2 );
-    alpha = 0.001;
-    tempVal1 = y - h_theta( x , theta );
-    tempVal2 = repmat( tempVal1 ,1 , num_feature );
-    tempVal3 = tempVal2 .* x;
-    tempVal4 = sum( tempVal3 );
-    theta = theta + alpha * tempVal4;
-end
-
-function hVal = h_theta( x , theta)
-    hVal = 1 ./ ( 1 + exp( - x * theta' ) );
-end
-%% Read in the data of each type of gesture
-function [ x , gesture_index , same_gesture_number ] = read_in_distance_sample_map_data( str , file_index )
-    x = []; gesture_index = []; same_gesture_number = [];
-    new_gesture_index_num = 1;
-    for ii = file_index
-        load( strcat( str , num2str(ii) , '_test_data') );
-        m = size(distance_sample_map,1);
-        same_gesture_number = [ same_gesture_number ; m ];
-        gesture_index = [ gesture_index ; new_gesture_index_num*ones(m,1)];
-        new_gesture_index_num = new_gesture_index_num + 1;
-        x = [ x ; distance_sample_map ]; 
-    end
-    clear ii jj m;
-end
-%% Select the training set and test set, store separately in x and z; x_all is the gesture set, gesture_number_all is the number of each gesture type, percent is the percentage of training set, CW_random=='random_on' means select the training set randomly.
-function [ y , x , z ,index ] = data_select( x_all , gesture_number_all , percent , CW_random )
-    dif_gesture_num = size( gesture_number_all , 1 );%Size of each gesture
-    feature_num = size( x_all , 2 );
-    selected_same_gesture_num = floor( percent * gesture_number_all );%Size of each gesture in the training set
-    unselected_same_gesture_num = gesture_number_all - selected_same_gesture_num;%Size of each gesture in the test set
-
-    y = zeros( sum( selected_same_gesture_num ) , dif_gesture_num );
-    x = zeros( sum( selected_same_gesture_num ) , feature_num );
-    index = zeros( sum( unselected_same_gesture_num ) , 1 );
-
-    for ii = 1 : dif_gesture_num
-        if strcmp( CW_random , 'random_on' )
-            index_all_random = randperm( gesture_number_all(ii) );
-            index_select = index_all_random( 1 : selected_same_gesture_num(ii) );
-            index_unselect = index_all_random( selected_same_gesture_num(ii)+1 : end );
-        else
-            index_select = 1 : selected_same_gesture_num(ii);
-            index_unselect = selected_same_gesture_num(ii)+1 : gesture_number_all(ii);
-        end
-
-        x( sum( selected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( selected_same_gesture_num( 1 : ii  ) ) , : ) = x_all( sum( gesture_number_all( 1 : ii -1 ) ) +  index_select , : );
-        y( sum( selected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( selected_same_gesture_num( 1 : ii  ) ) , ii ) = 1;
-        index( sum( unselected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( unselected_same_gesture_num( 1 : ii ) ) ) = sum( gesture_number_all( 1 : ii -1 ) ) + index_unselect;
-    end
-    z = x_all( index , : );
-end
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This is pretty much everything about our hand gesture recognition algorithm, the source code is constantly changing because I am still refining the algorithm. If you are interested, please go to my &lt;a href=&quot;https://github.com/imkaywu/&quot;&gt;Github page&lt;/a&gt; to download the &lt;a href=&quot;https://github.com/imkaywu/Gesture-Recognition-3&quot;&gt;latest version&lt;/a&gt;.&lt;/p&gt;
 </content>
  </entry>
  
@@ -439,6 +319,150 @@ for i=1:fingertip_length
             break;
         end
     end
+end
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Two Recognition Schemes</title>
+   <link href="http://lhzhang.com/2013/11/23/two-recognition-schemes.html"/>
+   <updated>2013-11-23T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/11/23/two-recognition-schemes</id>
+   <content type="html">&lt;h3&gt;Scheme 1&lt;/h3&gt;
+
+&lt;p&gt;After we obtain the accurate hand direction, we can find a relatively fixed reference point in the hand gesture. The reference point is chosen using the following rule. As is shown in the following image.&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;The line crosses the reference point and the centroid is perpendicular to the hand direction.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;Then we can calculate the degree between the fingertips (or fingerroots) and the reference point. Because the hand direction is rotation invariant and the reference point is relatively fixed, this should suffice to recognition the gestures.&lt;/p&gt;
+
+&lt;h3&gt;Scheme 2&lt;/h3&gt;
+
+&lt;p&gt;We transform the contour points above the centroid into a time-series curve again. Now this time, we don't need to find the fingertips and fingerroots, we take samples in this curve. Because the time-series is the description of the hand profile, this extracted samples also serve as a coarse description of the hand profile. See the following two images.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Samples in the original image&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/sample_original.png&quot; alt=&quot;Samples in the original image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Samples in the time-series curve&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/sample_time_series.png&quot; alt=&quot;edge_finder_unmodified&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We then use machine learning algorithm(Logistic Regression) to train the data for recognition. The source code is as follows&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function  result_table = main_logistic_regression_hand
+    times = 1;
+    result_table = 0;
+    for ii = 1 : times
+        [ result_table_temp , theta ]= logistic_regression_hand;
+        result_table = result_table + result_table_temp;
+        save( strcat('theta',num2str(ii),'.mat'),'theta');
+    end
+    result_table = result_table / times;
+end
+
+function [ result_table , theta ] = logistic_regression_hand
+    %% Read in data &amp;amp; select data
+    str = 'data\Test data\gesture';
+    file_index = 2 : 14;
+    [ x_all , groung_truth_gesture_index_all , same_gesture_number_all ] = read_in_distance_sample_map_data( str , file_index );
+    [ y , train_set , test_set , test_index ] = data_select( x_all , same_gesture_number_all , 0.8 , 'random_on'  );
+    %% Traing
+    theta = zeros( size( y , 2 ) , size( train_set , 2 ) );%theta(number of gestures, number of features)
+    for kk = 1 : size( y , 2 )
+        theta(kk,:) = Logistic_Regression_Gradient_Descent_Hand( y( : , kk ) , train_set);
+    end
+    %% Result
+    test_gesture_index = groung_truth_gesture_index_all( test_index );
+    test_gesture_number = zeros( length( same_gesture_number_all ) , 1 );
+    init_gesture = [ 1 , 1 , 1 , 4 , 4 , 4 , 4 , 8 , 8 , 8 , 8 , 12 , 13 ];
+    recognized_gesture_index = zeros( length( test_gesture_index ) ,1 );
+    result_table = zeros( length( same_gesture_number_all ) , length( same_gesture_number_all ) );
+    result = test_set * ( theta' );
+    for ii = 1 : length( same_gesture_number_all )
+        test_gesture_number( ii ) = sum( test_gesture_index == ii );
+    end
+    for ii = 1 : length( same_gesture_number_all )
+        [ maxVal , maxInd ] = max( result( sum( test_gesture_number( 1 : ii-1 ) ) + 1 : sum( test_gesture_number( 1 : ii ) ) , init_gesture == init_gesture( ii ) ) , [] , 2 );
+        recognized_gesture_index( sum( test_gesture_number( 1 : ii-1 ) ) + 1 : sum( test_gesture_number( 1 : ii ) ) ) = maxInd + init_gesture( ii ) - 1;
+    end
+
+    for ii = 1 : length( recognized_gesture_index )
+        result_table( recognized_gesture_index(ii) , test_gesture_index( ii ) ) = result_table( recognized_gesture_index(ii) , test_gesture_index( ii ) ) + 1;
+    end
+    for ii = 1 : length( same_gesture_number_all )
+        result_table( : , ii ) = result_table( : , ii ) ./ sum( test_gesture_number( ii ) );
+    end
+end
+%% Logistic Regression and Gradient Descent
+function theta = Logistic_Regression_Gradient_Descent_Hand( y , x )
+    epsilon = 1e-5;
+    num_feature = size( x , 2 );
+    theta = zeros( 1 , num_feature );
+    jVal = 0;
+    jVal_old = 100 * epsilon;
+    while( abs( jVal_old - jVal ) &amp;gt;= epsilon )
+        jVal_old = jVal;
+        theta = Gradient_Descent_hand( y , x , theta );
+        jVal = y .* log( h_theta( x , theta) )+ ( 1 - y ) .* log( 1 - h_theta( x , theta) );
+        jVal = sum( jVal );
+    end
+end
+
+function theta = Gradient_Descent_hand( y , x , theta )
+    num_feature = size( x , 2 );
+    alpha = 0.001;
+    tempVal1 = y - h_theta( x , theta );
+    tempVal2 = repmat( tempVal1 ,1 , num_feature );
+    tempVal3 = tempVal2 .* x;
+    tempVal4 = sum( tempVal3 );
+    theta = theta + alpha * tempVal4;
+end
+
+function hVal = h_theta( x , theta)
+    hVal = 1 ./ ( 1 + exp( - x * theta' ) );
+end
+%% Read in the data of each type of gesture
+function [ x , gesture_index , same_gesture_number ] = read_in_distance_sample_map_data( str , file_index )
+    x = []; gesture_index = []; same_gesture_number = [];
+    new_gesture_index_num = 1;
+    for ii = file_index
+        load( strcat( str , num2str(ii) , '_test_data') );
+        m = size(distance_sample_map,1);
+        same_gesture_number = [ same_gesture_number ; m ];
+        gesture_index = [ gesture_index ; new_gesture_index_num*ones(m,1)];
+        new_gesture_index_num = new_gesture_index_num + 1;
+        x = [ x ; distance_sample_map ]; 
+    end
+    clear ii jj m;
+end
+%% Select the training set and test set, store separately in x and z; x_all is the gesture set, gesture_number_all is the number of each gesture type, percent is the percentage of training set, CW_random=='random_on' means select the training set randomly.
+function [ y , x , z ,index ] = data_select( x_all , gesture_number_all , percent , CW_random )
+    dif_gesture_num = size( gesture_number_all , 1 );%Size of each gesture
+    feature_num = size( x_all , 2 );
+    selected_same_gesture_num = floor( percent * gesture_number_all );%Size of each gesture in the training set
+    unselected_same_gesture_num = gesture_number_all - selected_same_gesture_num;%Size of each gesture in the test set
+
+    y = zeros( sum( selected_same_gesture_num ) , dif_gesture_num );
+    x = zeros( sum( selected_same_gesture_num ) , feature_num );
+    index = zeros( sum( unselected_same_gesture_num ) , 1 );
+
+    for ii = 1 : dif_gesture_num
+        if strcmp( CW_random , 'random_on' )
+            index_all_random = randperm( gesture_number_all(ii) );
+            index_select = index_all_random( 1 : selected_same_gesture_num(ii) );
+            index_unselect = index_all_random( selected_same_gesture_num(ii)+1 : end );
+        else
+            index_select = 1 : selected_same_gesture_num(ii);
+            index_unselect = selected_same_gesture_num(ii)+1 : gesture_number_all(ii);
+        end
+
+        x( sum( selected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( selected_same_gesture_num( 1 : ii  ) ) , : ) = x_all( sum( gesture_number_all( 1 : ii -1 ) ) +  index_select , : );
+        y( sum( selected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( selected_same_gesture_num( 1 : ii  ) ) , ii ) = 1;
+        index( sum( unselected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( unselected_same_gesture_num( 1 : ii ) ) ) = sum( gesture_number_all( 1 : ii -1 ) ) + index_unselect;
+    end
+    z = x_all( index , : );
 end
 &lt;/code&gt;&lt;/pre&gt;
 </content>
@@ -854,30 +878,6 @@ end
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;After testing on more than 600+ images we decide to choose the latter method.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Hand Gesture Recognition</title>
-   <link href="http://lhzhang.com/2013/11/22/Hand-gesture-recognition.html"/>
-   <updated>2013-11-22T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/22/Hand-gesture-recognition</id>
-   <content type="html">&lt;p&gt;This is a post that gives a brief description of the algorithm of hand gesture recognition that I developed. It serves as a reminder of what has been done and what remains to be done. You can download the codes in &lt;a href=&quot;https://github.com/imkaywu/Gesture-Recognition&quot;&gt;Github&lt;/a&gt;.Let me introduce our algorithm step by step.&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html&quot;&gt;Find the contour points and connect them in a consecutive manner&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-centroid-of-the-hand-gestures.html&quot;&gt;Find the centroid of hand gesture using &lt;strong&gt;distance transform&lt;/strong&gt;.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the direction of the hand gesture using the relative positions of contour points (using just Step 1).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html&quot;&gt;Transform the hand contour (points above the centroid, which contribute more to the hand direction) into a &lt;em&gt;time-series curve&lt;/em&gt;.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/24/Find-the-fingertips-and-fingerroots.html&quot;&gt;Find the initial positions of the fingertips and fingerroots (using just Step 1).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/24/Find-the-fingertips-and-fingerroots.html&quot;&gt;Refine the positions of fingertips and fingerroots(using Step 2).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the accurate direction of the hand gesture using the directions of fingers(using Step 2).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;&quot;&gt;Recognition scheme 1: Use the positions of the fingertips and fingerroots for recognition.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;&quot;&gt;Recognition scheme 2: Transform the contour points into the time-series curve again and take samples. For each gesture, we can obtain a feature vector. Use Machine Learning algorithm to train the data for recognition.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This is pretty much everything about our hand gesture recognition algorithm, and I'm sitll developing the part to recognize the fingerroots using more robust method, the code is available in &lt;a href=&quot;https://github.com/imkaywu/Gesture-Recognition-1&quot;&gt;Github&lt;/a&gt; too. For more details, please check the detailed posts.&lt;/p&gt;
 </content>
  </entry>
  
