@@ -17,4 +17,4 @@ c.层次支持向量机（H-SVMs）。层次分类法首先将所有类别分成
 
 d.其他多类分类方法。除了以上几种方法外，还有有向无环图SVM（Directed Acyclic Graph SVMs，简称DAG-SVMs）和对类别进行二进制编码的纠错编码SVMs。
 
-原[博客文章](blog.csdn.net/lanseliuying/article/details/1768995)
+原[博客文章](http://blog.csdn.net/lanseliuying/article/details/1768995)
