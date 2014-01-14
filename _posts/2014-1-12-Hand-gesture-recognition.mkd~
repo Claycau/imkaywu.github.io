@@ -21,8 +21,8 @@ This is a post that gives a brief description of the algorithm of hand gesture r
 
 > 7. [Find the accurate direction of the hand gesture using the directions of fingers(using Step 2).](http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html)
 
-> 7. [Recognition scheme 1: Use the positions of the fingertips and fingerroots for recognition.]()
+> 7. [Recognition scheme 1: Use the positions of the fingertips and fingerroots for recognition.](http://imkaywu.com/2013/11/23/two-recognition-schemes.html)
 
-> 8. [Recognition scheme 2: Transform the contour points into the time-series curve again and take samples. For each gesture, we can obtain a feature vector. Use Machine Learning algorithm to train the data for recognition.]()
+> 8. [Recognition scheme 2: Transform the contour points into the time-series curve again and take samples. For each gesture, we can obtain a feature vector. Use Machine Learning algorithm to train the data for recognition.](http://imkaywu.com/2013/11/23/two-recognition-schemes.html)
 
 This is pretty much everything about our hand gesture recognition algorithm, the source code is constantly changing because I am still refining the algorithm. If you are interested, please go to my [Github page](https://github.com/imkaywu/) to download the [latest version](https://github.com/imkaywu/Gesture-Recognition-3).

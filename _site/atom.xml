@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-14T21:09:26+08:00</updated>
+ <updated>2014-01-14T21:45:16+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -32,7 +32,7 @@
 &lt;/ol&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;This is pretty much everything about our hand gesture recognition algorithm, the source code is constantly changing because I am still refining the algorithm. If you are interested, please go to my &lt;a href=&quot;https://github.com/imkaywu/&quot;&gt;Github page&lt;/a&gt; to download the &lt;a href=&quot;https://github.com/imkaywu/Gesture-Recognition-3&quot;&gt;latest version&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This is pretty much everything about our hand gesture recognition algorithm, the source code is constantly changing because I am still refining the algorithm. If you are interested, please go to my &lt;a href=&quot;https://github.com/imkaywu/&quot;&gt;Github page&lt;/a&gt; to download the &lt;a href=&quot;https://github.com/imkaywu/Gesture-Recognition-SVM&quot;&gt;latest version&lt;/a&gt;.&lt;/p&gt;
 </content>
  </entry>
  
