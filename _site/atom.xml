@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-14T20:58:28+08:00</updated>
+ <updated>2014-01-14T21:00:29+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -346,10 +346,10 @@ end
  </entry>
  
  <entry>
-   <title>LibSVP简介和安装使用</title>
-   <link href="http://lhzhang.com/2014/01/10/LibSVM.html"/>
+   <title>LIBSVP简介和安装使用</title>
+   <link href="http://lhzhang.com/2014/01/10/LIBSVM.html"/>
    <updated>2014-01-10T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2014/01/10/LibSVM</id>
+   <id>http://lhzhang.com/2014/01/10/LIBSVM</id>
    <content type="html">&lt;h2&gt;简介&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;(http://www.csie.ntu.edu.tw/~cjlin/libsvm/&quot;&gt;LIBSVM&lt;/a&gt;)是台湾大学林智仁教授等研究人员开发的一个用于支持向量机分类，回归分析及分布估计的c/c++开源库。另外，它也可以用于解决多类分类问题。LIBSVM的主要特点有：&lt;/p&gt;
