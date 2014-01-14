@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Linghua Zhang" />
+    
+    <title>SVM多分类的方法 (转载)</title>
+    
+    <link rel="shortcut icon" href="/media/favicon.ico">
+    <link rel="stylesheet" type=text/css href="/media/css/style.css">
+    <link rel="stylesheet" type=text/css href="/media/css/github.css">
+	<link rel="stylesheet" href="/media/css/font-awesome.min.css">
+	<link href="/atom.xml" rel="alternate" title="The Journey Is the Reward" type="application/atom+xml" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/media/css/fontawesome-ie7.css">
+    <![endif]-->
+    <script type="text/javascript" src="/media/js/highlight.pack.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="The Journey Is the Reward" class="" href="/">The Journey Is the Reward</a></h1>
+          </div>
+          <nav>
+			<span><a title="About" class="icon-user" href="/about.html"></a></span>
+			<span><a title="Resume" class="icon-list-ol" href="/Curriculum_Vitae.pdf"></a></span>
+			<span><a title="Publication" class="icon-book" href="/publication.html"></a></span>
+            <span><a title="Archive" class="icon-cloud" href="/archive.html"></a></span>
+            <span><a title="Tags" class="icon-tags" href="/tags.html"></a></span>
+            <span><a title="Projects" class="icon-film" href="/projects.html"></a></span>
+            <span><a title="Subscribe" class="icon-rss" href="/atom.xml"></a></span>
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>SVM多分类的方法 (转载) </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2014-01-14">2014-01-14</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#SVM" title="SVM">#SVM</a>
+    
+    <a href="/tags.html#Machine Learning" title="Machine Learning">#Machine Learning</a>
+    
+  </span>
+  
+  </section>
+  <section class="post">
+  <p>SVM算法最初是为二值分类问题设计的，当处理多类问题时，就需要构造合适的多类分类器。目前，构造SVM多类分类器的方法主要有两类：一类是直接法，直接在目标函数上进行修改，将多个分类面的参数求解合并到一个最优化问题中，通过求解该最优化问题“一次性”实现多类分类。这种方法看似简单，但其计算复杂度比较高，实现起来比较困难，只适合用于小型问题中；另一类是间接法，主要是通过组合多个二分类器来实现多分类器的构造，常见的方法有one-against-one和one-against-all两种。</p>
+
+<p>a.一对多法（one-versus-rest,简称1-v-r SVMs）。训练时依次把某个类别的样本归为一类,其他剩余的样本归为另一类，这样k个类别的样本就构造出了k个SVM。分类时将未知样本分类为具有最大分类函数值的那类。</p>
+
+<p>b.一对一法（one-versus-one,简称1-v-1 SVMs）。其做法是在任意两类样本之间设计一个SVM，因此k个类别的样本就需要设计k(k-1)/2个SVM。当对一个未知样本进行分类时，最后得票最多的类别即为该未知样本的类别。Libsvm中的多类分类就是根据这个方法实现的。</p>
+
+<p>c.层次支持向量机（H-SVMs）。层次分类法首先将所有类别分成两个子类，再将子类进一步划分成两个次级子类，如此循环，直到得到一个单独的类别为止。</p>
+
+<p>对c和d两种方法的详细说明可以参考论文《支持向量机在多类分类问题中的推广》（计算机工程与应用。2004）</p>
+
+<p>d.其他多类分类方法。除了以上几种方法外，还有有向无环图SVM（Directed Acyclic Graph SVMs，简称DAG-SVMs）和对类别进行二进制编码的纠错编码SVMs。</p>
+
+<p>原<a href="blog.csdn.net/lanseliuying/article/details/1768995">博客文章</a></p>
+
+  </section>
+  <div style='height:1px;background-color:#C3C3C3;line-height:1px;clear:both;display:block;overflow:hidden'> </div>
+  <br>
+  <!--codes for Disqus-->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'kaystechblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <!--end of code-->
+</article>
+
+        </div>
+        <footer>
+          <div>
+            &copy; 2013 Kay | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/imkaywu/imkaywu.github.io" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+  </body>
+</html>
