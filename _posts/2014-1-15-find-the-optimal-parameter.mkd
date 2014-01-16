@@ -13,7 +13,7 @@ categories: blog
 
 ###Code:
 
-寻找最优化参数的函数：
+寻找最优化参数的函数(implemented using 10-fold cross-validation)：
 
 	function [bestacc,bestc,bestg] = SVMcg(train_label,train,cmin,cmax,gmin,gmax,v,cstep,gstep,accstep)
 	    % train_label:训练集标签.要求与libsvm工具箱中要求一致.

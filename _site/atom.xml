@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-16T22:29:19+08:00</updated>
+ <updated>2014-01-16T22:31:25+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -94,7 +94,7 @@
 
 &lt;h3&gt;Code:&lt;/h3&gt;
 
-&lt;p&gt;寻找最优化参数的函数：&lt;/p&gt;
+&lt;p&gt;寻找最优化参数的函数(implemented using 10-fold cross-validation)：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;function [bestacc,bestc,bestg] = SVMcg(train_label,train,cmin,cmax,gmin,gmax,v,cstep,gstep,accstep)
     % train_label:训练集标签.要求与libsvm工具箱中要求一致.
