@@ -33,4 +33,4 @@ Leave-one-out cross-validation (LOOCV) involves using a single observation from 
 
 ## An implementation of cross-validation to find the optimal parameters for LIBSVM.
 
-This source code is in [another post](http://imkaywu.com/2014/01/15/find-the-optimal-parameter.html), go check it out.
+The artical and source code are in [another post](http://imkaywu.com/2014/01/15/find-the-optimal-parameter.html), go check it out.
