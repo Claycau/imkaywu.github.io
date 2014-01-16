@@ -23,6 +23,7 @@ We transform the contour points above the centroid into a time-series curve agai
 
 ![edge_finder_unmodified](/media/images/sample_time_series.png)
 
+####Logistic Regression
 We then use machine learning algorithm(Logistic Regression) to train the data for recognition. The source code is as follows
 
 	function  result_table = main_logistic_regression_hand
@@ -138,3 +139,112 @@ We then use machine learning algorithm(Logistic Regression) to train the data fo
 		end
 		z = x_all( index , : );
 	end
+
+####Support Vector Machine
+I recently turned to SVM and thanks to the open code provided by LIBSVM, I implemented the recognition algorithm with quite convience and it achieves much better recognition  results. I used one-versus-one multi-class SVM.
+
+	% one-versus-one
+	function [ accuracy_train , accuracy_test ] = main_svm_classifier_v3
+		tic;
+		train_prct = 0.9;
+		count = 20;
+		accuracy_train = zeros( 13 );
+		accuracy_test = zeros( 13 );
+		for i = 1 : count
+		    [ accuracy_train_temp , accuracy_test_temp ] = svm_classifier;
+		    accuracy_train = accuracy_train + accuracy_train_temp;
+		    accuracy_test = accuracy_test + accuracy_test_temp;
+		end
+		accuracy_train = accuracy_train / count;
+		accuracy_test = accuracy_test / count;
+		cd data\Train' data'\accuracy;
+		save( strcat('accuracy_train',num2str(train_prct),'.mat'),'accuracy_train');
+		save( strcat('accuracy_test',num2str(train_prct),'.mat'),'accuracy_test');
+		toc;
+	end
+	function [ accuracy_train , accuracy_test ] = svm_classifier
+		%% Read in data and choose the training set
+		str = 'data\Test data\gesture';
+		train_prct = 0.8;
+		file_index = 2 : 14;
+		[ x_all , ground_truth_gesture_index_all , same_gesture_number_all ] = read_in_distance_sample_map_data( str , file_index );
+		[ y , train_set , test_set , test_index ] = data_select( x_all , same_gesture_number_all , train_prct , 'random_on' );
+		%% Training
+		num_gesture_type = size( same_gesture_number_all , 1 );
+		input_feature=zeros( size( y , 1 ) , 1 );
+		for i = 1 : num_gesture_type
+		    input_feature( y( : , i ) == 1 ) = i;
+		end
+		cd 'E:\Program Files\MATLAB\R2010b\toolbox\libsvm-3.17\matlab';
+		[ bestacc , bestc , bestg ] = SVMcg( input_feature , train_set );
+		cmd = [ '-c ' , num2str(bestc) , ' -g ' , num2str(bestg) ];
+		model = svmtrain( input_feature , train_set , cmd );
+		%% Test
+		accuracy_train = zeros( num_gesture_type );
+		accuracy_test = zeros( num_gesture_type );
+		test_set_index = ground_truth_gesture_index_all( test_index );
+		% Predict the training set
+		cd 'E:\Program Files\MATLAB\R2010b\toolbox\libsvm-3.17\matlab';
+		[ predict_label , accuracy_rate , prob_estimates ] = svmpredict( input_feature , train_set , model , '-q' );
+		cd 'E:\Document\Goer\Essay\清华\Kay''s code';
+		for i = 1 : size( input_feature , 1 )
+		    accuracy_train( predict_label( i ) , input_feature( i ) ) = accuracy_train( predict_label( i ) , input_feature( i ) ) + 1;
+		end
+		for i = 1 : num_gesture_type
+		    accuracy_train( : , i ) = accuracy_train( : , i ) / sum( accuracy_train( : , i ) );
+		end
+		
+		% Predict the test set
+		cd 'E:\Program Files\MATLAB\R2010b\toolbox\libsvm-3.17\matlab';
+		[ predict_label , accuracy_rate , prob_estimates ] = svmpredict( test_set_index , test_set , model , '-q' );
+		cd 'E:\Document\Goer\Essay\清华\Kay''s code';
+		for i = 1 : size( test_set_index , 1 )
+		    accuracy_test( predict_label( i ) , test_set_index( i ) ) = accuracy_test( predict_label( i ) , test_set_index( i ) ) + 1;
+		end
+		for i = 1 : num_gesture_type
+		    accuracy_test( : , i ) = accuracy_test( : , i ) / sum( accuracy_test( : , i ) );
+		end
+	end
+
+	%% Read in the data of each type of gesture
+	function [ x , gesture_index , same_gesture_number ] = read_in_distance_sample_map_data( str , file_index )
+		x = []; gesture_index = []; same_gesture_number = [];
+		new_gesture_index_num = 1;
+		for ii = file_index
+		    load( strcat( str , num2str(ii) , '_test_data') );
+		    m = size(distance_sample_map,1);
+		    same_gesture_number = [ same_gesture_number ; m ];
+		    gesture_index = [ gesture_index ; new_gesture_index_num*ones(m,1)];
+		    new_gesture_index_num = new_gesture_index_num + 1;
+		    x = [ x ; distance_sample_map ];
+		end
+		clear ii jj m;
+	end
+	%% Select the training set and test set, store separately in x and z; x_all is the gesture set, gesture_number_all is the number of each gesture type, percent is the percentage of training set, CW_random=='random_on' means select the training set randomly.
+	function [ y , x , z ,index ] = data_select( x_all , gesture_number_all , percent , CW_random )
+		dif_gesture_num = size( gesture_number_all , 1 );%Size of each gesture
+		feature_num = size( x_all , 2 );
+		selected_same_gesture_num = floor( percent * gesture_number_all );%Size of each gesture in the training set
+		unselected_same_gesture_num = gesture_number_all - selected_same_gesture_num;%Size of each gesture in the test set
+		
+		y = zeros( sum( selected_same_gesture_num ) , dif_gesture_num );
+		x = zeros( sum( selected_same_gesture_num ) , feature_num );
+		index = zeros( sum( unselected_same_gesture_num ) , 1 );
+		
+		for ii = 1 : dif_gesture_num
+		    if strcmp( CW_random , 'random_on' )
+		        index_all_random = randperm( gesture_number_all(ii) );
+		        index_select = index_all_random( 1 : selected_same_gesture_num(ii) );
+		        index_unselect = index_all_random( selected_same_gesture_num(ii)+1 : end );
+		    else
+		        index_select = 1 : selected_same_gesture_num(ii);
+		        index_unselect = selected_same_gesture_num(ii)+1 : gesture_number_all(ii);
+		    end
+		    
+		    x( sum( selected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( selected_same_gesture_num( 1 : ii  ) ) , : ) = x_all( sum( gesture_number_all( 1 : ii -1 ) ) +  index_select , : );
+		    y( sum( selected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( selected_same_gesture_num( 1 : ii  ) ) , ii ) = 1;
+		    index( sum( unselected_same_gesture_num( 1 : ii -1 ) ) + 1 : sum( unselected_same_gesture_num( 1 : ii ) ) ) = sum( gesture_number_all( 1 : ii -1 ) ) + index_unselect;
+		end
+		z = x_all( index , : );
+	end
+
