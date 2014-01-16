@@ -42,7 +42,7 @@ categories: blog
 > 
 > 选择编译器： 因为LIBSVM是用C++写的， 为了能在MATLAB中使用，必须通过编译器将C++代码编译成MATLAB可执行的代码（.mexw32）。在MATLAB命令窗口中输入`mex -setup`，然后按照提示选择编译器即可。
 > 
-> 编译：编译时必须在LibSVM/matlab的目录下，执行`make`。
+> 编译：编译时必须在LIBSVM/matlab的目录下，执行`make`。
 > 
 > 测试：下载测试使用的数据heart_scale.mat(注：有C++版本和MATLAB版，要下载MATLAB版本)。然后执行以下命令：
 
