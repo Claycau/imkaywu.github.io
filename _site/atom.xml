@@ -4,13 +4,176 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-14T21:45:16+08:00</updated>
+ <updated>2014-01-16T22:01:27+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
    <email>linghua.zhang@me.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Cross Validation (An implementation to find the optimal parameters for LIBSVM)</title>
+   <link href="http://lhzhang.com/2014/01/16/cross-validation.html"/>
+   <updated>2014-01-16T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2014/01/16/cross-validation</id>
+   <content type="html">&lt;h2&gt;Brief Introduction&lt;/h2&gt;
+
+&lt;p&gt;Cross-validation, sometimes called rotation estimation, is a model validation technique for assessing how the results of a statistical analysis will generalize to an independent data set. It is mainly used in settings where the goal is prediction, and one wants to estimate how accurately a predictive model will perform in practice. It is worth highlighting that in a prediction problem, a model is usually given a dataset of known data on which training is run (training dataset), and a dataset of unknown data (or first seen data) against which the model is tested (testing dataset).[4] The goal of cross validation is to define a dataset to &quot;test&quot; the model in the training phase (i.e., the validation dataset), in order to limit problems like overfitting, give an insight on how the model will generalize to an independent data set (i.e., an unknown dataset, for instance from a real problem), etc.&lt;/p&gt;
+
+&lt;p&gt;One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). To reduce variability, multiple rounds of cross-validation are performed using different partitions, and the validation results are averaged over the rounds.&lt;/p&gt;
+
+&lt;h2&gt;Common types of cross-validation&lt;/h2&gt;
+
+&lt;h3&gt;K-fold cross-validation&lt;/h3&gt;
+
+&lt;p&gt;In k-fold cross-validation, the original sample is randomly partitioned into k equal size subsamples. Of the k subsamples, a single subsample is retained as the validation data for testing the model, and the remaining &lt;code&gt;k − 1&lt;/code&gt; subsamples are used as training data. The cross-validation process is then repeated k times (the folds), with each of the k subsamples used exactly once as the validation data. The k results from the folds can then be averaged (or otherwise combined) to produce a single estimation. The advantage of this method over repeated random sub-sampling is that all observations are used for both training and validation, and each observation is used for validation exactly once. 10-fold cross-validation is commonly used, but in general k remains an unfixed parameter.&lt;/p&gt;
+
+&lt;h3&gt;2-fold cross-validation&lt;/h3&gt;
+
+&lt;p&gt;This is the simplest variation of k-fold cross-validation. Also, called holdout method. For each fold, we randomly assign data points to two sets s0 and s1, so that both sets are equal size (this is usually implemented by shuffling the data array and then splitting it in two). We then train on s0 and test on s1, followed by training on s1 and testing on s0.&lt;/p&gt;
+
+&lt;p&gt;This has the advantage that our training and test sets are both large, and each data point is used for both training and validation on each fold.&lt;/p&gt;
+
+&lt;h3&gt;Repeated random sub-sampling validation&lt;/h3&gt;
+
+&lt;p&gt;This method randomly splits the dataset into training and validation data. For each such split, the model is fit to the training data, and predictive accuracy is assessed using the validation data. The results are then averaged over the splits. The advantage of this method (over k-fold cross validation) is that the proportion of the training/validation split is not dependent on the number of iterations (folds). The disadvantage of this method is that some observations may never be selected in the validation subsample, whereas others may be selected more than once. In other words, validation subsets may overlap. This method also exhibits Monte Carlo variation, meaning that the results will vary if the analysis is repeated with different random splits.&lt;/p&gt;
+
+&lt;h3&gt;Leave-one-out cross-validation&lt;/h3&gt;
+
+&lt;p&gt;Leave-one-out cross-validation (LOOCV) involves using a single observation from the original sample as the validation data, and the remaining observations as the training data. This is repeated such that each observation in the sample is used once as the validation data. This is the same as a K-fold cross-validation with K being equal to the number of observations in the original sampling.&lt;/p&gt;
+
+&lt;h2&gt;An example: 10-fold cross-validation&lt;/h2&gt;
+
+&lt;p&gt;将数据集分成十分，轮流将其中9份作为训练数据，1份作为测试数据，进行试验。每次试验都会得出相应的正确率（或差错率）。10次的结果的正确率（或差错率）的平均值作为对算法精度的估计，一般还需要进行多次10-fold cross-validation（例如10次10-fold cross-validation），再求其均值，作为对算法准确性的估计。&lt;/p&gt;
+
+&lt;p&gt;之所以选择将数据集分为10份，是因为通过利用大量数据集、使用不同学习技术进行的大量试验，表明10折是获得最好误差估计的恰当选择，而且也有一些理论根据可以证明这一点。但这并非最终诊断，争议仍然存在。而且似乎5折或者20折与10折所得出的结果也相差无几。&lt;/p&gt;
+
+&lt;h2&gt;An implementation of cross-validation to find the optimal parameters for LIBSVM.&lt;/h2&gt;
+
+&lt;p&gt;This source code is in &lt;a href=&quot;http://imkaywu.com/2014/1/15/find/the/optimal/parameter&quot;&gt;another post&lt;/a&gt;, go check it out.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Find the optimal parameters for LIBSVM using cross-validation</title>
+   <link href="http://lhzhang.com/2014/01/15/find-the-optimal-parameter.html"/>
+   <updated>2014-01-15T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2014/01/15/find-the-optimal-parameter</id>
+   <content type="html">&lt;h3&gt;目标&lt;/h3&gt;
+
+&lt;p&gt;在SVM算法中，通过交叉验证来确定最佳的参数&lt;code&gt;c&lt;/code&gt;和&lt;code&gt;g&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3&gt;想法：&lt;/h3&gt;
+
+&lt;p&gt;让c和g在一定的范围里跑(比如 c = 2&lt;sup&gt;(-5),2&lt;sup&gt;(-4),...,2&lt;sup&gt;(5),g&lt;/sup&gt;&lt;/sup&gt;&lt;/sup&gt; = 2&lt;sup&gt;(-5),2&lt;sup&gt;(-4),...,2&lt;sup&gt;(5)),然后用cross&lt;/sup&gt;&lt;/sup&gt;&lt;/sup&gt; validation的想法找到准确率最高的c和g,在这里我做了一点修改(纯粹是个人的一点小经验和想法),我改进的是: 因为会有不同的c和g都对应最高的的准确率,我把具有最小c的那组c和g认为是最佳的c和g,因为惩罚参数不能设置太高,很高的惩罚参数能使得validation数据的准确率提高,但过高的惩罚参数c会造成过学习状态,反正从我用SVM到现在,往往都是惩罚参数c过高会导致最终测试集合的准确率并不是很理想。&lt;/p&gt;
+
+&lt;h3&gt;Code:&lt;/h3&gt;
+
+&lt;p&gt;寻找最优化参数的函数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;function [bestacc,bestc,bestg] = SVMcg(train_label,train,cmin,cmax,gmin,gmax,v,cstep,gstep,accstep)
+    % train_label:训练集标签.要求与libsvm工具箱中要求一致.
+    % train:训练集.要求与libsvm工具箱中要求一致.
+    % cmin:惩罚参数c的变化范围的最小值(取以2为底的对数后),即 c_min = 2^(cmin).默认为 -5
+    % cmax:惩罚参数c的变化范围的最大值(取以2为底的对数后),即 c_max = 2^(cmax).默认为 5
+    % gmin:参数g的变化范围的最小值(取以2为底的对数后),即 g_min = 2^(gmin).默认为 -5
+    % gmax:参数g的变化范围的最小值(取以2为底的对数后),即 g_min = 2^(gmax).默认为 5
+    % 
+    % v:cross validation的参数,即给测试集分为几部分进行cross validation.默认为 3
+    % cstep:参数c步进的大小.默认为 1
+    % gstep:参数g步进的大小.默认为 1
+    % accstep:最后显示准确率图时的步进大小. 默认为 1.5
+    %% about the parameters of SVMcg
+    v_def = 10;
+    if nargin &amp;lt; 10
+        accstep = 1.5;
+    end
+    if nargin &amp;lt; 8
+        accstep = 1.5;
+        cstep = 1;
+        gstep = 1;
+    end
+    if nargin &amp;lt; 7
+        accstep = 1.5;
+        v = v_def;
+        cstep = 1;
+        gstep = 1;
+    end
+    if nargin &amp;lt; 6
+        accstep = 1.5;
+        v = v_def;
+        cstep = 1;
+        gstep = 1;
+        gmax = 5;
+    end
+    if nargin &amp;lt; 5
+        accstep = 1.5;
+        v = v_def;
+        cstep = 1;
+        gstep = 1;
+        gmax = 5;
+        gmin = -5;
+    end
+    if nargin &amp;lt; 4
+        accstep = 1.5;
+        v = v_def;
+        cstep = 1;
+        gstep = 1;
+        gmax = 5;
+        gmin = -5;
+        cmax = 5;
+    end
+    if nargin &amp;lt; 3
+        accstep = 1.5;
+        v = v_def;
+        cstep = 1;
+        gstep = 1;
+        gmax = 5;
+        gmin = -5;
+        cmax = 5;
+        cmin = -5;
+    end
+    %% X:c Y:g cg:acc
+    [X,Y] = meshgrid(cmin:cstep:cmax,gmin:gstep:gmax);
+    [m,n] = size(X);
+    cg = zeros(m,n);
+    %% record acc with different c &amp;amp; g,and find the bestacc with the smallest c
+    bestc = 0;
+    bestg = 0;
+    bestacc = 0;
+    basenum = 2;
+    for i = 1:m
+        for j = 1:n
+            cmd = ['-v ',num2str(v),' -c ',num2str( basenum^X(i,j) ),' -g ',num2str( basenum^Y(i,j) )];
+            cg(i,j) = svmtrain(train_label, train, cmd);
+
+            if ( cg(i,j) &amp;gt; bestacc || ( cg(i,j) == bestacc &amp;amp;&amp;amp; bestc &amp;gt; basenum^X(i,j) ) )
+                bestacc = cg(i,j);
+                bestc = basenum^X(i,j);
+                bestg = basenum^Y(i,j);
+            end
+        end
+    end
+    %% to draw the acc with different c &amp;amp; g
+    [C,h] = contour(X,Y,cg,60:accstep:100);
+    clabel(C,h,'FontSize',10,'Color','r');
+    xlabel('log2c','FontSize',10);
+    ylabel('log2g','FontSize',10);
+    grid on;
+end
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;函数的测试程序：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ bestacc , bestc , bestg ] = SVMcg( input_feature , train_set );
+cmd = [ '-c ' , num2str(bestc) , ' -g ' , num2str(bestg) ];
+model = svmtrain( input_feature , train_set , cmd );
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.ilovematlab.cn/thread-47819-1-1.html&quot;&gt;原文链接&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Hand Gesture Recognition</title>
@@ -910,70 +1073,6 @@ end
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;So this the the result of our algorithm, and we've tested it on 600+ images and we will take more pictures to test the robustness of the algorithm.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Find the centroid of the hand gestures</title>
-   <link href="http://lhzhang.com/2013/11/23/Find-the-centroid-of-the-hand-gestures.html"/>
-   <updated>2013-11-23T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/23/Find-the-centroid-of-the-hand-gestures</id>
-   <content type="html">&lt;p&gt;For the next step, we need to find out the centroid of the hand. We employ two methods to this end, a simple one using all the points in the hand region, and another one called &lt;strong&gt;Distance Transform&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Because we know the points in the hand region have value 1 while others are 0. So we can easily use the points in the hand to calculate the centroid. Here is the code.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function [x_center,y_center]=center_finder(edge_map,binary_map,x_array,y_array)
-    %% ----find the center point, solution 1---- %%
-    [y_binary,x_binary]=ind2sub(size(binary_map),find(binary_map));
-    x_center=round(mean(x_binary));
-    y_center=round(mean(y_binary));
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Another method is called the &lt;strong&gt;Distance Transform&lt;/strong&gt;. You can refer to my other post to check out concept or the algorithm I developed. Here is the code of centroid finger using &lt;strong&gt;Distance Transform&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function [x_center,y_center]=center_finder(edge_map,binary_map,x_array,y_array)
-    %% ----find the center point, solution 2---- %%
-    max_distance=0;
-    dist_trans_map=bwdist(edge_map);
-    % dist_trans_map1=dist_trans(edge_map);    %distance transform I implement
-    dist_trans_map(binary_map==0)=0;
-    x_left=min(x_array(x_array~=0));
-    x_right=max(x_array);
-    y_up=min(y_array(y_array~=0));
-    y_bottom=max(y_array);
-    for i=x_left:x_right
-        for j=y_up:y_bottom
-            if(dist_trans_map(j,i)&amp;gt;max_distance)
-                x_center=i;
-                y_center=j;
-                max_distance=dist_trans_map(j,i);
-            end
-        end
-    end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;After testing on more than 600+ images we decide to choose the latter method.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Push my code to Github</title>
-   <link href="http://lhzhang.com/2013/11/15/Push-my-code-to-Github.html"/>
-   <updated>2013-11-15T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/15/Push-my-code-to-Github</id>
-   <content type="html">&lt;p&gt;看了好多网上的例子，感觉好多都是互相抄的，对我的机子都没有用，经过自己的摸索，以下的命令是在我自己的机子上可行的。&lt;/p&gt;
-
-&lt;blockquote&gt;&lt;p&gt;在github上创建repository&lt;/p&gt;
-
-&lt;p&gt;git add -A&lt;/p&gt;
-
-&lt;p&gt;git remote set-url origin https://github.com/usrname/repo_name&lt;/p&gt;
-
-&lt;p&gt;git pull origin master&lt;/p&gt;
-
-&lt;p&gt;git push -u origin master&lt;/p&gt;&lt;/blockquote&gt;
 </content>
  </entry>
  

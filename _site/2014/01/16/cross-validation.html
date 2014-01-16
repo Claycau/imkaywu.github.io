@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Linghua Zhang" />
+    
+    <title>Cross Validation (An implementation to find the optimal parameters for LIBSVM)</title>
+    
+    <link rel="shortcut icon" href="/media/favicon.ico">
+    <link rel="stylesheet" type=text/css href="/media/css/style.css">
+    <link rel="stylesheet" type=text/css href="/media/css/github.css">
+	<link rel="stylesheet" href="/media/css/font-awesome.min.css">
+	<link href="/atom.xml" rel="alternate" title="The Journey Is the Reward" type="application/atom+xml" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/media/css/fontawesome-ie7.css">
+    <![endif]-->
+    <script type="text/javascript" src="/media/js/highlight.pack.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="The Journey Is the Reward" class="" href="/">The Journey Is the Reward</a></h1>
+          </div>
+          <nav>
+			<span><a title="About" class="icon-user" href="/about.html"></a></span>
+			<span><a title="Resume" class="icon-list-ol" href="/Curriculum_Vitae.pdf"></a></span>
+			<span><a title="Publication" class="icon-book" href="/publication.html"></a></span>
+            <span><a title="Archive" class="icon-cloud" href="/archive.html"></a></span>
+            <span><a title="Tags" class="icon-tags" href="/tags.html"></a></span>
+            <span><a title="Projects" class="icon-film" href="/projects.html"></a></span>
+            <span><a title="Subscribe" class="icon-rss" href="/atom.xml"></a></span>
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>Cross Validation (An implementation to find the optimal parameters for LIBSVM) </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2014-01-16">2014-01-16</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#SVM" title="SVM">#SVM</a>
+    
+    <a href="/tags.html#Machine Learning" title="Machine Learning">#Machine Learning</a>
+    
+  </span>
+  
+  </section>
+  <section class="post">
+  <h2>Brief Introduction</h2>
+
+<p>Cross-validation, sometimes called rotation estimation, is a model validation technique for assessing how the results of a statistical analysis will generalize to an independent data set. It is mainly used in settings where the goal is prediction, and one wants to estimate how accurately a predictive model will perform in practice. It is worth highlighting that in a prediction problem, a model is usually given a dataset of known data on which training is run (training dataset), and a dataset of unknown data (or first seen data) against which the model is tested (testing dataset).[4] The goal of cross validation is to define a dataset to "test" the model in the training phase (i.e., the validation dataset), in order to limit problems like overfitting, give an insight on how the model will generalize to an independent data set (i.e., an unknown dataset, for instance from a real problem), etc.</p>
+
+<p>One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). To reduce variability, multiple rounds of cross-validation are performed using different partitions, and the validation results are averaged over the rounds.</p>
+
+<h2>Common types of cross-validation</h2>
+
+<h3>K-fold cross-validation</h3>
+
+<p>In k-fold cross-validation, the original sample is randomly partitioned into k equal size subsamples. Of the k subsamples, a single subsample is retained as the validation data for testing the model, and the remaining <code>k − 1</code> subsamples are used as training data. The cross-validation process is then repeated k times (the folds), with each of the k subsamples used exactly once as the validation data. The k results from the folds can then be averaged (or otherwise combined) to produce a single estimation. The advantage of this method over repeated random sub-sampling is that all observations are used for both training and validation, and each observation is used for validation exactly once. 10-fold cross-validation is commonly used, but in general k remains an unfixed parameter.</p>
+
+<h3>2-fold cross-validation</h3>
+
+<p>This is the simplest variation of k-fold cross-validation. Also, called holdout method. For each fold, we randomly assign data points to two sets s0 and s1, so that both sets are equal size (this is usually implemented by shuffling the data array and then splitting it in two). We then train on s0 and test on s1, followed by training on s1 and testing on s0.</p>
+
+<p>This has the advantage that our training and test sets are both large, and each data point is used for both training and validation on each fold.</p>
+
+<h3>Repeated random sub-sampling validation</h3>
+
+<p>This method randomly splits the dataset into training and validation data. For each such split, the model is fit to the training data, and predictive accuracy is assessed using the validation data. The results are then averaged over the splits. The advantage of this method (over k-fold cross validation) is that the proportion of the training/validation split is not dependent on the number of iterations (folds). The disadvantage of this method is that some observations may never be selected in the validation subsample, whereas others may be selected more than once. In other words, validation subsets may overlap. This method also exhibits Monte Carlo variation, meaning that the results will vary if the analysis is repeated with different random splits.</p>
+
+<h3>Leave-one-out cross-validation</h3>
+
+<p>Leave-one-out cross-validation (LOOCV) involves using a single observation from the original sample as the validation data, and the remaining observations as the training data. This is repeated such that each observation in the sample is used once as the validation data. This is the same as a K-fold cross-validation with K being equal to the number of observations in the original sampling.</p>
+
+<h2>An example: 10-fold cross-validation</h2>
+
+<p>将数据集分成十分，轮流将其中9份作为训练数据，1份作为测试数据，进行试验。每次试验都会得出相应的正确率（或差错率）。10次的结果的正确率（或差错率）的平均值作为对算法精度的估计，一般还需要进行多次10-fold cross-validation（例如10次10-fold cross-validation），再求其均值，作为对算法准确性的估计。</p>
+
+<p>之所以选择将数据集分为10份，是因为通过利用大量数据集、使用不同学习技术进行的大量试验，表明10折是获得最好误差估计的恰当选择，而且也有一些理论根据可以证明这一点。但这并非最终诊断，争议仍然存在。而且似乎5折或者20折与10折所得出的结果也相差无几。</p>
+
+<h2>An implementation of cross-validation to find the optimal parameters for LIBSVM.</h2>
+
+<p>This source code is in <a href="http://imkaywu.com/2014/1/15/find/the/optimal/parameter">another post</a>, go check it out.</p>
+
+  </section>
+  <div style='height:1px;background-color:#C3C3C3;line-height:1px;clear:both;display:block;overflow:hidden'> </div>
+  <br>
+  <!--codes for Disqus-->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'kaystechblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <!--end of code-->
+</article>
+
+        </div>
+        <footer>
+          <div>
+            &copy; 2013 Kay | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/imkaywu/imkaywu.github.io" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+  </body>
+</html>
