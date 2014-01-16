@@ -37,6 +37,7 @@ categories: blog
 > 测试；
 
 ##安装
+
 > [下载LIBSVM软件包](https://github.com/cjlin1/libsvm),将该软件包解压缩到MATLAB所在目录下的toolbox文件夹下。
 > 
 > 选择编译器： 因为LIBSVM是用C++写的， 为了能在MATLAB中使用，必须通过编译器将C++代码编译成MATLAB可执行的代码（.mexw32）。在MATLAB命令窗口中输入`mex -setup`，然后按照提示选择编译器即可。
@@ -45,8 +46,8 @@ categories: blog
 > 
 > 测试：下载测试使用的数据heart_scale.mat(注：有C++版本和MATLAB版，要下载MATLAB版本)。然后执行以下命令：
 
-	load heart_scale;
-	model=svmtrain(heart_scale_label,heart_scale_inst);
-	[predict_label,accuracy,prob_estimates] = svmpredict(heart_scale_label,heart_scale_inst,model,'b');
+    load heart_scale;
+    model=svmtrain(heart_scale_label,heart_scale_inst);
+    [predict_label,accuracy,prob_estimates] = svmpredict(heart_scale_label,heart_scale_inst,model,'b');
 
 如果成功的话就可以看到Accuracy。其中heart_scale_label是train的标签，heart_scale_inst是train的feature vector，model是SVM训练出来的模型。
