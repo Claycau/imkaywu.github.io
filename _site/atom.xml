@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-16T22:06:13+08:00</updated>
+ <updated>2014-01-16T22:08:01+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -51,7 +51,7 @@
 
 &lt;h2&gt;An implementation of cross-validation to find the optimal parameters for LIBSVM.&lt;/h2&gt;
 
-&lt;p&gt;This source code is in &lt;a href=&quot;http://imkaywu.com/2014/01/15/find-the-optimal-parameter.html&quot;&gt;another post&lt;/a&gt;, go check it out.&lt;/p&gt;
+&lt;p&gt;This source code is in &lt;a href=&quot;http://imkaywu.com/2014/1/15/find/the/optimal/parameter&quot;&gt;another post&lt;/a&gt;, go check it out.&lt;/p&gt;
 </content>
  </entry>
  
