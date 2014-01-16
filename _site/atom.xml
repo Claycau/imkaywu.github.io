@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-16T22:01:27+08:00</updated>
+ <updated>2014-01-16T22:03:57+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -51,7 +51,7 @@
 
 &lt;h2&gt;An implementation of cross-validation to find the optimal parameters for LIBSVM.&lt;/h2&gt;
 
-&lt;p&gt;This source code is in &lt;a href=&quot;http://imkaywu.com/2014/1/15/find/the/optimal/parameter&quot;&gt;another post&lt;/a&gt;, go check it out.&lt;/p&gt;
+&lt;p&gt;This source code is in &lt;a href=&quot;http://imkaywu.com/2014/01/15/find-the-optimal-parameter.html&quot;&gt;another post&lt;/a&gt;, go check it out.&lt;/p&gt;
 </content>
  </entry>
  
@@ -515,7 +515,7 @@ end
    <id>http://lhzhang.com/2014/01/10/LIBSVM</id>
    <content type="html">&lt;h2&gt;简介&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;(http://www.csie.ntu.edu.tw/~cjlin/libsvm/&quot;&gt;LIBSVM&lt;/a&gt;)是台湾大学林智仁教授等研究人员开发的一个用于支持向量机分类，回归分析及分布估计的c/c++开源库。另外，它也可以用于解决多类分类问题。LIBSVM的主要特点有：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.csie.ntu.edu.tw/~cjlin/libsvm/&quot;&gt;LIBSVM&lt;/a&gt;是台湾大学林智仁教授等研究人员开发的一个用于支持向量机分类，回归分析及分布估计的c/c++开源库。另外，它也可以用于解决多类分类问题。LIBSVM的主要特点有：&lt;/p&gt;
 
 &lt;blockquote&gt;&lt;p&gt;各种SVM的表达公式；&lt;/p&gt;
 
