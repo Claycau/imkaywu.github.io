@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-18T00:12:44+08:00</updated>
+ <updated>2014-01-18T00:19:40+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -19,7 +19,7 @@
    <id>http://lhzhang.com/2014/01/16/cross-validation</id>
    <content type="html">&lt;h2&gt;Brief Introduction&lt;/h2&gt;
 
-&lt;p&gt;Cross-validation, sometimes called rotation estimation, is a model validation technique for assessing how the results of a statistical analysis will generalize to an independent data set. It is mainly used in settings where the goal is prediction, and one wants to estimate how accurately a predictive model will perform in practice. It is worth highlighting that in a prediction problem, a model is usually given a dataset of known data on which training is run (training dataset), and a dataset of unknown data (or first seen data) against which the model is tested (testing dataset).[4] The goal of cross validation is to define a dataset to &quot;test&quot; the model in the training phase (i.e., the validation dataset), in order to limit problems like overfitting, give an insight on how the model will generalize to an independent data set (i.e., an unknown dataset, for instance from a real problem), etc.&lt;/p&gt;
+&lt;p&gt;Cross-validation, sometimes called rotation estimation, is a model validation technique for assessing how the results of a statistical analysis will generalize to an independent data set. It is mainly used in settings where the goal is prediction, and one wants to estimate how accurately a predictive model will perform in practice. It is worth highlighting that in a prediction problem, a model is usually given a dataset of known data on which training is run (training dataset), and a dataset of unknown data (or first seen data) against which the model is tested (testing dataset). The goal of cross validation is to define a dataset to &quot;test&quot; the model in the training phase (i.e., the validation dataset), in order to limit problems like overfitting, give an insight on how the model will generalize to an independent data set (i.e., an unknown dataset, for instance from a real problem), etc.&lt;/p&gt;
 
 &lt;p&gt;One round of cross-validation involves partitioning a sample of data into complementary subsets, performing the analysis on one subset (called the training set), and validating the analysis on the other subset (called the validation set or testing set). To reduce variability, multiple rounds of cross-validation are performed using different partitions, and the validation results are averaged over the rounds.&lt;/p&gt;
 
