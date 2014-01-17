@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-16T22:38:25+08:00</updated>
+ <updated>2014-01-17T19:33:52+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -67,8 +67,8 @@
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-centroid-of-the-hand-gestures.html&quot;&gt;Find the centroid of hand gesture using &lt;strong&gt;distance transform&lt;/strong&gt;.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the direction of the hand gesture using the relative positions of contour points (using just Step 1).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Transform-to-time-series-curve.html&quot;&gt;Transform the hand contour (points above the centroid, which contribute more to the hand direction) into a &lt;em&gt;time-series curve&lt;/em&gt;.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/24/Find-the-fingertips-and-fingerroots.html&quot;&gt;Find the initial positions of the fingertips and fingerroots (using just Step 1).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/24/Find-the-fingertips-and-fingerroots.html&quot;&gt;Refine the positions of fingertips and fingerroots(using Step 2).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2014/01/12/Find-the-fingertips-and-fingerroots.html&quot;&gt;Find the initial positions of the fingertips and fingerroots (using just Step 1).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2014/01/12/Find-the-fingertips-and-fingerroots.html&quot;&gt;Refine the positions of fingertips and fingerroots(using Step 2).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/Find-the-direction-of-hand-gestures.html&quot;&gt;Find the accurate direction of the hand gesture using the directions of fingers(using Step 2).&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/two-recognition-schemes.html&quot;&gt;Recognition scheme 1: Use the positions of the fingertips and fingerroots for recognition.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://imkaywu.com/2013/11/23/two-recognition-schemes.html&quot;&gt;Recognition scheme 2: Transform the contour points into the time-series curve again and take samples. For each gesture, we can obtain a feature vector. Use Machine Learning algorithm to train the data for recognition.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
@@ -565,6 +565,17 @@ model=svmtrain(heart_scale_label,heart_scale_inst);
  </entry>
  
  <entry>
+   <title>A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching</title>
+   <link href="http://lhzhang.com/2013/12/05/Paper.html"/>
+   <updated>2013-12-05T00:00:00+08:00</updated>
+   <id>http://lhzhang.com/2013/12/05/Paper</id>
+   <content type="html">&lt;p&gt;Publication List
+This is an excerpt of the paper of A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching. It's about the algorithm of hand gesture recognition, You can refer to another post for a brief description of the algorithm. A PDF version is available below.
+&lt;a href=&quot;http://imkaywu.com/paper.pdf&quot;&gt;Ren Y., Wu K., A Low Complex hand segment and recognition method for human-wearable device-interaction using priority-based scan-line stereo matching&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Two Recognition Schemes</title>
    <link href="http://lhzhang.com/2013/11/23/two-recognition-schemes.html"/>
    <updated>2013-11-23T00:00:00+08:00</updated>
@@ -1042,149 +1053,6 @@ end
     end
 end
 &lt;/code&gt;&lt;/pre&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Find the contour of the hand gestures</title>
-   <link href="http://lhzhang.com/2013/11/23/Find-the-contour-of-the-hand-gestures.html"/>
-   <updated>2013-11-23T00:00:00+08:00</updated>
-   <id>http://lhzhang.com/2013/11/23/Find-the-contour-of-the-hand-gestures</id>
-   <content type="html">&lt;p&gt;Our algorithm of hand gesture recognition begins with the detection of the hand contour and connect these points in a consecutive manner. This problem may sound intuitive and simple for human beings, when it comes to the computer, the issue is a little more complicated. Here is why, because the contour is no longer smooth as we expect it would be, possibility is high that we may run into a deadend before we reach the end point, then what we got is no long the whole but part of the hand contour. The contour detection algorithm should be able to ignore all the noise points and obtain the profile of hand.&lt;/p&gt;
-
-&lt;p&gt;So what are exactly these noisy points we are talking about. Well, here are an image showing one typical scenario. It's straightforward that when the computer runs into these points, it runs into a deadend.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Image that has noisy points&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/edge_finder_unmodified.png&quot; alt=&quot;edge_finder_unmodified&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Here is my solution to this problem, it's quite clear these points have two neighboring points up and down/left and right that have different values from themselves (the points in the hand region is 1 while the points outside is 0). So we can use a variable called edge_direction to indicate where their neighboring points are (up-down/left-down). If the points in the hand have both neighboring up-down/left-down points, it's the '&lt;em&gt;deadend&lt;/em&gt;' points we are looking for. The result of the algorithm is shown below.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Image that has eliminated the noisy points&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/media/images/edge_finder_modified.png&quot; alt=&quot;edge_finder_modified&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The above is just a simple depict of the hand contour detection algorithm, I think no other words are more convincing than the code, so check out my source code.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function edge_map=edge_finder(binary_map,row,colum)
-    edge_map=zeros(size(binary_map));
-    edge_direction=zeros(size(binary_map));
-    for i=1:row
-        j=1;
-        while(true)
-            if(j==colum+1)
-                break;
-            elseif(i~=1&amp;amp;&amp;amp;j~=1&amp;amp;&amp;amp;i~=row&amp;amp;&amp;amp;j~=colum)
-                if(xor(binary_map(i,j),binary_map(i,j+1)))
-                    if(edge_map(i,j+binary_map(i,j+1))==1&amp;amp;&amp;amp;(edge_direction(i,j+binary_map(i,j+1))==1||edge_direction(i,j+binary_map(i,j+1))==3))%可以去除想101图中的孤立的竖线
-                        edge_map(i,j+binary_map(i,j+1))=0;
-                        edge_direction(i,j+binary_map(i,j+1))=0;
-                        binary_map(i,j+binary_map(i,j+1))=0;
-                        continue;
-                    else
-                        edge_map(i,j+binary_map(i,j+1))=1;
-                        edge_direction(i,j+binary_map(i,j+1))=edge_direction(i,j+binary_map(i,j+1))+1;
-                    end
-                end
-                if(xor(binary_map(i,j),binary_map(i+1,j)))
-                    if(edge_map(i+binary_map(i+1,j),j)==1&amp;amp;&amp;amp;(edge_direction(i+binary_map(i+1,j),j)==2||edge_direction(i+binary_map(i+1,j),j)==3))
-                        edge_map(i+binary_map(i+1,j),j)=0;
-                        binary_map(i+binary_map(i+1,j),j)=0;
-                        if(binary_map(i+binary_map(i+1,j),j-1))
-                            j=j-1;
-                        end
-                        edge_direction(i+binary_map(i+1,j),j)=0;
-                        continue;
-                    else
-                        edge_map(i+binary_map(i+1,j),j)=1;
-                        edge_direction(i+binary_map(i+1,j),j)=edge_direction(i+binary_map(i+1,j),j)+2;
-                    end
-                end
-            else
-                if(binary_map(i,j))
-                   edge_map(i,j)=1;
-                end
-            end
-            j=j+1;
-        end
-    end
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here comes the codes to connect the contour points in a consecutive manner. We first consider the points in the neighborhood regions than that in the 8-neighborhood region.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;function [x_array,y_array]=edge_connector(edge_map,row,colum)
-    edge_map(row+1,:)=0;
-    edge_map(:,colum+1)=0;
-    % [y_origin,x_origin]=ind2sub(size(edge_map),min(find(edge_map)));
-    [y_index,x_index]=find(edge_map==1);
-    [y_origin,index]=max(y_index);
-    x_origin=min(x_index(index));
-    x_array=zeros(1,sum(sum(edge_map)));
-    y_array=zeros(1,sum(sum(edge_map)));
-    x_array(1)=x_origin;
-    y_array(1)=y_origin;
-    i=1;
-
-    while(1)
-        x_present=x_array(i);
-        y_present=y_array(i);
-        i=i+1;
-        if(sum(sum(edge_map(y_present-1:y_present,x_present-1:x_present)))&amp;gt;1)%top left direction
-            if(edge_map(y_present-1,x_present))%top
-                x_array(i)=x_present;
-                y_array(i)=y_present-1;
-            elseif(edge_map(y_present,x_present-1))%left
-                x_array(i)=x_present-1;
-                y_array(i)=y_present;
-            else%top_left
-                x_array(i)=x_present-1;
-                y_array(i)=y_present-1;
-            end
-        elseif(sum(sum(edge_map(y_present-1:y_present,x_present:x_present+1)))&amp;gt;1)%top right direction
-            if(edge_map(y_present-1,x_present))%top
-                x_array(i)=x_present;
-                y_array(i)=y_present-1;
-            elseif(edge_map(y_present,x_present+1))%right
-                x_array(i)=x_present+1;
-                y_array(i)=y_present;
-            else%top_right
-                x_array(i)=x_present+1;
-                y_array(i)=y_present-1;
-            end
-        elseif(sum(sum(edge_map(y_present:y_present+1,x_present:x_present+1)))&amp;gt;1)%bottom_right direction
-            if(edge_map(y_present+1,x_present))%bottom
-                x_array(i)=x_present;
-                y_array(i)=y_present+1;
-            elseif(edge_map(y_present,x_present+1))%right
-                x_array(i)=x_present+1;
-                y_array(i)=y_present;
-            else%bottom_right
-                x_array(i)=x_present+1;
-                y_array(i)=y_present+1;
-            end
-        elseif(sum(sum(edge_map(y_present:y_present+1,x_present-1:x_present)))&amp;gt;1)%bottom_left direction
-            if(edge_map(y_present+1,x_present))%bottom
-                x_array(i)=x_present;
-                y_array(i)=y_present+1;
-            elseif(edge_map(y_present,x_present-1))%left
-                x_array(i)=x_present-1;
-                y_array(i)=y_present;
-            else%bottom_left
-                x_array(i)=x_present-1;
-                y_array(i)=y_present+1;
-            end
-        else
-            break;
-        end
-        edge_map(y_present,x_present)=0;
-    end
-    x_array(x_array==0)=[];
-    y_array(y_array==0)=[];
-end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;So this the the result of our algorithm, and we've tested it on 600+ images and we will take more pictures to test the robustness of the algorithm.&lt;/p&gt;
 </content>
  </entry>
  
