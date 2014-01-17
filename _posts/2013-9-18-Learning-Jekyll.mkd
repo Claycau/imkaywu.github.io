@@ -5,7 +5,7 @@ tags: Jekyll
 categories: blog
 ---
 
-This blog is my learning notes of Jekyll which is the static web engine I use for my blog. And I'll only record the important points to me. The original site is [here](http://learn.andrewmunsell.com/learn/jekyll-by-example).
+This blog is my learning notes of Jekyll which is the static web engine I use for my blog. And I'll only record the important points to me. The original site is [here](https://learn.andrewmunsell.com/learn/jekyll-by-example).
 
 ###_config.yml
 
