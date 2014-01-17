@@ -4,7 +4,7 @@
  <title>The Journey Is the Reward</title>
  <link href="http://lhzhang.com/atom.xml" rel="self"/>
  <link href="http://lhzhang.com/"/>
- <updated>2014-01-17T19:33:52+08:00</updated>
+ <updated>2014-01-18T00:12:44+08:00</updated>
  <id>http://lhzhang.com/</id>
  <author>
    <name>Linghua Zhang</name>
@@ -585,6 +585,8 @@ This is an excerpt of the paper of A Low Complex hand segment and recognition me
 &lt;p&gt;After we obtain the accurate hand direction, we can find a relatively fixed reference point in the hand gesture. The reference point is chosen using the following rule. As is shown in the following image.&lt;/p&gt;
 
 &lt;blockquote&gt;&lt;p&gt;The line crosses the reference point and the centroid is perpendicular to the hand direction.&lt;/p&gt;&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/media/images/reference_point.png&quot; alt=&quot;reference point&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Then we can calculate the degree between the fingertips (or fingerroots) and the reference point. Because the hand direction is rotation invariant and the reference point is relatively fixed, this should suffice to recognition the gestures.&lt;/p&gt;
 

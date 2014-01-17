@@ -10,6 +10,8 @@ After we obtain the accurate hand direction, we can find a relatively fixed refe
 
 > The line crosses the reference point and the centroid is perpendicular to the hand direction.
 
+![reference point](/media/images/reference_point.png)
+
 Then we can calculate the degree between the fingertips (or fingerroots) and the reference point. Because the hand direction is rotation invariant and the reference point is relatively fixed, this should suffice to recognition the gestures.
 
 ###Scheme 2
