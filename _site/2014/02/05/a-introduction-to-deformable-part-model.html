@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="Linghua Zhang" />
+    
+    <title>An Introduction to Deformable Part Model</title>
+    
+    <link rel="shortcut icon" href="/media/favicon.ico">
+    <link rel="stylesheet" type=text/css href="/media/css/style.css">
+    <link rel="stylesheet" type=text/css href="/media/css/github.css">
+	<link rel="stylesheet" href="/media/css/font-awesome.min.css">
+	<link href="/atom.xml" rel="alternate" title="The Journey Is the Reward" type="application/atom+xml" />
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/media/css/fontawesome-ie7.css">
+    <![endif]-->
+    <script type="text/javascript" src="/media/js/highlight.pack.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+  </head>
+  <body>
+      <div id="main" role="main">
+        <header>
+          <div id="header">
+            <h1><a title="The Journey Is the Reward" class="" href="/">The Journey Is the Reward</a></h1>
+          </div>
+          <nav>
+			<span><a title="About" class="icon-user" href="/about.html"></a></span>
+			<span><a title="Resume" class="icon-list-ol" href="/Curriculum_Vitae.pdf"></a></span>
+			<span><a title="Publication" class="icon-book" href="/publication.html"></a></span>
+            <span><a title="Archive" class="icon-cloud" href="/archive.html"></a></span>
+            <span><a title="Tags" class="icon-tags" href="/tags.html"></a></span>
+            <span><a title="Projects" class="icon-film" href="/projects.html"></a></span>
+            <span><a title="Subscribe" class="icon-rss" href="/atom.xml"></a></span>
+          </nav>
+        </header>
+        <div id="content">
+        <article>
+  <section class="title">
+    <h2>An Introduction to Deformable Part Model </h2>
+  </section>
+  <section class="meta">
+  <span class="time">
+    <time datetime="2014-02-05">2014-02-05</time>
+  </span>
+  
+  <span class="tags">
+    
+    <a href="/tags.html#Object Recognition" title="Object Recognition">#Object Recognition</a>
+    
+    <a href="/tags.html#DMP" title="DMP">#DMP</a>
+    
+  </span>
+  
+  </section>
+  <section class="post">
+  <p>Deformable Part Model是最近两年最为流行的图像中物体检测模型，利用这个模型的方法在近几届PASCAL VOC Challenge中都取得了较好的效果。其作者，Brown University的<a href="http://cs.brown.edu/~pff/">Pedro Felzenszwalb</a>教授，也因为这项成就获得了VOC组委会授予的终身成就奖。有人认为这个模型是目前最好的物体检测算法。</p>
+
+<p>不同于bag of features和hog模板匹配，这类“object conceptually weaker”的模型，在Deformable Part Model中，通过描述每一部分和部分间的位置关系来表示物体（part+deformable configuration）。其实早在1973年，Part Model就已经在 "The representation and matching of pictorial structures" 这篇文章中被提出了。</p>
+
+<p><strong>part model</strong></p>
+
+<p><img src="/media/images/deformable%20part%20model.jpg" alt="part model" /></p>
+
+<p>Part Model中，我们通过描述a collection of parts以及connection between parts来表示物体。图1表示经典的弹簧模型，物体的每一部分通过弹簧连接。我们定义一个energy function，该函数度量了两部分之和：每一部分的匹配程度，部分间连接的变化程度（可以想象为弹簧的形变量）。与模型匹配最好的图像就是能使这个energy function最小的图片。形式化表示中，我们可以用一无向图 G=(V,E) 来表示物体的模型，V={v1,...,vn} 代表n个部分，边 (vi,vj)∈E 代表两部分间的连接。物体的某个实例的configuration可以表示为 L=(l1,...,ln)，li 表示为 vi 的位置（可以简单的将图片的configuration理解为各部分的位置布局，实际configuration可以包含part的其他属性）。给定一幅图像，用 mi(li) 来度量 vi 被放置图片中的 li 位置时，与模板的不匹配程度；用 dij(li,lj) 度量 vi,vj 被分别放置在图片中的 li,lj 位置时，模型的变化程度。因此，一副图像相对于模型的最优configuration，就是既能使每一部分匹配的好，又能使部分间的相对关系与模型尽可能的相符的那一个。同样的，模型也自然要描述这两部分。可以通过下面的公式描述最优configuration：</p>
+
+<p><img src="/media/images/formular_DPM.png" alt="formular DPM" /></p>
+
+<p>Pedro Felzenszwalb教授提出的Deformable Part Model用到了三方面的知识：1.Hog Features 2.Part Model 3. Latent SVM。</p>
+
+<p>作者通过Hog特征模板来刻画每一部分，然后进行匹配。并且采用了金字塔，即在不同的分辨率上提取Hog特征
+利用上段提出的Part Model。在进行object detection时，detect window的得分等于part的匹配得分减去模型变化的花费。
+在训练模型时，需要训练得到每一个part的Hog模板，以及衡量part位置分布cost的参数。文章中提出了Latent SVM方法，将deformable part model的学习问题转换为一个分类问题。利用SVM学习，将part的位置分布作为latent values，模型的参数转化为SVM的分割超平面。具体实现中，作者采用了迭代计算的方法，不断地更新模型。
+作者的页面上有模型的matlab实现源码，必须运行在linux或mac平台中。另外，源码中已经包含PASCAL VOC中各个类别训练好的模型，可以直接用，如果需要自己训练模型，这个过程是很耗时的。为了提高效率，作者又在2010年的“Cascade Object Detection with Deformable Part Models”这篇文章中对part model做了改进，将效率提高了20倍左右。</p>
+
+<p>相关资料：</p>
+
+<p>Fischler, M.A. and Elschlager, R.A. The representation and matching of pictorial structures, 1973</p>
+
+<p>Felzenszwalb, P.F. and Huttenlocher, D.P. Pictorial structures for object recognition,2005</p>
+
+<p>http://people.csail.mit.edu/torralba/courses/6.870/slide/6870_2008-09-10_histograms_pinto_opt.pdf</p>
+
+  </section>
+  <div style='height:1px;background-color:#C3C3C3;line-height:1px;clear:both;display:block;overflow:hidden'> </div>
+  <br>
+  <!--codes for Disqus-->
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'kaystechblog'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <!--end of code-->
+</article>
+
+        </div>
+        <footer>
+          <div>
+            &copy; 2013 Kay | powered by jekyll | themed by <a href="http://lhzhang.com" title="sext vi">sext vi</a> | fork <a href="https://github.com/imkaywu/imkaywu.github.io" title="fork me">me</a>
+          </div>
+        </footer>
+      </div> <!-- main -->
+  </body>
+</html>
