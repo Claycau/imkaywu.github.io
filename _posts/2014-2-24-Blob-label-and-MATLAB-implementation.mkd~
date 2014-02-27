@@ -1,11 +1,12 @@
 ---
 layout: post
 title: Blob label and MATLAB implementation
-tags: Computer Vision
+tags: [Computer Vision]
 categories: blog
 ---
 
 ##Graphical example of the algorithm
+
 ###The array from which connected regions are to be extracted is given below (8-connectivity based).
 We first assign different binary values to elements in the graph. Attention should be paid that the "0~1" values write on the center of the elements in the following graph are elements' values. While, the "1,2,...,7" values in the next two graphs are the elements' labels. The two concepts should not be confused.
 ![blob label 1](/media/images/blob label 1.png)
